@@ -17,12 +17,16 @@ SOURCES += main.cpp\
     cube.cpp \
     scene.cpp \
     observer.cpp \
-    leg.cpp
+    leg.cpp \
+    toptable.cpp \
+    xobject.cpp
 
 HEADERS  += mainwindow.h \
     cube.h \
     scene.h \
     observer.h \
-    leg.h
+    leg.h \
+    toptable.h \
+    xobject.h
 
 FORMS    += mainwindow.ui

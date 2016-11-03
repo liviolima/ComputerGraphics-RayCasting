@@ -86,6 +86,8 @@ Cube::Cube()
 
 
 }
+
+
 /*
 void scale(int Sx, int Sy, int Sz){
     for(int i = 0; i <= 7; i++){

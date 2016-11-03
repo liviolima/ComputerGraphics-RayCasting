@@ -1,27 +1,4 @@
 #include "leg.h"
-struct vertex{
-    int vertex_identifier;
-
-    double x;
-    double y;
-    double z;
-};
-
-struct edge{
-    int edge_identifier;
-
-    int first_vertex_identifier;
-    int second_vertex_identifier;
-};
-
-struct face{
-    int face_identifier;
-
-    int first_edge_identifier;
-    int second_edge_identifier;
-    int third_edge_identifier;
-
-};
 
 
 
@@ -29,6 +6,29 @@ struct face{
 
 Leg::Leg()
 {
+    struct vertex{
+        int vertex_identifier;
+
+        double x;
+        double y;
+        double z;
+    };
+
+    struct edge{
+        int edge_identifier;
+
+        int first_vertex_identifier;
+        int second_vertex_identifier;
+    };
+
+    struct face{
+        int face_identifier;
+
+        int first_edge_identifier;
+        int second_edge_identifier;
+        int third_edge_identifier;
+
+    };
 
     vertex * all_vertexes = new vertex[8];
 
@@ -82,7 +82,7 @@ Leg::Leg()
 
 }
 
-void translate(double x, double y, double z){
+void Leg::translate(double x, double y, double z){
     for (int i = 0; i < 8; i++){
         //modify all the value of x, y, z
     }
