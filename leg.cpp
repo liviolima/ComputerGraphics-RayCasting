@@ -30,18 +30,17 @@ struct face{
 Leg::Leg()
 {
 
-    double size = 1.0f;
-
     vertex * all_vertexes = new vertex[8];
 
-    all_vertexes[0] = {1, size, -size, size};
-    all_vertexes[1] = {2, size, -size, -size};
-    all_vertexes[2] = {3, -size, -size, -size};
-    all_vertexes[3] = {4, -size, -size, size};
-    all_vertexes[4] = {5, size, size, size};
-    all_vertexes[5] = {6, size, size, -size};
-    all_vertexes[6] = {7, -size, size, -size};
-    all_vertexes[7] = {8, -size, size, size};
+    all_vertexes[0] = {1, 0, 0, 5};
+    all_vertexes[1] = {2, 5, 0, 5};
+    all_vertexes[2] = {3, 0, 0, 0};
+    all_vertexes[3] = {4, 5, 0, 0};
+
+    all_vertexes[4] = {5, 0, 40, 5};
+    all_vertexes[5] = {6, 5, 40, 5};
+    all_vertexes[6] = {7, 0, 40, 0};
+    all_vertexes[7] = {8, 5, 40, 0};
 
 
     edge * all_edges = new edge[18];
@@ -84,5 +83,7 @@ Leg::Leg()
 }
 
 void translate(double x, double y, double z){
-    //TO DO translation on vertexes.
+    for (int i = 0; i < 8; i++){
+        //modify all the value of x, y, z
+    }
 }
