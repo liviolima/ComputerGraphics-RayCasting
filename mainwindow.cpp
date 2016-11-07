@@ -1,5 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "camera.h"
+#include "ray.h"
+#include "scene.h"
+#include "intersection.h"
+
+Ray ConstructRayThroughPixel(Camera camera, int x, int y){
+    return Ray();
+}
+Intersection FindIntersection(Ray ray, Scene scene){
+    return Intersection();
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,10 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
        int sizeY = 600;
 
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
+       Camera camera = Camera();
+       Scene scene = Scene();
 
-       for(int l=0; l<sizeX; l++){
-           for(int c=0; c<sizeY; c++){
-               image.setPixel(l, c, qRgb(100, 150, 200));
+       for(int x=0; x<sizeX; x++){
+           for(int y=0; y<sizeY; y++){
+               Ray ray = ConstructRayThroughPixel(camera, x, y);
+               Intersection hit = FindIntersection(ray, scene);
+               image.setPixel(x, y, qRgb(4, 4, 4));
            }
 
        }
@@ -25,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
        ui->graphicsView->setScene(graphic);
 }
+
+
 
 MainWindow::~MainWindow()
 {

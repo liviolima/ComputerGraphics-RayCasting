@@ -2,13 +2,13 @@
 #define OBSERVER_H
 
 
-class Observer
+class Camera
 {
-    int observer_xyz_position[3];
+    int camera_xyz_position[3];
     int look_at_xyz_position[3];
 
 public:
-    Observer();
+    Camera();
 };
 
-#endif // OBSERVER_H
+#endif // CAMERA_H

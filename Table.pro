@@ -16,17 +16,20 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cube.cpp \
     scene.cpp \
-    observer.cpp \
     leg.cpp \
     toptable.cpp \
-    xobject.cpp
+    xobject.cpp \
+    ray.cpp \
+    intersection.cpp \
+    camera.cpp
 
 HEADERS  += mainwindow.h \
-    cube.h \
     scene.h \
-    observer.h \
     leg.h \
     toptable.h \
-    xobject.h
+    xobject.h \
+    ray.h \
+    intersection.h \
+    camera.h
 
 FORMS    += mainwindow.ui
