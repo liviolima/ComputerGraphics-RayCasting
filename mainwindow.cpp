@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
        Camera camera = Camera();
+
+       camera.camera_xyz_position = NumberVector(0,0,5);
+       camera.look_at_xyz_position = NumberVector(0,0,0);
+       camera.up_xyz = NumberVector(0,1,0);
+
        Scene scene = Scene();
 
        for(int x=0; x<sizeX; x++){

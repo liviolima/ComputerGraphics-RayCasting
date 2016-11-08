@@ -1,19 +1,14 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
-
+#include "numbervector.h"
 
 class Camera
-{
-    int camera_xyz_position[3];
-    int look_at_xyz_position[3];
+{    
 
-    struct ray{
-        double Pi;
-        double Pj;
-
-    };
-
-public:
+public:    
+    NumberVector camera_xyz_position;
+    NumberVector look_at_xyz_position;
+    NumberVector up_xyz;
     Camera();
 };
 
