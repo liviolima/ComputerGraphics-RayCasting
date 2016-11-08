@@ -1,9 +1,13 @@
-#ifndef LEG_H
-#define LEG_H
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+#import "object.h"
 
 
-class Leg
+class Triangle: public Object
 {
+public:
+    Triangle();
+
     struct vertex{
         int vertex_identifier;
 
@@ -34,10 +38,9 @@ class Leg
 
     face * all_faces;
 
-public:
-    Leg();
-
+    void scale(double x, double y, double z);
     void translate(double x, double y, double z);
+
 };
 
-#endif // LEG_H
+#endif // TRIANGLE_H

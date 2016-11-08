@@ -14,14 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cube.cpp \
     scene.cpp \
     leg.cpp \
     toptable.cpp \
     xobject.cpp \
     ray.cpp \
     intersection.cpp \
-    camera.cpp
+    camera.cpp \
+    object.cpp \
+    triangle.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -30,6 +31,8 @@ HEADERS  += mainwindow.h \
     xobject.h \
     ray.h \
     intersection.h \
-    camera.h
+    camera.h \
+    object.h \
+    triangle.h
 
 FORMS    += mainwindow.ui
