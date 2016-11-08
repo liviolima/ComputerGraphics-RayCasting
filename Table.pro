@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     intersection.cpp \
     camera.cpp \
     object.cpp \
-    triangle.cpp
+    triangle.cpp \
+    numbervector.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -33,6 +34,7 @@ HEADERS  += mainwindow.h \
     intersection.h \
     camera.h \
     object.h \
-    triangle.h
+    triangle.h \
+    numbervector.h
 
 FORMS    += mainwindow.ui
