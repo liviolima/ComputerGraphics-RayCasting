@@ -7,11 +7,9 @@
 
 Ray ConstructRayThroughPixel(Camera camera, int x, int y){
 
-    // FIXME sizeX sizeY instead of hardcoded xpix and ypix
-    double xpix = -600
-    NumberVector ray_direction = NumberVector(
-                camera.camera_xyz_position
-                );
+
+
+
     return Ray();
 }
 Intersection FindIntersection(Ray ray, Scene scene){

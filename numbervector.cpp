@@ -15,6 +15,9 @@ NumberVector NumberVector::normalize(){
 }
 
 NumberVector NumberVector::cross_product(NumberVector other){
+    // CROSSPRODUCT of Other x Self.
+    // If you do Self x Other, the result will be anticommutative
+    // e.g Other x Self = a, then Self x Other = -a
     return NumberVector(1,1,1);
 }
 
