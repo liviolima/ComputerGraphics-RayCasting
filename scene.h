@@ -3,17 +3,19 @@
 #include "leg.h"
 #include "toptable.h"
 #include "xobject.h"
+#include "triangle.h"
 
 class Scene
 {
-    Leg leg1, leg2, leg3, leg4;
-    TopTable toptable;
-    Xobject xobject;
 
-    int ilumination_xyz_position[3];
+
 
 public:
     Scene();
+
+
+    Triangle triangle;
+    int ilumination_xyz_position[3];
 };
 
 #endif // SCENE_H

@@ -18,6 +18,9 @@ Intersection FindIntersection(Ray ray, Scene scene){
     return Intersection();
 }
 
+void convertToCameraCoordinates(Scene scene){
+    //scene.triangle;
+}
 
 
 
@@ -41,7 +44,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
 
+
+
        Scene scene = Scene();
+       convertToCameraCoordinates(scene);
 
        for(int x=0; x<sizeX; x++){
            for(int y=0; y<sizeY; y++){
@@ -58,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
        ui->graphicsView->setScene(graphic);
 }
-
 
 
 MainWindow::~MainWindow()

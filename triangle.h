@@ -1,20 +1,16 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 #import "object.h"
-
+#import "numbervector.h"
 
 class Triangle: public Object
 {
 public:
     Triangle();
 
-    struct vertex{
-        int vertex_identifier;
+    NumberVector vertex[3];
 
-        double x;
-        double y;
-        double z;
-    };
+
 
     struct edge{
         int edge_identifier;
@@ -32,7 +28,7 @@ public:
 
     };
 
-    vertex * all_vertexes;
+
 
     edge * all_edges;
 

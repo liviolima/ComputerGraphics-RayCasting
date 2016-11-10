@@ -19,7 +19,7 @@ public:
     Camera(NumberVector pos, NumberVector look_at, NumberVector up);
     double coordinatesWorldToCamera[4][4];
 
-    void printMatrix();
+
 };
 
 #endif // CAMERA_H
