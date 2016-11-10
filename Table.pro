@@ -38,3 +38,5 @@ HEADERS  += mainwindow.h \
     numbervector.h
 
 FORMS    += mainwindow.ui
+
+CONFIG += console

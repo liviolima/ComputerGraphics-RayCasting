@@ -4,6 +4,8 @@
 #include "ray.h"
 #include "scene.h"
 #include "intersection.h"
+#include <iostream>
+#include <QDebug>
 
 Ray ConstructRayThroughPixel(Camera camera, int x, int y){
 
@@ -16,6 +18,9 @@ Intersection FindIntersection(Ray ray, Scene scene){
     return Intersection();
 }
 
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,11 +31,15 @@ MainWindow::MainWindow(QWidget *parent) :
        int sizeY = 600;
 
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
-       Camera camera = Camera();
 
-       camera.camera_xyz_position = NumberVector(0,0,5);
-       camera.look_at_xyz_position = NumberVector(0,0,0);
-       camera.up_xyz = NumberVector(0,1,0);
+       qDebug()  << "Console Mode.\n";
+       std::cout << "Console Mode.\n";
+
+       NumberVector camera_xyz_position = NumberVector(0,0,5);
+       NumberVector look_at_xyz_position = NumberVector(0,0,0);
+       NumberVector up_xyz = NumberVector(0,1,0);
+
+       Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
 
        Scene scene = Scene();
 

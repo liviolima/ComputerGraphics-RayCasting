@@ -5,6 +5,7 @@
 class Camera
 {    
 
+
 public:    
     NumberVector camera_xyz_position;
     NumberVector look_at_xyz_position;
@@ -16,6 +17,9 @@ public:
 
     Camera();
     Camera(NumberVector pos, NumberVector look_at, NumberVector up);
+    double coordinatesWorldToCamera[4][4];
+
+    void printMatrix();
 };
 
 #endif // CAMERA_H
