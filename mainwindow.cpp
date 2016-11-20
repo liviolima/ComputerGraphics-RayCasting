@@ -19,7 +19,7 @@ Intersection FindIntersection(Ray ray, Scene scene){
 }
 
 void convertToCameraCoordinates(Scene scene){
-    //scene.triangle;
+
 }
 
 

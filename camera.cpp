@@ -24,30 +24,30 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
        this->look_at_xyz_position.y - this->camera_xyz_position.y,
        this->look_at_xyz_position.z - this->camera_xyz_position.z
      * */
-    this->camera_look_direction = NumberVector(
+    this->camera_look_direction_k = NumberVector(
                 this->camera_xyz_position.x - this->look_at_xyz_position.x,
                 this->camera_xyz_position.y - this->look_at_xyz_position.y,
                 this->camera_xyz_position.z - this->look_at_xyz_position.z)
             .normalize();
-    this->camera_right_direction = camera_look_direction.cross_product(up_xyz).normalize();
-    this->camera_down_direction = camera_right_direction.cross_product(camera_look_direction);
+    this->camera_right_direction_i = camera_look_direction_k.cross_product(up_xyz).normalize();
+    this->camera_down_direction_j = camera_right_direction_i.cross_product(camera_look_direction_k);
 
 
-    double Oc_i = camera_xyz_position.x*camera_right_direction.x + camera_xyz_position.y*camera_right_direction.y +
-                  camera_xyz_position.z*camera_right_direction.z;
+    double Oc_i = camera_xyz_position.x*camera_right_direction_i.x + camera_xyz_position.y*camera_right_direction_i.y +
+                  camera_xyz_position.z*camera_right_direction_i.z;
 
-    double Oc_j = camera_xyz_position.x*camera_down_direction.x + camera_xyz_position.y*camera_down_direction.y +
-                  camera_xyz_position.z*camera_down_direction.z;
+    double Oc_j = camera_xyz_position.x*camera_down_direction_j.x + camera_xyz_position.y*camera_down_direction_j.y +
+                  camera_xyz_position.z*camera_down_direction_j.z;
 
-    double Oc_k = camera_xyz_position.x*camera_look_direction.x + camera_xyz_position.y*camera_look_direction.y +
-                  camera_xyz_position.z*camera_look_direction.z;
+    double Oc_k = camera_xyz_position.x*camera_look_direction_k.x + camera_xyz_position.y*camera_look_direction_k.y +
+                  camera_xyz_position.z*camera_look_direction_k.z;
 
 
 
     double coordinatesWorldToCamera[4][4] = {
-      {camera_right_direction.x, camera_right_direction.y, camera_right_direction.z, -Oc_i},
-      {camera_down_direction.x, camera_down_direction.y, camera_down_direction.z, -Oc_j},
-      {camera_look_direction.x, camera_look_direction.y, camera_look_direction.z, -Oc_k},
+      {camera_right_direction_i.x, camera_right_direction_i.y, camera_right_direction_i.z, -Oc_i},
+      {camera_down_direction_j.x, camera_down_direction_j.y, camera_down_direction_j.z, -Oc_j},
+      {camera_look_direction_k.x, camera_look_direction_k.y, camera_look_direction_k.z, -Oc_k},
       {0.0, 0.0, 0.0, 1.0}
 
     };
