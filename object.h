@@ -7,9 +7,8 @@ class Object
 public:
     Object();
 
-   void scale(double x, double y, double z);
-   void translate(double x, double y, double z);
-
+    virtual void scale(double x, double y, double z) = 0;
+    virtual void translate(double x, double y, double z) = 0;
 };
 
 #endif // OBJECT_H

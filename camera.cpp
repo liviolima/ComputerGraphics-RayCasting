@@ -15,7 +15,7 @@ Camera::Camera()
 
 }
 
-void Camera::transformVertexFromCoordinatesWorldToCamera(Scene scene){
+void Camera::transformVertexesFromCoordinatesWorldToCamera(){
 //**** Vertex 0 ****//
 
     scene.triangle.vertex[0].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[0].x +

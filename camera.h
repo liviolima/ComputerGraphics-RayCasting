@@ -8,6 +8,8 @@ class Camera
 
 
 public:    
+    Scene scene; //Is it correct? If I put one scene on the class Camera? I have to check it again.
+
     NumberVector camera_xyz_position;
     NumberVector look_at_xyz_position;
     NumberVector up_xyz;
@@ -20,7 +22,7 @@ public:
     Camera(NumberVector pos, NumberVector look_at, NumberVector up);
     double coordinatesWorldToCamera[4][4];
 
-    void transformVertexFromCoordinatesWorldToCamera(Scene scene);
+    void transformVertexesFromCoordinatesWorldToCamera();
 
 
 };

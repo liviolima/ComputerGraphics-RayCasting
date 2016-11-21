@@ -1,5 +1,6 @@
 #include "triangle.h"
 #include "numbervector.h"
+#include <QDebug>
 
 Triangle::Triangle()
 {
@@ -22,13 +23,12 @@ Triangle::Triangle()
 }
 
 void Triangle::scale(double x, double y, double z){
-
+    //qDebug() << "test-triangle-scale";
 }
 
 
-
 void Triangle::translate(double x, double y, double z){
-
+    //qDebug() << "test-triangle-translate";
 }
 
 //void Triangle::changeCoordinateWorld
