@@ -1,6 +1,7 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 #include "numbervector.h"
+#include "scene.h"
 
 class Camera
 {    
@@ -18,6 +19,8 @@ public:
     Camera();
     Camera(NumberVector pos, NumberVector look_at, NumberVector up);
     double coordinatesWorldToCamera[4][4];
+
+    void transformVertexFromCoordinatesWorldToCamera(Scene scene);
 
 
 };

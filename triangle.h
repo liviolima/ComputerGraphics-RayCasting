@@ -11,7 +11,6 @@ public:
     NumberVector vertex[3];
 
 
-
     struct edge{
         int edge_identifier;
 
@@ -27,7 +26,6 @@ public:
         int third_edge_identifier;
 
     };
-
 
 
     edge * all_edges;

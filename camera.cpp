@@ -1,6 +1,8 @@
 #include "camera.h"
 #include <iostream>
 #include <QDebug>
+#include "triangle.h"
+#include "scene.h"
 
 Camera::Camera()
 {
@@ -12,6 +14,70 @@ Camera::Camera()
 
 
 }
+
+void Camera::transformVertexFromCoordinatesWorldToCamera(Scene scene){
+//**** Vertex 0 ****//
+
+    scene.triangle.vertex[0].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[0].x +
+                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[0].y +
+                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[0].z +
+                                 coordinatesWorldToCamera[0][3] * 1;
+
+
+    scene.triangle.vertex[0].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[0].x +
+                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[0].y +
+                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[0].z +
+                                 coordinatesWorldToCamera[1][3] * 1;
+
+
+    scene.triangle.vertex[0].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[0].x +
+                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[0].y +
+                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[0].z +
+                                 coordinatesWorldToCamera[2][3] * 1;
+
+//**** Vertex 1 ****//
+
+    scene.triangle.vertex[1].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[1].x +
+                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[1].y +
+                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[1].z +
+                                 coordinatesWorldToCamera[0][3] * 1;
+
+
+    scene.triangle.vertex[1].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[1].x +
+                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[1].y +
+                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[1].z +
+                                 coordinatesWorldToCamera[1][3] * 1;
+
+
+    scene.triangle.vertex[1].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[1].x +
+                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[1].y +
+                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[1].z +
+                                 coordinatesWorldToCamera[2][3] * 1;
+
+
+
+//**** Vertex 2 ****//
+
+    scene.triangle.vertex[2].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[2].x +
+                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[2].y +
+                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[2].z +
+                                 coordinatesWorldToCamera[0][3] * 1;
+
+
+    scene.triangle.vertex[2].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[2].x +
+                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[2].y +
+                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[2].z +
+                                 coordinatesWorldToCamera[1][3] * 1;
+
+
+    scene.triangle.vertex[2].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[2].x +
+                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[2].y +
+                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[2].z +
+                                 coordinatesWorldToCamera[2][3] * 1;
+
+
+}
+
 
 Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     this->camera_xyz_position = pos;
@@ -56,7 +122,6 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     for(int j = 0; j < 4; j++){
         qDebug() <<coordinatesWorldToCamera[j][0]<<" "<<coordinatesWorldToCamera[j][1]<<" "<<coordinatesWorldToCamera[j][2]<<" "<<coordinatesWorldToCamera[j][3];
         qDebug() <<"\n";
-
     }
 
 

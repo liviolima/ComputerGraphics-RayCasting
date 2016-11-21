@@ -5,16 +5,14 @@ Triangle::Triangle()
 {
 
 
-
+    vertex[0] = NumberVector( 0, 0, 0);
+    vertex[1] = NumberVector( 10, 0, 0);
+    vertex[2] = NumberVector( 5, 10, 0);
 
     edge * all_edges = new edge[2];
 
     face * all_faces = new face[1];
 
-
-    vertex[0] = NumberVector( 0, 0, 0);
-    vertex[1] = NumberVector( 10, 0, 0);
-    vertex[2] = NumberVector( 5, 10, 0);
 
     all_edges[0] = {1, 1, 2};
     all_edges[1] = {2, 1, 3};

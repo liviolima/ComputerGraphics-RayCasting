@@ -8,11 +8,8 @@
 class Scene
 {
 
-
-
 public:
     Scene();
-
 
     Triangle triangle;
     int ilumination_xyz_position[3];
