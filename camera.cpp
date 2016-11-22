@@ -16,7 +16,11 @@ Camera::Camera()
 }
 
 void Camera::transformVertexesFromCoordinatesWorldToCamera(){
-//**** Vertex 0 ****//
+    //Later on I think we need put a loop for all objects and loop all vertexes of each object.
+    //How can I do it? (Above)
+
+
+    //**** Vertex 0 ****//
 
     scene.triangle.vertex[0].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[0].x +
                                  coordinatesWorldToCamera[0][1] * scene.triangle.vertex[0].y +

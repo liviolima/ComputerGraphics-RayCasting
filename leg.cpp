@@ -1,9 +1,6 @@
 #include "leg.h"
 
 
-
-
-
 Leg::Leg()
 {
     struct vertex{

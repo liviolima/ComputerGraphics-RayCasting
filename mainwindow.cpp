@@ -7,13 +7,27 @@
 #include <iostream>
 #include <QDebug>
 
-Ray ConstructRayThroughPixel(Camera camera, int x, int y){
+Ray ConstructRayThroughPixel(Camera camera, int i, int j){
+
+    //I have to change the correct values for Pz, Dx, Dy.
+
+    double Px, Py, Pz = -10.0;
+    double Dx = 1.0, Dy = 1.0;
+    double W = 10, H = 10;
+
+    Px = W/2.0 +  Dx/2.0 + j*Dx;
+    Py = H/2.0 - Dy/2.0 - i*Dy;
 
 
+    NumberVector P(Px, Py, Pz);
+
+    Ray ray;
+    ray.calculateV(P);
 
 
-    return Ray();
+    return ray;
 }
+
 Intersection FindIntersection(Ray ray, Scene scene){
     return Intersection();
 }
@@ -49,11 +63,11 @@ MainWindow::MainWindow(QWidget *parent) :
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
 
-       for(int x=0; x<sizeX; x++){
-           for(int y=0; y<sizeY; y++){
-               Ray ray = ConstructRayThroughPixel(camera, x, y);
+       for(int i=0; i<sizeX; i++){
+           for(int j=0; j<sizeY; j++){
+               Ray ray = ConstructRayThroughPixel(camera, i, j);
                Intersection hit = FindIntersection(ray, scene);
-               image.setPixel(x, y, qRgb(4, 4, 4));
+               image.setPixel(i, j, qRgb(4, 4, 4));
            }
 
        }
