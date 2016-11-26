@@ -1,8 +1,5 @@
 #ifndef SCENE_H
 #define SCENE_H
-#include "leg.h"
-#include "toptable.h"
-#include "xobject.h"
 #include "triangle.h"
 
 class Scene

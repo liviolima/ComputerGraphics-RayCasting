@@ -3,11 +3,11 @@
 #include "camera.h"
 #include "ray.h"
 #include "scene.h"
-#include "intersection.h"
 #include <iostream>
 #include <vector>
 #include <QDebug>
 
+/*
 Ray ConstructRayThroughPixel(Camera camera, int i, int j){
 
     //I have to change the correct values for Pz, Dx, Dy.
@@ -28,13 +28,10 @@ Ray ConstructRayThroughPixel(Camera camera, int i, int j){
 
     return ray;
 }
-
-Intersection FindIntersection(Ray ray, Scene scene){
-    return Intersection();
-}
+*/
 
 void convertToCameraCoordinates(Scene scene){
-
+    //I did it on the class Camera.
 }
 
 
@@ -63,8 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
        NumberVector up_xyz = NumberVector(0,1,0);
 
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
-
-
 
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
@@ -95,9 +90,11 @@ MainWindow::MainWindow(QWidget *parent) :
                intersections.push_back(scene.triangle.findIntersection(origin,direction));
 
 
-               //Ray ray = ConstructRayThroughPixel(camera, i, j);
-               //Intersection hit = FindIntersection(ray, scene);
-               //image.setPixel(i, j, qRgb(4, 4, 4));
+               /*
+               Ray ray = ConstructRayThroughPixel(camera, i, j);
+               Intersection hit = FindIntersection(ray, scene);
+               image.setPixel(i, j, qRgb(4, 4, 4));]
+               */
            }
 
        }

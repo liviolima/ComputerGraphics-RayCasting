@@ -1,8 +1,5 @@
 #include "scene.h"
-#include "leg.h"
-#include "toptable.h"
-#include "xobject.h"
-
+#include "triangle.h"
 
 
 Scene::Scene()
