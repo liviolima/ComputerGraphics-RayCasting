@@ -140,7 +140,8 @@ MainWindow::MainWindow(QWidget *parent) :
                NumberVector origin = NumberVector(0, 0, 0);
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
-               NumberVector direction = NumberVector(1, 1, 1); // I need change it
+               NumberVector direction = NumberVector(1, 1, 1); // I need change it]
+               //NumberVector direction = camera.camera_look_direction_k.add(camera.camera_right_direction_i.add())
 
                std::vector<double> intersections;
                //intersections.push_back(scene.triangle.findIntersection(origin,direction));

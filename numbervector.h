@@ -11,8 +11,9 @@ public:
     NumberVector normalize();
     NumberVector cross_product(NumberVector other);
     double dot_product(NumberVector other);
+    NumberVector multiply(double amount);
     NumberVector add(NumberVector other);
-    NumberVector sub(NumberVector other);
+    NumberVector sub(NumberVector other);    
 };
 
 #endif // NUMBERVECTOR_H

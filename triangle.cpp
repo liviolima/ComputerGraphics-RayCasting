@@ -2,6 +2,8 @@
 #include "numbervector.h"
 #include <QDebug>
 #include "color.h"
+#include "iostream"
+
 
 Triangle::Triangle()
 {
@@ -41,6 +43,7 @@ NumberVector Triangle::getNormalAt(NumberVector point){
 }
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
+    //  std::cout << "hi";
     //How to calculate intersection for a Triangle?
 
     bool intersectTheTriangle = true;
