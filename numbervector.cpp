@@ -26,9 +26,19 @@ NumberVector NumberVector::cross_product(NumberVector other){
                 x * other.y - y * other.x);
 }
 
+double NumberVector::dot_product(NumberVector other){
+    return (x * other.x + y * other.y + z * other.z);
+}
+
 NumberVector NumberVector::add(NumberVector other){
     return NumberVector(x + other.x, y + other.y, z + other.z);
 }
+
+NumberVector NumberVector::sub(NumberVector other){
+    return NumberVector(x - other.x, y - other.y, z - other.z);
+}
+
+
 
 /*
  * convertToCameraCoordinates(Matrix m){

@@ -2,6 +2,7 @@
 #define TRIANGLE_H
 #import "object.h"
 #import "numbervector.h"
+#import "ray.h"
 
 class Triangle: public Object
 {
@@ -36,7 +37,7 @@ public:
     void translate(double x, double y, double z);
 
     NumberVector getNormalAt(NumberVector point);
-    void findIntersection(Ray ray);
+    bool findIntersection(Ray ray, NumberVector origin, NumberVector direction);
 
 
 

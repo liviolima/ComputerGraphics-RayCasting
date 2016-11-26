@@ -10,7 +10,9 @@ public:
     NumberVector(double, double, double);
     NumberVector normalize();
     NumberVector cross_product(NumberVector other);
+    double dot_product(NumberVector other);
     NumberVector add(NumberVector other);
+    NumberVector sub(NumberVector other);
 };
 
 #endif // NUMBERVECTOR_H
