@@ -38,7 +38,7 @@ NumberVector Triangle::getNormalAt(NumberVector point){
     return normal_vector;
 }
 
-double Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direction){
+double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     //How to calculate intersection for a Triangle?
 
     bool intersectTheTriangle = true;

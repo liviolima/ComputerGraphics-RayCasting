@@ -5,6 +5,7 @@
 #include "scene.h"
 #include "intersection.h"
 #include <iostream>
+#include <vector>
 #include <QDebug>
 
 Ray ConstructRayThroughPixel(Camera camera, int i, int j){
@@ -86,8 +87,12 @@ MainWindow::MainWindow(QWidget *parent) :
                    yamnt = ((sizeY - j) + 0.5)/sizeY;
                }
 
+
                NumberVector origin = NumberVector(0, 0, 0);
-               //NumberVector direction =
+               NumberVector direction = NumberVector(1, 1, 1); // I need change it
+
+               std::vector<double> intersections;
+               intersections.push_back(scene.triangle.findIntersection(origin,direction));
 
 
                //Ray ray = ConstructRayThroughPixel(camera, i, j);
