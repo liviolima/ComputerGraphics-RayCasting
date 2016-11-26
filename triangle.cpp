@@ -31,4 +31,13 @@ void Triangle::translate(double x, double y, double z){
     //qDebug() << "test-triangle-translate";
 }
 
+
+NumberVector Triangle::getNormalAt(NumberVector point){
+
+}
+
+void Triangle::findIntersection(Ray ray){
+
+}
+
 //void Triangle::changeCoordinateWorld

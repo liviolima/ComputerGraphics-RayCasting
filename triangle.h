@@ -35,6 +35,10 @@ public:
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
 
+    NumberVector getNormalAt(NumberVector point);
+    void findIntersection(Ray ray);
+
+
 
 };
 
