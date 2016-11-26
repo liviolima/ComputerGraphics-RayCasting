@@ -43,14 +43,10 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
 
     //PART 1
     double kEpsilon = 0.001;
-    double v0v1_x = vertex[1].x - vertex[0].x;
-    double v0v1_y = vertex[1].y - vertex[0].y;
-    double v0v1_z = vertex[1].z - vertex[0].z;
-    double v0v2_x = vertex[2].x - vertex[0].x;
-    double v0v2_y = vertex[2].y - vertex[0].y;
-    double v0v2_z = vertex[2].z - vertex[0].z;
-    NumberVector v0v1 = NumberVector(v0v1_x, v0v1_y, v0v1_z);
-    NumberVector v0v2 = NumberVector(v0v2_x, v0v2_y, v0v2_z);
+    //v0v1 = v1 - v0
+    NumberVector v0v1 = vertex[1].sub(vertex[0]);
+    //v0v2 = v2 - v0
+    NumberVector v0v2 = vertex[2].sub(vertex[0]);
     NumberVector N = v0v1.cross_product(v0v2);
 
 
