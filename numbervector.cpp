@@ -39,12 +39,3 @@ NumberVector NumberVector::sub(NumberVector other){
 }
 
 
-
-/*
- * convertToCameraCoordinates(Matrix m){
- *  x = novo_x (camera);
- *  y ""
- *  z ""
- * }
- *
- * */

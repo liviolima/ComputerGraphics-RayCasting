@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
                NumberVector origin = NumberVector(0, 0, 0);
+
+               //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
                NumberVector direction = NumberVector(1, 1, 1); // I need change it
 
                std::vector<double> intersections;
