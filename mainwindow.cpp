@@ -44,8 +44,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
        ui->setupUi(this);
 
+       int thisone;
+
        int sizeX = 600;
        int sizeY = 600;
+       double aspectratio = (double)sizeX / (double)sizeY;
+
+       double xamnt, yamnt;
 
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
 
@@ -65,9 +70,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
        for(int i=0; i<sizeX; i++){
            for(int j=0; j<sizeY; j++){
-               Ray ray = ConstructRayThroughPixel(camera, i, j);
-               Intersection hit = FindIntersection(ray, scene);
-               image.setPixel(i, j, qRgb(4, 4, 4));
+               thisone = j*sizeX + i;
+
+               if(sizeX > sizeY){
+                    xamnt = ((i+0.5)/sizeX)*aspectratio - (((sizeX - sizeY)/(double)sizeY)/2);
+                    yamnt = ((sizeY - j) + 0.5)/sizeY;
+               }
+               else if(sizeX < sizeY){
+                   xamnt = (i + 0.5)/sizeX;
+                   yamnt = (((sizeY - j) + 0.5)/sizeY)/aspectratio - (((sizeY - sizeX)/(double)sizeX)/2);
+               }
+               else{
+                   //the image is a square
+                   xamnt = (i + 0.5)/sizeX;
+                   yamnt = ((sizeY - j) + 0.5)/sizeY;
+               }
+
+               NumberVector origin = NumberVector(0, 0, 0);
+               //NumberVector direction =
+
+
+               //Ray ray = ConstructRayThroughPixel(camera, i, j);
+               //Intersection hit = FindIntersection(ray, scene);
+               //image.setPixel(i, j, qRgb(4, 4, 4));
            }
 
        }

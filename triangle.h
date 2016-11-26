@@ -37,7 +37,7 @@ public:
     void translate(double x, double y, double z);
 
     NumberVector getNormalAt(NumberVector point);
-    bool findIntersection(Ray ray, NumberVector origin, NumberVector direction);
+    double findIntersection(Ray ray, NumberVector origin, NumberVector direction);
 
 
 

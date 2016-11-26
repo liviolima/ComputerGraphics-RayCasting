@@ -38,8 +38,10 @@ NumberVector Triangle::getNormalAt(NumberVector point){
     return normal_vector;
 }
 
-bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direction){
+double Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direction){
     //How to calculate intersection for a Triangle?
+
+    bool intersectTheTriangle = true;
 
     //PART 1
     double kEpsilon = 0.001;
@@ -54,7 +56,7 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
     // check if ray and plane are parallel ?
     double NdotProductWithRayDirection = N.dot_product(direction);
     if (abs(NdotProductWithRayDirection) < kEpsilon) // almost 0
-        return false; // they are parallel so they don't intersect !
+        intersectTheTriangle = false; // they are parallel so they don't intersect !
 
 
     //PART 3
@@ -63,7 +65,7 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
     // compute t (equation 3)
     double t = (N.dot_product(origin) + d) / NdotProductWithRayDirection;
     // check if the triangle is in behind the ray
-    if (t < 0) return false; // the triangle is behind
+    if (t < 0) intersectTheTriangle = false; // the triangle is behind
 
 
     //PART 4
@@ -83,7 +85,7 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
     //This means ---> vp0 = P - v0
     NumberVector vp0 = P.sub(vertex[0]);
     NumberVector C1 = edge0.cross_product(vp0);
-    if(N.dot_product(C1) < 0) return false; // P is on the right side
+    if(N.dot_product(C1) < 0) intersectTheTriangle = false; // P is on the right side
 
 
 
@@ -94,7 +96,7 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
     //This means ---> vp1 = P - v1
     NumberVector vp1 = P.sub(vertex[1]);
     NumberVector C2 = edge1.cross_product(vp1);
-    if(N.dot_product(C2) < 0) return false; // P is on the right side
+    if(N.dot_product(C2) < 0) intersectTheTriangle = false; // P is on the right side
 
 
 
@@ -105,12 +107,16 @@ bool Triangle::findIntersection(Ray ray, NumberVector origin, NumberVector direc
     //This means ---> vp2 = P - v2
     NumberVector vp2 = P.sub(vertex[2]);
     NumberVector C3 = edge1.cross_product(vp1);
-    if(N.dot_product(C3) < 0) return false; // P is on the right side
+    if(N.dot_product(C3) < 0) intersectTheTriangle = false; // P is on the right side
 
 
 
     //PART 8
-    return true; // this ray hits the triangle
+    // this ray hits the triangle
+    if(intersectTheTriangle == true){
+        return t;
+    }
+    else return -1; // this ray does no hit the triangle
 }
 
 
