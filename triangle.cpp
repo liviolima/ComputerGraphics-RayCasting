@@ -1,10 +1,12 @@
 #include "triangle.h"
 #include "numbervector.h"
 #include <QDebug>
+#include "color.h"
 
 Triangle::Triangle()
 {
 
+    Color color = Color(25.0, 222.0, 4.0, 0);
 
     vertex[0] = NumberVector( 0, 0, 0);
     vertex[1] = NumberVector( 10, 0, 0);
@@ -117,6 +119,10 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
         return t;
     }
     else return -1; // this ray does no hit the triangle
+}
+
+Color Triangle::getColor(){
+    return color;
 }
 
 

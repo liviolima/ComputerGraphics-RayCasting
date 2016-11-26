@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     camera.cpp \
     object.cpp \
     triangle.cpp \
-    numbervector.cpp
+    numbervector.cpp \
+    color.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     camera.h \
     object.h \
     triangle.h \
-    numbervector.h
+    numbervector.h \
+    color.h
 
 FORMS    += mainwindow.ui
 

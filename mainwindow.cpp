@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <QDebug>
+#include "object.h"
 
 /*
 Ray ConstructRayThroughPixel(Camera camera, int i, int j){
@@ -32,6 +33,56 @@ Ray ConstructRayThroughPixel(Camera camera, int i, int j){
 
 void convertToCameraCoordinates(Scene scene){
     //I did it on the class Camera.
+}
+
+int winningObjectIndex(std::vector<double> object_intersection){
+    //return the index of the winning intersection
+    int index_of_minimum_value;
+
+    //prevent unnecessary calculations
+    if(object_intersection.size() == 0){
+        //if there is no intersections
+        return -1;
+    }
+    else if(object_intersection.size() == 1){
+        if(object_intersection.at(0) > 0){
+            //if the intersection is greater than zero then its our index of minimum value
+            return 0;
+        }
+        else{
+            //otherwise the only intersection value is negative
+            return -1;
+        }
+    }
+    else{
+        //otherwise there is more than one intersection
+        //first find the maximum value
+
+        double max = 0;
+        for(int i = 0; i < object_intersection.size() ; i++){
+            if(max < object_intersection.at(i)){
+                max = object_intersection.at(i);
+            }
+        }
+
+        //then starting from the maximum value find the minimum positive
+
+        if(max > 0){
+            //we only want positive intersections
+            for(int index = 0; index < object_intersection.size(); index++){
+                if(object_intersection.at(index) > 0 && object_intersection.at(index) <= max){
+                    max = object_intersection.at(index);
+                    index_of_minimum_value = index;
+                }
+            }
+            return index_of_minimum_value;
+        }
+        else{
+            //all intersections were negative
+            return -1;
+        }
+    }
+
 }
 
 
@@ -64,6 +115,9 @@ MainWindow::MainWindow(QWidget *parent) :
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
 
+       std::vector<Object*> scene_objects;
+       scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+
        for(int i=0; i<sizeX; i++){
            for(int j=0; j<sizeY; j++){
                thisone = j*sizeX + i;
@@ -89,8 +143,40 @@ MainWindow::MainWindow(QWidget *parent) :
                NumberVector direction = NumberVector(1, 1, 1); // I need change it
 
                std::vector<double> intersections;
-               intersections.push_back(scene.triangle.findIntersection(origin,direction));
+               //intersections.push_back(scene.triangle.findIntersection(origin,direction));
 
+
+
+               for(int index = 0; index < scene_objects.size(); index++){
+                   intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
+               }
+
+
+               int index_of_winning_object = winningObjectIndex(intersections);
+
+               std::cout <<index_of_winning_object;
+               //qDebug() <<"\n";
+
+               if(index_of_winning_object == -1){
+                   //set the background to black
+                    image.setPixel(i, j, qRgb(0, 0, 0));
+               }
+               else{
+                    //index corresponds to an object in our scene.
+                    Color this_color = scene_objects.at(index_of_winning_object)->getColor();
+                    image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+               }
+
+
+
+               /*
+               if( (i > 200  && i < 440) && (j > 200) && (j < 280)){
+                   image.setPixel(i, j, qRgb(23, 222, 10));
+               }
+               else{
+                   image.setPixel(i, j, qRgb(0, 0, 0));
+               }
+               */
 
                /*
                Ray ray = ConstructRayThroughPixel(camera, i, j);

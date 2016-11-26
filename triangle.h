@@ -3,6 +3,7 @@
 #import "object.h"
 #import "numbervector.h"
 #import "ray.h"
+#include "color.h"
 
 class Triangle: public Object
 {
@@ -11,6 +12,7 @@ public:
 
     NumberVector vertex[3];
 
+    Color color;
 
     struct edge{
         int edge_identifier;
@@ -35,9 +37,11 @@ public:
 
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
+    virtual double findIntersection(NumberVector origin, NumberVector direction);
+    virtual Color getColor();
 
     NumberVector getNormalAt(NumberVector point);
-    double findIntersection(NumberVector origin, NumberVector direction);
+
 
 
 
