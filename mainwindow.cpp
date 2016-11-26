@@ -159,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
                if(index_of_winning_object == -1){
                    //set the background to black
-                    image.setPixel(i, j, qRgb(0, 0, 0));
+                    image.setPixel(i, j, qRgb(173, 216, 230));
                }
                else{
                     //index corresponds to an object in our scene.
