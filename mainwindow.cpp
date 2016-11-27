@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent) :
        scene_objects.push_back(dynamic_cast<Object*>(&sphere));
 
        //plane
-       //scene_objects.push_back(dynamic_cast<Object*>(&plane));
+       scene_objects.push_back(dynamic_cast<Object*>(&plane));
 
 
 
