@@ -9,6 +9,8 @@ class Triangle: public Object
 {
 public:
     Triangle();
+    Triangle(NumberVector new_value_for_vertex[3]);
+
 
     NumberVector vertex[3];
 
@@ -41,6 +43,8 @@ public:
     virtual Color getColor();
 
     NumberVector getNormalAt(NumberVector point);
+
+    void setVertexes(NumberVector new_value_for_vertex[3]);
 
 
 

@@ -3,12 +3,15 @@
 #include "numbervector.h"
 #include "color.h"
 #include "object.h"
-
+#include "triangle.h"
+#include "vector"
 
 class Cube : public Object
 {
 public:
     Cube();
+
+    std::vector<Triangle*> triangles_of_the_cube;
 
     Color color;
 

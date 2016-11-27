@@ -28,6 +28,29 @@ Triangle::Triangle()
 
 }
 
+Triangle::Triangle(NumberVector new_value_for_vertex[3])
+{
+
+    color.red = 255.0;
+    color.green = 255.0;
+    color.blue = 0.0;
+
+    vertex[0] = new_value_for_vertex[0];
+    vertex[1] = new_value_for_vertex[1];
+    vertex[2] = new_value_for_vertex[2];
+
+    edge * all_edges = new edge[2];
+
+    face * all_faces = new face[1];
+
+
+    all_edges[0] = {1, 1, 2};
+    all_edges[1] = {2, 1, 3};
+
+    all_faces[0] = {1,1, 2,3};
+
+}
+
 void Triangle::scale(double x, double y, double z){
     //qDebug() << "test-triangle-scale";
 }
@@ -167,6 +190,12 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
 Color Triangle::getColor(){
     return color;
+}
+
+void Triangle::setVertexes(NumberVector new_value_for_vertex[3]){
+    vertex[0] = new_value_for_vertex[0];
+    vertex[1] = new_value_for_vertex[1];
+    vertex[2] = new_value_for_vertex[2];
 }
 
 
