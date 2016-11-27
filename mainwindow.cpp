@@ -181,8 +181,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-               for(int index = 0; index < scene_objects.size(); index++){
-                   intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
+               for(int index = 0; index < scene_objects.size(); index++){                   
+                   std::vector<Triangle> triangles = scene_objects[index]->triangles;
+                   for (int i = 0 ; i <= triangles.size() ; i++){
+                       intersections.push_back(triangles[i].findIntersection(origin, direction));
+                   }
+                   //intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
 
 

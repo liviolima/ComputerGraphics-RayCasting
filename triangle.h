@@ -1,11 +1,10 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
-#import "object.h"
 #import "numbervector.h"
 #import "ray.h"
 #include "color.h"
 
-class Triangle: public Object
+class Triangle
 {
 public:
     Triangle();

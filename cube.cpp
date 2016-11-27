@@ -1,5 +1,6 @@
 #include "cube.h"
 #include "numbervector.h"
+#include <iostream>
 
 Cube::Cube()
 {

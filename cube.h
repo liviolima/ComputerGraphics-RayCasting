@@ -12,8 +12,7 @@ public:
     Cube();
     Cube(double size, Color newColor);
 
-    std::vector<Triangle*> triangles_of_the_cube;
-    Triangle triangles[12];
+
 
     Color color;
 
