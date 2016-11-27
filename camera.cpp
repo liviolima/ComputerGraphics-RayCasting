@@ -98,9 +98,10 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
                 this->camera_xyz_position.x - this->look_at_xyz_position.x,
                 this->camera_xyz_position.y - this->look_at_xyz_position.y,
                 this->camera_xyz_position.z - this->look_at_xyz_position.z)
-            .normalize();
+            .negative().normalize();
 
-    this->camera_right_direction_i = camera_look_direction_k.cross_product(up_xyz).normalize();
+    //this->camera_right_direction_i = camera_look_direction_k.cross_product(up_xyz).normalize();
+    this->camera_right_direction_i = up_xyz.cross_product(camera_look_direction_k).normalize();
     this->camera_down_direction_j = camera_right_direction_i.cross_product(camera_look_direction_k);
 
 
