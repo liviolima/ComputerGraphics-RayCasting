@@ -4,12 +4,12 @@
 Cube::Cube()
 {
 
-    triangles[0] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[1] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[2] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[3] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[4] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[5] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[0] = Triangle(NumberVector(-1,-1,1), NumberVector(1,1,1), NumberVector(-1,1,1));
+    triangles[1] = Triangle(NumberVector(1,-1,1), NumberVector(-1, -1,1), NumberVector(1,1,1));
+    triangles[2] = Triangle(NumberVector(1,-1,1), NumberVector(1,-1,-1), NumberVector(1,1,-1));
+    triangles[3] = Triangle(NumberVector(1,-1,1), NumberVector(1,1,1), NumberVector(1,1,-1));
+    triangles[4] = Triangle(NumberVector(1,1,1), NumberVector(1,1,-1), NumberVector(-1,1,1));
+    triangles[5] = Triangle(NumberVector(1,1,-1), NumberVector(-1,1,-1), NumberVector(-1,1,1));
 
     triangles[6] = Triangle(NumberVector(-1,-1,-1), NumberVector(-1,-1,1), NumberVector(-1,1,-1));
     triangles[7] = Triangle(NumberVector(-1,-1,1), NumberVector(-1,1,-1), NumberVector(-1,1,1));
