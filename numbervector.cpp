@@ -27,7 +27,9 @@ NumberVector NumberVector::cross_product(NumberVector other){
 }
 
 NumberVector NumberVector::multiply(double amount){
-
+    this->x = this->x*amount;
+    this->y = this->y*amount;
+    this->z = this->z*amount;
 }
 
 double NumberVector::dot_product(NumberVector other){
