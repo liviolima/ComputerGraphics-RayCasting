@@ -7,6 +7,8 @@
 #include <vector>
 #include <QDebug>
 #include "object.h"
+#include "plane.h"
+#include "color.h"
 
 /*
 Ray ConstructRayThroughPixel(Camera camera, int i, int j){
@@ -115,8 +117,16 @@ MainWindow::MainWindow(QWidget *parent) :
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
 
+       Color color = Color(23.0, 124.0, 5.0, 0);
+       NumberVector Y = NumberVector(0, 1, 0);
+       Plane plane = Plane(Y, -1, color);
+
        std::vector<Object*> scene_objects;
-       scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+       scene_objects.push_back(dynamic_cast<Object*>(&plane));
+
+
+
 
        for(int i=0; i<sizeX; i++){
            for(int j=0; j<sizeY; j++){

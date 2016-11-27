@@ -43,3 +43,8 @@ NumberVector NumberVector::sub(NumberVector other){
 }
 
 
+NumberVector NumberVector::negative(){
+    return NumberVector(-x, -y, -z);
+}
+
+

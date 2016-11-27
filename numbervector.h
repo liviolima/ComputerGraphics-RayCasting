@@ -13,7 +13,8 @@ public:
     double dot_product(NumberVector other);
     NumberVector multiply(double amount);
     NumberVector add(NumberVector other);
-    NumberVector sub(NumberVector other);    
+    NumberVector sub(NumberVector other);
+    NumberVector negative();
 };
 
 #endif // NUMBERVECTOR_H
