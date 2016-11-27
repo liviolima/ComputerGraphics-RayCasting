@@ -10,7 +10,6 @@
 #include "plane.h"
 #include "color.h"
 #include "sphere.h"
-#include "cube.h"
 
 /*
 Ray ConstructRayThroughPixel(Camera camera, int i, int j){
@@ -128,20 +127,12 @@ MainWindow::MainWindow(QWidget *parent) :
        double radius = 1.0; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
        Sphere sphere = Sphere(center, radius, color2);
 
-       Color color3 = Color(255.0, 13.0, 0.0, 0);
-       double size = 2.0;
-       Cube cube = Cube(size, color3);
-
        std::vector<Object*> scene_objects;
        //triangle
        scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
 
        //sphere
        scene_objects.push_back(dynamic_cast<Object*>(&sphere));
-
-       //cube
-       scene_objects.push_back(dynamic_cast<Object*>(&cube));
-
 
        //plane
        //scene_objects.push_back(dynamic_cast<Object*>(&plane));

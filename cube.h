@@ -10,7 +10,6 @@ class Cube : public Object
 {
 public:
     Cube();
-    Cube(double size, Color newColor);
 
 
 
