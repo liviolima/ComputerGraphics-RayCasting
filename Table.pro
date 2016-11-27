@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     numbervector.cpp \
     color.cpp \
     plane.cpp \
-    sphere.cpp
+    sphere.cpp \
+    cube.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     numbervector.h \
     color.h \
     plane.h \
-    sphere.h
+    sphere.h \
+    cube.h
 
 FORMS    += mainwindow.ui
 
