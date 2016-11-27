@@ -122,8 +122,8 @@ MainWindow::MainWindow(QWidget *parent) :
        Plane plane = Plane(Y, -1, color);
 
        std::vector<Object*> scene_objects;
-       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
-       scene_objects.push_back(dynamic_cast<Object*>(&plane));
+       scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+       //scene_objects.push_back(dynamic_cast<Object*>(&plane));
 
 
 
