@@ -11,8 +11,8 @@ Triangle::Triangle()
     Color color = Color(25.0, 222.0, 4.0, 0);
 
     vertex[0] = NumberVector( 0, 0, 0);
-    vertex[1] = NumberVector( 1, 0, 0);
-    vertex[2] = NumberVector( 0.5, 1, 0);
+    vertex[1] = NumberVector( 2, 0, 0);
+    vertex[2] = NumberVector( 1, 2, 0);
 
     edge * all_edges = new edge[2];
 
@@ -22,7 +22,7 @@ Triangle::Triangle()
     all_edges[0] = {1, 1, 2};
     all_edges[1] = {2, 1, 3};
 
-    all_faces[0] = {1 , 1, 2, 3};
+    all_faces[0] = {1,1, 2,3};
 
 }
 
@@ -43,7 +43,44 @@ NumberVector Triangle::getNormalAt(NumberVector point){
 }
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
-    //  std::cout << "hi";
+
+    float EPSILON = 0.0000001;
+    NumberVector edge1, edge2, P, Q, T;
+    float det, inv_det, u, v, t;
+
+    edge1 = vertex[1].sub(vertex[0]);
+    edge2 = vertex[2].sub(vertex[0]);
+
+    P = direction.cross_product(edge2);
+    //if determinant is near zero, ray lies in plane of triangle or ray is parallel to plane of triangle
+    det = edge1.dot_product(P);
+
+    if (det > -EPSILON && det < EPSILON) return 0;
+    inv_det = 1.f / det;
+
+    T = origin.sub(vertex[0]);
+    u = T.dot_product(P) * inv_det;
+
+    if (u < 0.f || u > 1.f) return 0;
+
+    Q = T.cross_product(edge1);
+    v = direction.dot_product(Q);
+
+    if (v < 0.f || u + v > 1.f) return 0;
+
+    t = edge2.dot_product(Q) * inv_det;
+
+    if (t > EPSILON){
+
+        return t;
+    } else{
+        //std::cout << "Value of t:";
+        //std::cout << t;
+        return -1;
+    }
+
+// OLD IMPLEMENTATION BELOW
+/*
     //How to calculate intersection for a Triangle?
 
     int intersectTheTriangle = 1;
@@ -119,9 +156,11 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     //PART 8
     // this ray hits the triangle
     if(intersectTheTriangle == 1){
+        std::cout << "HIT";
         return t;
     }
     else return -1; // this ray does no hit the triangle
+*/
 }
 
 Color Triangle::getColor(){
