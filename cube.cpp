@@ -10,12 +10,13 @@ Cube::Cube()
     triangles[3] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
     triangles[4] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
     triangles[5] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[6] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[7] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[8] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[9] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[10] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
-    triangles[11] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+
+    triangles[6] = Triangle(NumberVector(-1,-1,-1), NumberVector(-1,-1,1), NumberVector(-1,1,-1));
+    triangles[7] = Triangle(NumberVector(-1,-1,1), NumberVector(-1,1,-1), NumberVector(-1,1,1));
+    triangles[8] = Triangle(NumberVector(1,-1,1), NumberVector(1,-1,-1), NumberVector(-1,-1,1));
+    triangles[9] = Triangle(NumberVector(1,-1,-1), NumberVector(-1,-1,-1), NumberVector(-1,-1,1));
+    triangles[10] = Triangle(NumberVector(1,-1,-1), NumberVector(-1,-1,-1), NumberVector(1,1,-1));
+    triangles[11] = Triangle(NumberVector(-1,-1,-1), NumberVector(1,1,-1), NumberVector(-1,1,-1));
 
 
     /*
