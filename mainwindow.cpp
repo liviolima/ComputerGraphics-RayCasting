@@ -109,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent) :
        qDebug()  << "Console Mode.\n";
        std::cout << "Console Mode.\n";
 
-       NumberVector camera_xyz_position = NumberVector(3.0, 1.5, -4.0);
+       NumberVector camera_xyz_position = NumberVector(0, 0, 5);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0,1,0);
 
@@ -123,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
        Plane plane = Plane(Y, -1, color);
 
        Color color2 = Color(2.0, 20.0, 131.0, 0);
-       NumberVector center = NumberVector(1.5, 0.0, 2.0);
+       NumberVector center = NumberVector(0, 0.0, 0.0);
        double radius = 1.0; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
        Sphere sphere = Sphere(center, radius, color2);
 
@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent) :
        scene_objects.push_back(dynamic_cast<Object*>(&sphere));
 
        //plane
-       scene_objects.push_back(dynamic_cast<Object*>(&plane));
+       //scene_objects.push_back(dynamic_cast<Object*>(&plane));
 
 
 
@@ -159,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
                }
 
 
-               NumberVector origin = NumberVector(3.0, 1.5, -4.0);
+               NumberVector origin = camera_xyz_position;
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
                //NumberVector direction = NumberVector(1, 1, 1); // I need change it]
