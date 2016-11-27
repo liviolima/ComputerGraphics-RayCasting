@@ -129,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
        std::vector<Object*> scene_objects;
        //triangle
-       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+       scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
 
        //sphere
        scene_objects.push_back(dynamic_cast<Object*>(&sphere));

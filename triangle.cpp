@@ -8,7 +8,9 @@
 Triangle::Triangle()
 {
 
-    Color color = Color(25.0, 222.0, 4.0, 0);
+    color.red = 255.0;
+    color.green = 255.0;
+    color.blue = 0.0;
 
     vertex[0] = NumberVector( 0, 0, 0);
     vertex[1] = NumberVector( 2, 0, 0);
