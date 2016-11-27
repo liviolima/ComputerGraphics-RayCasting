@@ -3,20 +3,32 @@
 
 Cube::Cube()
 {
+    double x = 1;
+    NumberVector v1 = NumberVector( x  , -x,  x);
+    NumberVector v2 = NumberVector( x  , -x, -x);
+    NumberVector v3 = NumberVector(-x  , -x, -x);
+    NumberVector v4 = NumberVector(-x  , -x,  x);
+    NumberVector v5 = NumberVector( x  ,  x,  x);
+    NumberVector v6 = NumberVector( x  ,  x, -x);
+    NumberVector v7 = NumberVector(-x  ,  x, -x);
+    NumberVector v8 = NumberVector(-x  ,  x,  x);
 
-    triangles[0] = Triangle(NumberVector(-1,-1,1), NumberVector(1,1,1), NumberVector(-1,1,1));
-    triangles[1] = Triangle(NumberVector(1,-1,1), NumberVector(-1, -1,1), NumberVector(1,1,1));
-    triangles[2] = Triangle(NumberVector(1,-1,1), NumberVector(1,-1,-1), NumberVector(1,1,-1));
-    triangles[3] = Triangle(NumberVector(1,-1,1), NumberVector(1,1,1), NumberVector(1,1,-1));
-    triangles[4] = Triangle(NumberVector(1,1,1), NumberVector(1,1,-1), NumberVector(-1,1,1));
-    triangles[5] = Triangle(NumberVector(1,1,-1), NumberVector(-1,1,-1), NumberVector(-1,1,1));
 
-    triangles[6] = Triangle(NumberVector(-1,-1,-1), NumberVector(-1,-1,1), NumberVector(-1,1,-1));
-    triangles[7] = Triangle(NumberVector(-1,-1,1), NumberVector(-1,1,-1), NumberVector(-1,1,1));
-    triangles[8] = Triangle(NumberVector(1,-1,1), NumberVector(1,-1,-1), NumberVector(-1,-1,1));
-    triangles[9] = Triangle(NumberVector(1,-1,-1), NumberVector(-1,-1,-1), NumberVector(-1,-1,1));
-    triangles[10] = Triangle(NumberVector(1,-1,-1), NumberVector(-1,-1,-1), NumberVector(1,1,-1));
-    triangles[11] = Triangle(NumberVector(-1,-1,-1), NumberVector(1,1,-1), NumberVector(-1,1,-1));
+    triangles[0] = Triangle(v4, v5, v8);
+    triangles[1] = Triangle(v1, v4, v5);
+    triangles[2] = Triangle(v1, v2, v6);
+    triangles[3] = Triangle(v1, v5, v6);
+    triangles[4] = Triangle(v5, v6, v8);
+    triangles[5] = Triangle(v6, v7, v8);
+
+    triangles[6] = Triangle(v3, v4, v7);
+    triangles[7] = Triangle(v4, v7, v8);
+    triangles[8] = Triangle(v1, v3, v4);
+    triangles[9] = Triangle(v2, v3, v6);
+    triangles[10] = Triangle(v2, v3, v6);
+    triangles[11] = Triangle(v3, v6, v1);
+
+
 
 
     /*
