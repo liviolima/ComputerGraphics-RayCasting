@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     triangle.cpp \
     numbervector.cpp \
     color.cpp \
-    plane.cpp
+    plane.cpp \
+    sphere.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     triangle.h \
     numbervector.h \
     color.h \
-    plane.h
+    plane.h \
+    sphere.h
 
 FORMS    += mainwindow.ui
 
