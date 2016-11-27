@@ -9,7 +9,7 @@ class Triangle: public Object
 {
 public:
     Triangle();
-    Triangle(NumberVector new_value_for_vertex[3]);
+    Triangle(NumberVector v1, NumberVector v2, NumberVector v3);
 
 
     NumberVector vertex[3];

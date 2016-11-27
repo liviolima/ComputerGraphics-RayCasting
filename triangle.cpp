@@ -28,16 +28,16 @@ Triangle::Triangle()
 
 }
 
-Triangle::Triangle(NumberVector new_value_for_vertex[3])
+Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3)
 {
 
     color.red = 255.0;
     color.green = 255.0;
     color.blue = 0.0;
 
-    vertex[0] = new_value_for_vertex[0];
-    vertex[1] = new_value_for_vertex[1];
-    vertex[2] = new_value_for_vertex[2];
+    vertex[0] = v1;
+    vertex[1] = v2;
+    vertex[2] = v3;
 
     edge * all_edges = new edge[2];
 

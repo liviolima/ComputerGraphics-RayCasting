@@ -1,7 +1,24 @@
 #include "cube.h"
+#include "numbervector.h"
 
 Cube::Cube()
 {
+
+    triangles[0] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[1] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[2] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[3] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[4] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[5] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[6] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[7] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[8] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[9] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[10] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+    triangles[11] = Triangle(NumberVector(0,0,0), NumberVector(0,0,0), NumberVector(0,0,0));
+
+
+    /*
     Triangle face1_triangule1_t1 = Triangle();
     Triangle face1_triangule2_t2 = Triangle();
     Triangle face2_triangule1_t3 = Triangle();
@@ -16,6 +33,7 @@ Cube::Cube()
     Triangle face6_triangule2_t12 = Triangle();
 
 
+
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face1_triangule1_t1));
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face1_triangule2_t2));
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face2_triangule1_t3));
@@ -28,7 +46,7 @@ Cube::Cube()
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face5_triangule2_t10));
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face6_triangule1_t11));
     triangles_of_the_cube.push_back(dynamic_cast<Triangle*>(&face6_triangule2_t12));
-
+    */
 
 
 
