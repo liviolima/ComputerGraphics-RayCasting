@@ -86,7 +86,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-       NumberVector camera_xyz_position = NumberVector(0, 0, 5);
+
+       //NumberVector camera_xyz_position = NumberVector(0, 0, 5);
+       NumberVector camera_xyz_position = NumberVector(1, 3, -5);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0,1,0);
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
@@ -123,7 +125,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
-       //camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
+       camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
        //camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
 
 
