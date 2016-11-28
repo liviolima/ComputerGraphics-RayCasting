@@ -86,7 +86,11 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera2(std::vector<Object*>
 
          std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
          for (int i = 0 ; i < triangles.size() ; i++){
-                  //----------vertex[0] of this triangle------------
+                 std::cout<<"\nTriangle["<<i<<"]\n";
+                 std::cout<<"before transformation\n";
+                 triangles.at(i)->printVertexes();
+
+                 //----------vertex[0] of this triangle------------
 
                   triangles.at(i)->vertex[0].x =   coordinatesWorldToCamera[0][0] * triangles.at(i)->vertex[0].x +
                                                    coordinatesWorldToCamera[0][1] * triangles.at(i)->vertex[0].y +
@@ -142,6 +146,9 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera2(std::vector<Object*>
                                                    coordinatesWorldToCamera[2][1] * triangles.at(i)->vertex[2].y +
                                                    coordinatesWorldToCamera[2][2] * triangles.at(i)->vertex[2].z +
                                                    coordinatesWorldToCamera[2][3] * 1;
+
+                  std::cout<<"after transformation\n";
+                  triangles.at(i)->printVertexes();
             }
      }
 
