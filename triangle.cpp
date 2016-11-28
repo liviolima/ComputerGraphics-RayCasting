@@ -93,7 +93,7 @@ NumberVector Triangle::getNormalAt(NumberVector point){
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
-    std::cout << "test1\n";
+    //std::cout << "test1\n";
     float EPSILON = 0.0000001;
     NumberVector edge1, edge2, P, Q, T;
     float det, inv_det, u, v, t;
@@ -105,31 +105,31 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     //if determinant is near zero, ray lies in plane of triangle or ray is parallel to plane of triangle
     det = edge1.dot_product(P);
 
-    std::cout << "test2\n";
+   // std::cout << "test2\n";
     if (det > -EPSILON && det < EPSILON) return 0;
     inv_det = 1.f / det;
 
-    std::cout << "test3\n";
+    //std::cout << "test3\n";
     T = origin.sub(vertex[0]);
     u = T.dot_product(P) * inv_det;
 
-    std::cout << "test4\n";
+   // std::cout << "test4\n";
     if (u < 0.f || u > 1.f) return 0;
 
     Q = T.cross_product(edge1);
     v = direction.dot_product(Q);
 
-    std::cout << "test5\n";
-    std::cout << "v: " <<v<< "\n";
-    std::cout << "u+v: " <<u+v<< "\n";
+   // std::cout << "test5\n";
+    //std::cout << "v: " <<v<< "\n";
+    //std::cout << "u+v: " <<u+v<< "\n";
     if (v < 0.f || u + v > 1.f) return 0;
 
-    std::cout << "test6\n";
+    //std::cout << "test6\n";
     t = edge2.dot_product(Q) * inv_det;
 
-    std::cout << "test7\n";
+    //std::cout << "test7\n";
     if (t > EPSILON){
-    std::cout << "test8\n";
+    //std::cout << "test8\n";
         return t;
     } else{
         std::cout << "test9\n";

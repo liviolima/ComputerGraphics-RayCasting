@@ -30,7 +30,7 @@ Cube::Cube()
     trianglesv[5] = Triangle(v6, v7, v8, darkBlueColor);
 
     trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
-    trianglesv[7] = Triangle(v4, v7, v8), darkYellowColor;
+    trianglesv[7] = Triangle(v4, v7, v8, darkYellowColor);
     trianglesv[8] = Triangle(v1, v3, v4, purpleColor);
     trianglesv[9] = Triangle(v2, v3, v6, darkPurpleColor);
     trianglesv[10] = Triangle(v2, v3, v6, cianColor);
@@ -81,7 +81,7 @@ Cube::Cube(double size, Color newColor)
     trianglesv[5] = Triangle(v7, v6, v8, darkBlueColor);
 
     trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
-    trianglesv[7] = Triangle(v4, v7, v8), darkYellowColor;
+    trianglesv[7] = Triangle(v4, v7, v8, darkYellowColor);
 
     trianglesv[8] = Triangle(v3, v1, v4, purpleColor);
     trianglesv[9] = Triangle(v6, v3, v2, darkPurpleColor);

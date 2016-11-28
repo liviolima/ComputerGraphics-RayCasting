@@ -108,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent) :
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
 
        qDebug()  << "Console Mode.\n";
-       std::cout << "Console Mode.\n";
+       //std::cout << "Console Mode.\n";
 
        NumberVector camera_xyz_position = NumberVector(0, 0, 5);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
@@ -185,13 +185,13 @@ MainWindow::MainWindow(QWidget *parent) :
                    intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
 */
-               std::cout << "Hi-1\n";
+              // std::cout << "Hi-1\n";
                for(int index = 0; index < scene_objects.size(); index++){
-                   std::cout << "Hi-2\n";
+                   //std::cout << "Hi-2\n";
                    std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
                    for (int i2 = 0 ; i2 < triangles.size() ; i2++){
                    //for (int i2 = 0 ; i2 < triangles.size()-11 ; i2++){
-                            std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
+                            //std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
                             //std::cout << triangles.size();
                             //triangles.at(i2)->printVertexes();
                             double c = triangles.at(i2)->findIntersection(origin, direction);
@@ -209,18 +209,18 @@ MainWindow::MainWindow(QWidget *parent) :
                        //intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
                //std::cout <<intersections.at(0)<< "\n";
-               std::cout << "Hi-4\n";
+               //std::cout << "Hi-4\n";
 
 
                int index_of_winning_object = winningObjectIndex(intersections);
-std::cout << "Hi-5\n";
-               std::cout <<"index_w: "<<index_of_winning_object << "v  ";
+//std::cout << "Hi-5\n";
+               //std::cout <<"index_w: "<<index_of_winning_object << "v  ";
                //qDebug() <<"\n";
 
                if(index_of_winning_object == -1){
                    //set the background to black
                     image.setPixel(i, j, qRgb(173, 216, 230));
- std::cout << "Hi-6\n";
+ //std::cout << "Hi-6\n";
                }
                else{
                     //index corresponds to an object in our scene.
@@ -233,9 +233,9 @@ std::cout << "Hi-5\n";
                     //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
                     Color this_color = scene_objects.at(0)->triangles.at(index_of_winning_object)->getColor();
                     image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-std::cout << "Hi-7\n";
+//std::cout << "Hi-7\n";
                }
-std::cout << "Hi-8\n";
+//std::cout << "Hi-8\n";
 
 
                /*
