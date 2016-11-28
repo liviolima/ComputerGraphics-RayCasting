@@ -168,21 +168,17 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
 
 
 
-    double Oc_i = camera_xyz_position.x*camera_right_direction_i.x + camera_xyz_position.y*camera_right_direction_i.y +
-                  camera_xyz_position.z*camera_right_direction_i.z;
+    double Oc_i1 = camera_xyz_position.dot_product(camera_right_direction_i);
+    double Oc_j1 = camera_xyz_position.dot_product(camera_down_direction_j);
+    double Oc_k1 = camera_xyz_position.dot_product(camera_look_direction_k);
 
-    double Oc_j = camera_xyz_position.x*camera_down_direction_j.x + camera_xyz_position.y*camera_down_direction_j.y +
-                  camera_xyz_position.z*camera_down_direction_j.z;
-
-    double Oc_k = camera_xyz_position.x*camera_look_direction_k.x + camera_xyz_position.y*camera_look_direction_k.y +
-                  camera_xyz_position.z*camera_look_direction_k.z;
 
 
 
     double coordinatesWorldToCamera[4][4] = {
-      {camera_right_direction_i.x, camera_right_direction_i.y, camera_right_direction_i.z, -Oc_i},
-      {camera_down_direction_j.x, camera_down_direction_j.y, camera_down_direction_j.z, -Oc_j},
-      {camera_look_direction_k.x, camera_look_direction_k.y, camera_look_direction_k.z, -Oc_k},
+      {camera_right_direction_i.x, camera_right_direction_i.y, camera_right_direction_i.z, -Oc_i1},
+      {camera_down_direction_j.x, camera_down_direction_j.y, camera_down_direction_j.z, -Oc_j1},
+      {camera_look_direction_k.x, camera_look_direction_k.y, camera_look_direction_k.z, -Oc_k1},
       {0.0, 0.0, 0.0, 1.0}
 
     };
