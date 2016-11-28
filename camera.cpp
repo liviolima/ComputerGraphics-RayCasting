@@ -77,8 +77,8 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     coordinatesCameraToWorld[2][1] = camera_down_direction_j.z;
     coordinatesCameraToWorld[3][1] = 0.0;
 
-    coordinatesCameraToWorld[0][2] = camera_look_direction_k.z;
-    coordinatesCameraToWorld[1][2] = camera_look_direction_k.z;
+    coordinatesCameraToWorld[0][2] = camera_look_direction_k.x;
+    coordinatesCameraToWorld[1][2] = camera_look_direction_k.y;
     coordinatesCameraToWorld[2][2] = camera_look_direction_k.z;
     coordinatesCameraToWorld[3][2] = 0.0;
 

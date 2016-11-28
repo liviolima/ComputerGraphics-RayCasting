@@ -31,6 +31,7 @@ Cube::Cube()
     f 5 1 8
 */
     double x = 1;
+
     NumberVector v1 = NumberVector( x  , -x,  -x);
     NumberVector v2 = NumberVector( x  , -x,   x);
     NumberVector v3 = NumberVector(-x  , -x,   x);
@@ -53,6 +54,30 @@ Cube::Cube()
     trianglesv[10] = Triangle(v4, v3, v8, cianColor);
     trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
 
+
+/*
+    NumberVector v1 = NumberVector( -x  , -x,  x);
+    NumberVector v2 = NumberVector( x  , -x,   x);
+    NumberVector v3 = NumberVector(-x  , x,   x);
+    NumberVector v4 = NumberVector(x  , x,  x);
+    NumberVector v5 = NumberVector( x  ,  -x,  -x);
+    NumberVector v6 = NumberVector( -x  , -x,   -x);
+    NumberVector v7 = NumberVector(-x  ,  x,   -x);
+    NumberVector v8 = NumberVector(x  ,  x,  -x);
+
+    trianglesv[0] = Triangle(v1, v4, v3, redColor);
+    trianglesv[1] = Triangle(v1, v2, v4, darkRedColor);
+    trianglesv[2] = Triangle(v2, v8, v4, greenColor);
+    trianglesv[3] = Triangle(v2, v5, v8, darkGreenColor);
+    trianglesv[4] = Triangle(v4, v7, v3, blueColor);
+    trianglesv[5] = Triangle(v4, v8, v7, darkBlueColor);
+    trianglesv[6] = Triangle(v6, v8, v7, yellowColor);
+    trianglesv[7] = Triangle(v6, v5, v8, darkYellowColor);
+    trianglesv[8] = Triangle(v7, v3, v1, purpleColor);
+    trianglesv[9] = Triangle(v7, v1, v5, darkPurpleColor);
+    trianglesv[10] = Triangle(v5, v6, v1, cianColor);
+    trianglesv[11] = Triangle(v5, v1, v2, darkCianColor);
+*/
     for(int i = 0; i < 12; i++)
         triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[i]));
 
@@ -65,6 +90,7 @@ Cube::Cube(double size, Color newColor)
     color.blue = newColor.blue;
 
     double x = size;
+
     NumberVector v1 = NumberVector( x  , -x,  -x);
     NumberVector v2 = NumberVector( x  , -x,   x);
     NumberVector v3 = NumberVector(-x  , -x,   x);
@@ -86,7 +112,29 @@ Cube::Cube(double size, Color newColor)
     trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
     trianglesv[10] = Triangle(v4, v3, v8, cianColor);
     trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
+/*
+    NumberVector v1 = NumberVector( -x  , -x,  x);
+    NumberVector v2 = NumberVector( x  , -x,   x);
+    NumberVector v3 = NumberVector(-x  , x,   x);
+    NumberVector v4 = NumberVector(x  , x,  x);
+    NumberVector v5 = NumberVector( x  ,  -x,  -x);
+    NumberVector v6 = NumberVector( -x  , -x,   -x);
+    NumberVector v7 = NumberVector(-x  ,  x,   -x);
+    NumberVector v8 = NumberVector(x  ,  x,  -x);
 
+    trianglesv[0] = Triangle(v1, v4, v3, redColor);
+    trianglesv[1] = Triangle(v1, v2, v4, darkRedColor);
+    trianglesv[2] = Triangle(v2, v8, v4, greenColor);
+    trianglesv[3] = Triangle(v2, v5, v8, darkGreenColor);
+    trianglesv[4] = Triangle(v4, v7, v3, blueColor);
+    trianglesv[5] = Triangle(v4, v8, v7, darkBlueColor);
+    trianglesv[6] = Triangle(v6, v8, v7, yellowColor);
+    trianglesv[7] = Triangle(v6, v5, v8, darkYellowColor);
+    trianglesv[8] = Triangle(v7, v3, v1, purpleColor);
+    trianglesv[9] = Triangle(v7, v1, v5, darkPurpleColor);
+    trianglesv[10] = Triangle(v5, v6, v1, cianColor);
+    trianglesv[11] = Triangle(v5, v1, v2, darkCianColor);
+*/
     for(int i = 0; i < 12; i++)
         triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[i]));
 }
