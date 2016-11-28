@@ -71,8 +71,8 @@ Cube::Cube(double size, Color newColor)
 
     //triangles.resize(12);
 
-    trianglesv[0] = Triangle(v8, v5, v4, redColor);
-    trianglesv[1] = Triangle(v1, v4, v5, darkRedColor);
+    trianglesv[0] = Triangle(v4, v5, v8, redColor);
+    trianglesv[1] = Triangle(v4, v1, v5, darkRedColor);
 
     trianglesv[2] = Triangle(v6, v2, v1, greenColor);
     trianglesv[3] = Triangle(v1, v5, v6, darkGreenColor);
@@ -80,7 +80,7 @@ Cube::Cube(double size, Color newColor)
     trianglesv[4] = Triangle(v6, v5, v8, blueColor);
     trianglesv[5] = Triangle(v7, v6, v8, darkBlueColor);
 
-    trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
+    trianglesv[6] = Triangle(v3, v7, v4, yellowColor);
     trianglesv[7] = Triangle(v4, v7, v8, darkYellowColor);
 
     trianglesv[8] = Triangle(v3, v1, v4, purpleColor);
