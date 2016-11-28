@@ -10,6 +10,9 @@ class Camera
 
 
 public:    
+    Camera();
+    Camera(NumberVector pos, NumberVector look_at, NumberVector up);
+
     Scene scene; //Is it correct? If I put one scene on the class Camera? I have to check it again.
 
     NumberVector camera_xyz_position;
@@ -20,12 +23,17 @@ public:
     NumberVector camera_right_direction_i;
     NumberVector camera_down_direction_j;
 
-    Camera();
-    Camera(NumberVector pos, NumberVector look_at, NumberVector up);
     double coordinatesWorldToCamera[4][4];
+    double coordinatesCameraToWorld[4][4];
 
-    //void transformVertexesFromCoordinatesWorldToCamera();
-    void transformVertexesFromCoordinatesWorldToCamera2(std::vector<Object*> scene_objects);
+    double teste;
+
+    //void transformVertexesFromCoordinatesWorldToCamera2();
+    void transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> scene_objects);
+    void transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> scene_objects);
+
+    void printMatrixWorldToCamera();
+    void printMatrixCameraToWorld();
 
 
 };

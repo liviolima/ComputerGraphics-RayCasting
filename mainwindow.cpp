@@ -123,7 +123,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
-       camera.transformVertexesFromCoordinatesWorldToCamera2(scene_objects);
+       //camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
+       //camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
+
 
 
        for(int i=0; i<sizeX; i++){
