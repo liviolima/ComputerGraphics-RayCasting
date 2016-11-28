@@ -71,23 +71,23 @@ Cube::Cube(double size, Color newColor)
 
     //triangles.resize(12);
 
-    trianglesv[0] = Triangle(v4, v5, v8, redColor);
+    trianglesv[0] = Triangle(v8, v5, v4, redColor);
     trianglesv[1] = Triangle(v1, v4, v5, darkRedColor);
 
-    trianglesv[2] = Triangle(v1, v2, v6, greenColor);
+    trianglesv[2] = Triangle(v6, v2, v1, greenColor);
     trianglesv[3] = Triangle(v1, v5, v6, darkGreenColor);
 
-    trianglesv[4] = Triangle(v5, v6, v8, blueColor);
-    trianglesv[5] = Triangle(v6, v7, v8, darkBlueColor);
+    trianglesv[4] = Triangle(v6, v5, v8, blueColor);
+    trianglesv[5] = Triangle(v7, v6, v8, darkBlueColor);
 
     trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
     trianglesv[7] = Triangle(v4, v7, v8), darkYellowColor;
 
-    trianglesv[8] = Triangle(v1, v3, v4, purpleColor);
-    trianglesv[9] = Triangle(v2, v3, v6, darkPurpleColor);
+    trianglesv[8] = Triangle(v3, v1, v4, purpleColor);
+    trianglesv[9] = Triangle(v6, v3, v2, darkPurpleColor);
 
-    trianglesv[10] = Triangle(v2, v3, v6, cianColor);
-    trianglesv[11] = Triangle(v3, v6, v1, darkCianColor);
+    trianglesv[10] = Triangle(v6, v3, v2, cianColor);
+    trianglesv[11] = Triangle(v1, v6, v3, darkCianColor);
 
 
     //scene_objects.push_back(dynamic_cast<Object*>(&cube));
