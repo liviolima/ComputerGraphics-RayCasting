@@ -10,6 +10,7 @@ public:
     void setColor(Color color);
     double red, green, blue;
     int integer;
+
 };
 
 #endif // COLOR_H

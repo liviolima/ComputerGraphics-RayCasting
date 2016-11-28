@@ -51,6 +51,30 @@ Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3)
 
 }
 
+Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Color newColor)
+{
+
+    color.red = newColor.red;
+    color.green = newColor.green;
+    color.blue = newColor.blue;
+
+    vertex[0] = v1;
+    vertex[1] = v2;
+    vertex[2] = v3;
+
+    edge * all_edges = new edge[2];
+
+    face * all_faces = new face[1];
+
+
+    all_edges[0] = {1, 1, 2};
+    all_edges[1] = {2, 1, 3};
+
+    all_faces[0] = {1,1, 2,3};
+
+}
+
+
 void Triangle::scale(double x, double y, double z){
     //qDebug() << "test-triangle-scale";
 }
@@ -69,6 +93,7 @@ NumberVector Triangle::getNormalAt(NumberVector point){
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
+    std::cout << "test1\n";
     float EPSILON = 0.0000001;
     NumberVector edge1, edge2, P, Q, T;
     float det, inv_det, u, v, t;
@@ -80,29 +105,39 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     //if determinant is near zero, ray lies in plane of triangle or ray is parallel to plane of triangle
     det = edge1.dot_product(P);
 
+    std::cout << "test2\n";
     if (det > -EPSILON && det < EPSILON) return 0;
     inv_det = 1.f / det;
 
+    std::cout << "test3\n";
     T = origin.sub(vertex[0]);
     u = T.dot_product(P) * inv_det;
 
+    std::cout << "test4\n";
     if (u < 0.f || u > 1.f) return 0;
 
     Q = T.cross_product(edge1);
     v = direction.dot_product(Q);
 
+    std::cout << "test5\n";
+    std::cout << "v: " <<v<< "\n";
+    std::cout << "u+v: " <<u+v<< "\n";
     if (v < 0.f || u + v > 1.f) return 0;
 
+    std::cout << "test6\n";
     t = edge2.dot_product(Q) * inv_det;
 
+    std::cout << "test7\n";
     if (t > EPSILON){
-
+    std::cout << "test8\n";
         return t;
     } else{
+        std::cout << "test9\n";
         //std::cout << "Value of t:";
         //std::cout << t;
         return -1;
     }
+    std::cout << "test10\n";
 
 // OLD IMPLEMENTATION BELOW
 /*
@@ -196,6 +231,12 @@ void Triangle::setVertexes(NumberVector new_value_for_vertex[3]){
     vertex[0] = new_value_for_vertex[0];
     vertex[1] = new_value_for_vertex[1];
     vertex[2] = new_value_for_vertex[2];
+}
+
+void Triangle::printVertexes(){
+    std::cout<< "v0: " <<"x= "<<vertex[0].x<<", y= "<<vertex[0].y<<", z= "<<vertex[0].z<<"\n";
+    std::cout<< "v1: " <<"x= "<<vertex[1].x<<", y= "<<vertex[1].y<<", z= "<<vertex[1].z<<"\n";
+    std::cout<< "v2: " <<"x= "<<vertex[2].x<<", y= "<<vertex[2].y<<", z= "<<vertex[2].z<<"\n";
 }
 
 

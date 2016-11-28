@@ -12,8 +12,7 @@ public:
     Cube();
     Cube(double size, Color newColor);
 
-    std::vector<Triangle*> triangles_of_the_cube;
-    Triangle triangles[12];
+    Triangle trianglesv[12];
 
     Color color;
 
@@ -21,6 +20,24 @@ public:
     void translate(double x, double y, double z);
     virtual double findIntersection(NumberVector origin, NumberVector direction);
     virtual Color getColor();
+
+    Color redColor = Color(255.0, 0.0, 0.0, 0);
+    Color darkRedColor = Color(153.0, 0.0, 0.0, 0);
+
+    Color greenColor = Color(0.0, 255.0, 0.0, 0);
+    Color darkGreenColor = Color(0.0, 51.0, 0.0, 0);
+
+    Color blueColor = Color(0.0, 0.0, 255.0, 0);
+    Color darkBlueColor = Color(0.0, 0.0, 102.0, 0);
+
+    Color yellowColor = Color(255.0, 255.0, 0.0, 0);
+    Color darkYellowColor = Color(204.0, 204.0, 0.0, 0);
+
+    Color purpleColor = Color(204.0, 0.0, 204.0, 0);
+    Color darkPurpleColor = Color(102.0, 0.0, 102.0, 0);
+
+    Color cianColor = Color(0.0, 204.0, 204.0, 0);
+    Color darkCianColor = Color(51.0, 255.0, 255.0, 0.0);
 
 };
 

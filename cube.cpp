@@ -17,20 +17,39 @@ Cube::Cube()
     NumberVector v7 = NumberVector(-x  ,  x, -x);
     NumberVector v8 = NumberVector(-x  ,  x,  x);
 
+    //triangles.resize(12);
 
-    triangles[0] = Triangle(v4, v5, v8);
-    triangles[1] = Triangle(v1, v4, v5);
-    triangles[2] = Triangle(v1, v2, v6);
-    triangles[3] = Triangle(v1, v5, v6);
-    triangles[4] = Triangle(v5, v6, v8);
-    triangles[5] = Triangle(v6, v7, v8);
 
-    triangles[6] = Triangle(v3, v4, v7);
-    triangles[7] = Triangle(v4, v7, v8);
-    triangles[8] = Triangle(v1, v3, v4);
-    triangles[9] = Triangle(v2, v3, v6);
-    triangles[10] = Triangle(v2, v3, v6);
-    triangles[11] = Triangle(v3, v6, v1);
+
+
+    trianglesv[0] = Triangle(v4, v5, v8, redColor);
+    trianglesv[1] = Triangle(v1, v4, v5, darkRedColor);
+    trianglesv[2] = Triangle(v1, v2, v6, greenColor);
+    trianglesv[3] = Triangle(v1, v5, v6, darkGreenColor);
+    trianglesv[4] = Triangle(v5, v6, v8, blueColor);
+    trianglesv[5] = Triangle(v6, v7, v8, darkBlueColor);
+
+    trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
+    trianglesv[7] = Triangle(v4, v7, v8), darkYellowColor;
+    trianglesv[8] = Triangle(v1, v3, v4, purpleColor);
+    trianglesv[9] = Triangle(v2, v3, v6, darkPurpleColor);
+    trianglesv[10] = Triangle(v2, v3, v6, cianColor);
+    trianglesv[11] = Triangle(v3, v6, v1, darkCianColor);
+
+    //scene_objects.push_back(dynamic_cast<Object*>(&cube));
+
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[0]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[1]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[2]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[3]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[4]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[5]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[6]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[7]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[8]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[9]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[10]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[11]));
 
 
 }
@@ -50,20 +69,47 @@ Cube::Cube(double size, Color newColor)
     NumberVector v7 = NumberVector(-x  ,  x, -x);
     NumberVector v8 = NumberVector(-x  ,  x,  x);
 
+    //triangles.resize(12);
 
-    triangles[0] = Triangle(v4, v5, v8);
-    triangles[1] = Triangle(v1, v4, v5);
-    triangles[2] = Triangle(v1, v2, v6);
-    triangles[3] = Triangle(v1, v5, v6);
-    triangles[4] = Triangle(v5, v6, v8);
-    triangles[5] = Triangle(v6, v7, v8);
+    trianglesv[0] = Triangle(v4, v5, v8, redColor);
+    trianglesv[1] = Triangle(v1, v4, v5, darkRedColor);
 
-    triangles[6] = Triangle(v3, v4, v7);
-    triangles[7] = Triangle(v4, v7, v8);
-    triangles[8] = Triangle(v1, v3, v4);
-    triangles[9] = Triangle(v2, v3, v6);
-    triangles[10] = Triangle(v2, v3, v6);
-    triangles[11] = Triangle(v3, v6, v1);
+    trianglesv[2] = Triangle(v1, v2, v6, greenColor);
+    trianglesv[3] = Triangle(v1, v5, v6, darkGreenColor);
+
+    trianglesv[4] = Triangle(v5, v6, v8, blueColor);
+    trianglesv[5] = Triangle(v6, v7, v8, darkBlueColor);
+
+    trianglesv[6] = Triangle(v3, v4, v7, yellowColor);
+    trianglesv[7] = Triangle(v4, v7, v8), darkYellowColor;
+
+    trianglesv[8] = Triangle(v1, v3, v4, purpleColor);
+    trianglesv[9] = Triangle(v2, v3, v6, darkPurpleColor);
+
+    trianglesv[10] = Triangle(v2, v3, v6, cianColor);
+    trianglesv[11] = Triangle(v3, v6, v1, darkCianColor);
+
+
+    //scene_objects.push_back(dynamic_cast<Object*>(&cube));
+
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[0]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[1]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[2]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[3]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[4]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[5]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[6]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[7]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[8]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[9]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[10]));
+    triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[11]));
+
+
+
+
+
+
 
 
 }

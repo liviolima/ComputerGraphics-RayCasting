@@ -129,15 +129,15 @@ MainWindow::MainWindow(QWidget *parent) :
        Sphere sphere = Sphere(center, radius, color2);
 
        Color color3 = Color(255.0, 13.0, 0.0, 0);
-       double size = 2.0;
+       double size = 1.0;
        Cube cube = Cube(size, color3);
 
        std::vector<Object*> scene_objects;
        //triangle
-       scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
 
        //sphere
-       scene_objects.push_back(dynamic_cast<Object*>(&sphere));
+       //scene_objects.push_back(dynamic_cast<Object*>(&sphere));
 
        //cube
        scene_objects.push_back(dynamic_cast<Object*>(&cube));
@@ -180,27 +180,62 @@ MainWindow::MainWindow(QWidget *parent) :
                //intersections.push_back(scene.triangle.findIntersection(origin,direction));
 
 
-
+/*
                for(int index = 0; index < scene_objects.size(); index++){
                    intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
+*/
+               std::cout << "Hi-1\n";
+               for(int index = 0; index < scene_objects.size(); index++){
+                   std::cout << "Hi-2\n";
+                   std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
+                   for (int i2 = 0 ; i2 < triangles.size() ; i2++){
+                   //for (int i2 = 0 ; i2 < triangles.size()-11 ; i2++){
+                            std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
+                            //std::cout << triangles.size();
+                            //triangles.at(i2)->printVertexes();
+                            double c = triangles.at(i2)->findIntersection(origin, direction);
+
+
+                            //***************THE ERROR IS ON THE INDEX BELOW ***********
+                            //intersections.push_back(triangles[i2].findIntersection(origin, direction));
+                            //intersections.push_back(triangles.at(i2)->findIntersection(origin, direction));
+
+                            //**********The problem is here ****************
+                            intersections.push_back(c);
+
+
+                      }
+                       //intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
+               }
+               //std::cout <<intersections.at(0)<< "\n";
+               std::cout << "Hi-4\n";
 
 
                int index_of_winning_object = winningObjectIndex(intersections);
-
-               std::cout <<index_of_winning_object;
+std::cout << "Hi-5\n";
+               std::cout <<"index_w: "<<index_of_winning_object << "v  ";
                //qDebug() <<"\n";
 
                if(index_of_winning_object == -1){
                    //set the background to black
                     image.setPixel(i, j, qRgb(173, 216, 230));
+ std::cout << "Hi-6\n";
                }
                else{
                     //index corresponds to an object in our scene.
-                    Color this_color = scene_objects.at(index_of_winning_object)->getColor();
-                    image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-               }
 
+                   //*************************************
+                   //**********PROBLEM IS HERE************
+                    //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
+                    //Color this_color = Color(255.0, 0.0, 0.0, 0);
+
+                    //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
+                    Color this_color = scene_objects.at(0)->triangles.at(index_of_winning_object)->getColor();
+                    image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+std::cout << "Hi-7\n";
+               }
+std::cout << "Hi-8\n";
 
 
                /*

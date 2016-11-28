@@ -1,15 +1,17 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
-#import "object.h"
+//#import "object.h"
 #import "numbervector.h"
 #import "ray.h"
 #include "color.h"
 
-class Triangle: public Object
+//class Triangle: public Object
+class Triangle
 {
 public:
     Triangle();
     Triangle(NumberVector v1, NumberVector v2, NumberVector v3);
+    Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Color newColor);
 
 
     NumberVector vertex[3];
@@ -39,8 +41,11 @@ public:
 
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
-    virtual double findIntersection(NumberVector origin, NumberVector direction);
-    virtual Color getColor();
+    //virtual double findIntersection(NumberVector origin, NumberVector direction);
+    //virtual Color getColor();
+    double findIntersection(NumberVector origin, NumberVector direction);
+    void printVertexes();
+    Color getColor();
 
     NumberVector getNormalAt(NumberVector point);
 
