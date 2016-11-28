@@ -12,28 +12,6 @@
 #include "sphere.h"
 #include "cube.h"
 
-/*
-Ray ConstructRayThroughPixel(Camera camera, int i, int j){
-
-    //I have to change the correct values for Pz, Dx, Dy.
-
-    double Px, Py, Pz = -10.0;
-    double Dx = 1.0, Dy = 1.0;
-    double W = 10, H = 10;
-
-    Px = W/2.0 +  Dx/2.0 + j*Dx;
-    Py = H/2.0 - Dy/2.0 - i*Dy;
-
-
-    NumberVector P(Px, Py, Pz);
-
-    Ray ray;
-    ray.calculateV(P);
-
-
-    return ray;
-}
-*/
 
 void convertToCameraCoordinates(Scene scene){
     //I did it on the class Camera.
@@ -86,7 +64,6 @@ int winningObjectIndex(std::vector<double> object_intersection){
             return -1;
         }
     }
-
 }
 
 
@@ -95,58 +72,58 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
        ui->setupUi(this);
 
        int thisone;
-
        int sizeX = 600;
        int sizeY = 600;
        double aspectratio = (double)sizeX / (double)sizeY;
-
        double xamnt, yamnt;
-
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
 
        qDebug()  << "Console Mode.\n";
-       //std::cout << "Console Mode.\n";
+
+
 
        NumberVector camera_xyz_position = NumberVector(0, 0, 5);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0,1,0);
-
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
-
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
+       std::vector<Object*> scene_objects;
 
+
+       //Triangle
+       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
+
+       //Plane
+       /*
        Color color = Color(23.0, 124.0, 5.0, 0);
        NumberVector Y = NumberVector(0, 1, 0);
        Plane plane = Plane(Y, -1, color);
+       scene_objects.push_back(dynamic_cast<Object*>(&plane));
+       */
 
+       //Sphere
+       /*
        Color color2 = Color(2.0, 20.0, 131.0, 0);
        NumberVector center = NumberVector(0, 0.0, 0.0);
        double radius = 1.0; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
        Sphere sphere = Sphere(center, radius, color2);
+       scene_objects.push_back(dynamic_cast<Object*>(&sphere));
+       */
 
+       //Cube
        Color color3 = Color(255.0, 13.0, 0.0, 0);
        double size = 1.0;
        Cube cube = Cube(size, color3);
-
-       std::vector<Object*> scene_objects;
-       //triangle
-       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
-
-       //sphere
-       //scene_objects.push_back(dynamic_cast<Object*>(&sphere));
-
-       //cube
        scene_objects.push_back(dynamic_cast<Object*>(&cube));
 
 
-       //plane
-       //scene_objects.push_back(dynamic_cast<Object*>(&plane));
-
-
+       //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
+       //,camera.transformVertexesFromCoordinatesWorldToCamera2(scene_objects);
 
 
        for(int i=0; i<sizeX; i++){
@@ -171,73 +148,52 @@ MainWindow::MainWindow(QWidget *parent) :
                NumberVector origin = camera_xyz_position;
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
-               //NumberVector direction = NumberVector(1, 1, 1); // I need change it]
                NumberVector direction = camera.camera_look_direction_k.add(camera.camera_right_direction_i.multiply(xamnt - 0.5)
                                                                            .add(camera.camera_down_direction_j.multiply(yamnt - 0.5)))
                                                                            .normalize();
 
                std::vector<double> intersections;
-               //intersections.push_back(scene.triangle.findIntersection(origin,direction));
 
 
+               //We used this before
 /*
                for(int index = 0; index < scene_objects.size(); index++){
                    intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
 */
-              // std::cout << "Hi-1\n";
+
+
+
                for(int index = 0; index < scene_objects.size(); index++){
-                   //std::cout << "Hi-2\n";
                    std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
-                   for (int i2 = 0 ; i2 < triangles.size() ; i2++){
-                   //for (int i2 = 0 ; i2 < triangles.size()-11 ; i2++){
+                   for (int x = 0 ; x < triangles.size() ; x++){
                             //std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
                             //std::cout << triangles.size();
                             //triangles.at(i2)->printVertexes();
-                            double c = triangles.at(i2)->findIntersection(origin, direction);
-
-
-                            //***************THE ERROR IS ON THE INDEX BELOW ***********
-                            //intersections.push_back(triangles[i2].findIntersection(origin, direction));
-                            //intersections.push_back(triangles.at(i2)->findIntersection(origin, direction));
-
-                            //**********The problem is here ****************
-                            intersections.push_back(c);
-
+                            intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
 
                       }
-                       //intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
-               //std::cout <<intersections.at(0)<< "\n";
-               //std::cout << "Hi-4\n";
 
 
                int index_of_winning_object = winningObjectIndex(intersections);
-//std::cout << "Hi-5\n";
-               //std::cout <<"index_w: "<<index_of_winning_object << "v  ";
-               //qDebug() <<"\n";
+               //std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
+
 
                if(index_of_winning_object == -1){
-                   //set the background to black
+                   //set the background to this color
                     image.setPixel(i, j, qRgb(173, 216, 230));
- //std::cout << "Hi-6\n";
                }
                else{
                     //index corresponds to an object in our scene.
-
-                   //*************************************
-                   //**********PROBLEM IS HERE************
                     //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
                     //Color this_color = Color(255.0, 0.0, 0.0, 0);
-
-                    //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
                     Color this_color = scene_objects.at(0)->triangles.at(index_of_winning_object)->getColor();
                     image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-//std::cout << "Hi-7\n";
                }
-//std::cout << "Hi-8\n";
 
 
+               //------------This is just a test-------------
                /*
                if( (i > 200  && i < 440) && (j > 200) && (j < 280)){
                    image.setPixel(i, j, qRgb(23, 222, 10));
@@ -246,7 +202,7 @@ MainWindow::MainWindow(QWidget *parent) :
                    image.setPixel(i, j, qRgb(0, 0, 0));
                }
                */
-
+               //------------This is a pseudo-code------------
                /*
                Ray ray = ConstructRayThroughPixel(camera, i, j);
                Intersection hit = FindIntersection(ray, scene);

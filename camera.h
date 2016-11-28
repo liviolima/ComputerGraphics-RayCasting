@@ -2,6 +2,8 @@
 #define OBSERVER_H
 #include "numbervector.h"
 #include "scene.h"
+#include <vector>
+#include "object.h"
 
 class Camera
 {    
@@ -22,7 +24,8 @@ public:
     Camera(NumberVector pos, NumberVector look_at, NumberVector up);
     double coordinatesWorldToCamera[4][4];
 
-    void transformVertexesFromCoordinatesWorldToCamera();
+    //void transformVertexesFromCoordinatesWorldToCamera();
+    void transformVertexesFromCoordinatesWorldToCamera2(std::vector<Object*> scene_objects);
 
 
 };

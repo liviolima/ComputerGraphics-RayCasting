@@ -16,7 +16,6 @@ public:
     Color color;
 
 
-
     NumberVector getPlaneNormal();
     double getPlaneDistance();
 

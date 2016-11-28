@@ -78,10 +78,10 @@ Color Sphere::getColor(){
 }
 
 void Sphere::scale(double x, double y, double z){
-    //qDebug() << "test-plane";
+
 }
 
 void Sphere::translate(double x, double y, double z){
-    //qDebug() << "test-plane";
+
 }
 

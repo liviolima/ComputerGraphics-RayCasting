@@ -10,7 +10,4 @@ Scene::Scene()
     ilumination_xyz_position[1] = 0;
     ilumination_xyz_position[2] = 0;
 
-
-
-
 }
