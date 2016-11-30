@@ -98,6 +98,39 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
 
 
 void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> scene_objects){
+    double temp_camera_x = camera_xyz_position.x;
+    double temp_camera_y = camera_xyz_position.y;
+    double temp_camera_z = camera_xyz_position.z;
+
+    double temp_vertex_x_0;
+    double temp_vertex_y_0;
+    double temp_vertex_z_0;
+
+    double temp_vertex_x_1;
+    double temp_vertex_y_1;
+    double temp_vertex_z_1;
+
+    double temp_vertex_x_2;
+    double temp_vertex_y_2;
+    double temp_vertex_z_2;
+
+    camera_xyz_position.x =          coordinatesWorldToCamera[0][0] * temp_camera_x +
+                                     coordinatesWorldToCamera[0][1] * temp_camera_y +
+                                     coordinatesWorldToCamera[0][2] * temp_camera_z +
+                                     coordinatesWorldToCamera[0][3] * 1;
+
+    camera_xyz_position.y =           coordinatesWorldToCamera[1][0] * temp_camera_x +
+                                      coordinatesWorldToCamera[1][1] * temp_camera_y +
+                                      coordinatesWorldToCamera[1][2] * temp_camera_z +
+                                      coordinatesWorldToCamera[1][3] * 1;
+
+
+    camera_xyz_position.z =          coordinatesWorldToCamera[2][0] * temp_camera_x+
+                                     coordinatesWorldToCamera[2][1] * temp_camera_y +
+                                     coordinatesWorldToCamera[2][2] * temp_camera_z +
+                                     coordinatesWorldToCamera[2][3] * 1;
+
+
 
      for(int index = 0; index < scene_objects.size(); index++){
 
@@ -107,62 +140,76 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
                  std::cout<<"before transformation\n";
                  triangles.at(i)->printVertexes();
 
+                 temp_vertex_x_0 = triangles.at(i)->vertex[0].x;
+                 temp_vertex_y_0 = triangles.at(i)->vertex[0].y;
+                 temp_vertex_z_0 = triangles.at(i)->vertex[0].z;
+
+                 temp_vertex_x_1 = triangles.at(i)->vertex[1].x;
+                 temp_vertex_y_1 = triangles.at(i)->vertex[1].y;
+                 temp_vertex_z_1 = triangles.at(i)->vertex[1].z;
+
+                 temp_vertex_x_2 = triangles.at(i)->vertex[2].x;
+                 temp_vertex_y_2 = triangles.at(i)->vertex[2].y;
+                 temp_vertex_z_2 = triangles.at(i)->vertex[2].z;
+
+
+
 
                  //----------vertex[0] of this triangle------------
 
-                  triangles.at(i)->vertex[0].x =   coordinatesWorldToCamera[0][0] * triangles.at(i)->vertex[0].x +
-                                                   coordinatesWorldToCamera[0][1] * triangles.at(i)->vertex[0].y +
-                                                   coordinatesWorldToCamera[0][2] * triangles.at(i)->vertex[0].z +
+                  triangles.at(i)->vertex[0].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_0 +
+                                                   coordinatesWorldToCamera[0][1] * temp_vertex_y_0 +
+                                                   coordinatesWorldToCamera[0][2] * temp_vertex_z_0 +
                                                    coordinatesWorldToCamera[0][3] * 1;
 
 
-                  triangles.at(i)->vertex[0].y =    coordinatesWorldToCamera[1][0] * triangles.at(i)->vertex[0].x +
-                                                    coordinatesWorldToCamera[1][1] * triangles.at(i)->vertex[0].y +
-                                                    coordinatesWorldToCamera[1][2] * triangles.at(i)->vertex[0].z +
+                  triangles.at(i)->vertex[0].y =    coordinatesWorldToCamera[1][0] * temp_vertex_x_0 +
+                                                    coordinatesWorldToCamera[1][1] * temp_vertex_y_0 +
+                                                    coordinatesWorldToCamera[1][2] * temp_vertex_z_0 +
                                                     coordinatesWorldToCamera[1][3] * 1;
 
 
-                  triangles.at(i)->vertex[0].z =   coordinatesWorldToCamera[2][0] * triangles.at(i)->vertex[0].x +
-                                                   coordinatesWorldToCamera[2][1] * triangles.at(i)->vertex[0].y +
-                                                   coordinatesWorldToCamera[2][2] * triangles.at(i)->vertex[0].z +
+                  triangles.at(i)->vertex[0].z =   coordinatesWorldToCamera[2][0] * temp_vertex_x_0 +
+                                                   coordinatesWorldToCamera[2][1] * temp_vertex_y_0 +
+                                                   coordinatesWorldToCamera[2][2] * temp_vertex_z_0 +
                                                    coordinatesWorldToCamera[2][3] * 1;
 
 
 
                   //----------vertex[1] of this triangle------------
-                  triangles.at(i)->vertex[1].x =   coordinatesWorldToCamera[0][0] * triangles.at(i)->vertex[1].x +
-                                                   coordinatesWorldToCamera[0][1] * triangles.at(i)->vertex[1].y +
-                                                   coordinatesWorldToCamera[0][2] * triangles.at(i)->vertex[1].z +
+                  triangles.at(i)->vertex[1].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_1 +
+                                                   coordinatesWorldToCamera[0][1] * temp_vertex_y_1 +
+                                                   coordinatesWorldToCamera[0][2] * temp_vertex_z_1 +
                                                    coordinatesWorldToCamera[0][3] * 1;
 
 
-                  triangles.at(i)->vertex[1].y =    coordinatesWorldToCamera[1][0] * triangles.at(i)->vertex[1].x +
-                                                    coordinatesWorldToCamera[1][1] * triangles.at(i)->vertex[1].y +
-                                                    coordinatesWorldToCamera[1][2] * triangles.at(i)->vertex[1].z +
+                  triangles.at(i)->vertex[1].y =    coordinatesWorldToCamera[1][0] * temp_vertex_x_1 +
+                                                    coordinatesWorldToCamera[1][1] * temp_vertex_y_1 +
+                                                    coordinatesWorldToCamera[1][2] * temp_vertex_z_1 +
                                                     coordinatesWorldToCamera[1][3] * 1;
 
 
-                  triangles.at(i)->vertex[1].z =   coordinatesWorldToCamera[2][0] * triangles.at(i)->vertex[1].x +
-                                                   coordinatesWorldToCamera[2][1] * triangles.at(i)->vertex[1].y +
-                                                   coordinatesWorldToCamera[2][2] * triangles.at(i)->vertex[1].z +
+                  triangles.at(i)->vertex[1].z =   coordinatesWorldToCamera[2][0] * temp_vertex_x_1 +
+                                                   coordinatesWorldToCamera[2][1] * temp_vertex_y_1 +
+                                                   coordinatesWorldToCamera[2][2] * temp_vertex_z_1 +
                                                    coordinatesWorldToCamera[2][3] * 1;
 
                   //----------vertex[2] of this triangle------------
-                  triangles.at(i)->vertex[2].x =   coordinatesWorldToCamera[0][0] * triangles.at(i)->vertex[2].x +
-                                                   coordinatesWorldToCamera[0][1] * triangles.at(i)->vertex[2].y +
-                                                   coordinatesWorldToCamera[0][2] * triangles.at(i)->vertex[2].z +
+                  triangles.at(i)->vertex[2].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_2 +
+                                                   coordinatesWorldToCamera[0][1] * temp_vertex_y_2 +
+                                                   coordinatesWorldToCamera[0][2] * temp_vertex_z_2 +
                                                    coordinatesWorldToCamera[0][3] * 1;
 
 
-                  triangles.at(i)->vertex[2].y =    coordinatesWorldToCamera[1][0] * triangles.at(i)->vertex[2].x +
-                                                    coordinatesWorldToCamera[1][1] * triangles.at(i)->vertex[2].y +
-                                                    coordinatesWorldToCamera[1][2] * triangles.at(i)->vertex[2].z +
+                  triangles.at(i)->vertex[2].y =    coordinatesWorldToCamera[1][0] * temp_vertex_x_2 +
+                                                    coordinatesWorldToCamera[1][1] * temp_vertex_y_2 +
+                                                    coordinatesWorldToCamera[1][2] * temp_vertex_z_2 +
                                                     coordinatesWorldToCamera[1][3] * 1;
 
 
-                  triangles.at(i)->vertex[2].z =   coordinatesWorldToCamera[2][0] * triangles.at(i)->vertex[2].x +
-                                                   coordinatesWorldToCamera[2][1] * triangles.at(i)->vertex[2].y +
-                                                   coordinatesWorldToCamera[2][2] * triangles.at(i)->vertex[2].z +
+                  triangles.at(i)->vertex[2].z =   coordinatesWorldToCamera[2][0] * temp_vertex_x_2 +
+                                                   coordinatesWorldToCamera[2][1] * temp_vertex_y_2 +
+                                                   coordinatesWorldToCamera[2][2] * temp_vertex_z_2 +
                                                    coordinatesWorldToCamera[2][3] * 1;
 
                   std::cout<<"after transformation\n";

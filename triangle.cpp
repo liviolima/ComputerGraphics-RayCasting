@@ -174,13 +174,13 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 }
 */
 
-/* */
 
-
+/*
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     NumberVector edge1, edge2, normal, p1_vector ;
 
-    //std::cout<<" 1\n";
+
+    //std::cout<<direction.x<<" "<<direction.y<<" "<<direction.z<<" "<<" 1\n";
     edge1 = vertex[1].sub(vertex[0]);
     edge2 = vertex[2].sub(vertex[0]);
 
@@ -190,7 +190,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     double valueA = direction.dot_product(normal);
     double valueB = p1_vector.dot_product(normal);
 
-    if (fabs(valueA) <= 0.00001)
+    if (abs(valueA) <= 0.00001)
         return false;
 
     std::cout<<" 2\n";
@@ -203,9 +203,20 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     return T;
 
 
+    /*
+    double a = direction.dot_product(normal);
+
+    if(a == 0){
+        //ray is parallel to the plane
+        return -1;
+    }
+    else{
+        double b = normal.dot_product(origin.add(normal.multiply(1).negative()));
+        return -1*b/a;
+    }
 
 }
-
+*/
 /*
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
@@ -247,7 +258,71 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
         return -1;
     }
 }
- */
+*/
+
+double Triangle::findIntersection(NumberVector origin, NumberVector direction){
+
+    NumberVector edge1, edge2, normal, p1_vector ;
+    edge1 = vertex[1].sub(vertex[0]);
+    edge2 = vertex[2].sub(vertex[0]);
+    //normal = direction.cross_product(edge2).normalize();
+    normal = edge1.cross_product(edge2).normalize();
+
+    NumberVector _a = vertex[0];
+    NumberVector _b = vertex[1];
+    NumberVector _c = vertex[2];
+
+       double distance = normal.dot_product(_a);
+
+       double a = direction.dot_product(normal);
+
+       if (a == 0) {
+           // Raio paralelo ao triangulo
+           return -1;
+       }
+
+       double b = normal.dot_product(origin.add(normal.multiply(distance).negative()));
+       double distance2plane = -1*b/a;
+
+       double Qx = direction.multiply(distance2plane).x + origin.x;
+       double Qy = direction.multiply(distance2plane).y + origin.y;
+       double Qz = direction.multiply(distance2plane).z + origin.z;
+
+       NumberVector Q(Qx, Qy, Qz);
+
+       //[CAxQA] * N >= 0
+       NumberVector CA(_c.x - _a.x, _c.y - _a.y, _c.z - _a.z);
+       NumberVector QA(Q.x - _a.x, Q.y - _a.y, Q.z - _a.z);
+
+       double test1 = (CA.cross_product(QA)).dot_product(normal);
+
+       //[BCxQC] * N >= 0
+       NumberVector BC(_b.x - _c.x, _b.y - _c.y, _b.z - _c.z);
+       NumberVector QC(Q.x - _c.x, Q.y - _c.y, Q.z - _c.z);
+
+       double test2 = (BC.cross_product(QC)).dot_product(normal);
+
+       //[ABxQB] * N >= 0
+
+       NumberVector AB(_a.x - _b.x, _a.y - _b.y, _a.z - _b.z);
+       NumberVector QB(Q.x - _b.x, Q.y - _b.y, Q.z - _b.z);
+
+       double test3 = (AB.cross_product(QB)).dot_product(normal);
+
+       if(test1 >= 0  && test2 >= 0  && test3 >= 0  ) {
+           //dentro do triangulo
+           return -1*b/a;
+       } else {
+           //fora do triangulo
+           return -1;
+       }
+
+
+
+}
+
+
+
 
 Color Triangle::getColor(){
     return color;
