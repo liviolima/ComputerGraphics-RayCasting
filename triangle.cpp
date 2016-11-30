@@ -175,11 +175,43 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 */
 
 /* */
+
+
+double Triangle::findIntersection(NumberVector origin, NumberVector direction){
+    NumberVector edge1, edge2, normal, p1_vector ;
+
+    //std::cout<<" 1\n";
+    edge1 = vertex[1].sub(vertex[0]);
+    edge2 = vertex[2].sub(vertex[0]);
+
+    normal = direction.cross_product(edge2);
+    p1_vector = origin.sub(vertex[0]);
+
+    double valueA = direction.dot_product(normal);
+    double valueB = p1_vector.dot_product(normal);
+
+    if (fabs(valueA) <= 0.00001)
+        return false;
+
+    std::cout<<" 2\n";
+    float T = valueB / valueA;
+
+    if (T <= 0.0001)
+        return false;
+
+    std::cout<<T<<" 3\n";
+    return T;
+
+
+
+}
+
+/*
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
-    float EPSILON = 0.0000001;
+    double EPSILON = 0.0000001;
     NumberVector edge1, edge2, P, Q, T;
-    float det, inv_det, u, v, t;
+    double det, inv_det, u, v, t;
 
     edge1 = vertex[1].sub(vertex[0]);
     edge2 = vertex[2].sub(vertex[0]);
@@ -215,7 +247,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
         return -1;
     }
 }
-/* */
+ */
 
 Color Triangle::getColor(){
     return color;

@@ -24,10 +24,10 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
                 this->camera_xyz_position.x - this->look_at_xyz_position.x,
                 this->camera_xyz_position.y - this->look_at_xyz_position.y,
                 this->camera_xyz_position.z - this->look_at_xyz_position.z)
-            .negative().normalize();
+            .normalize();
 
     this->camera_right_direction_i = up_xyz.cross_product(camera_look_direction_k).normalize();
-    this->camera_down_direction_j = camera_right_direction_i.cross_product(camera_look_direction_k);
+    this->camera_down_direction_j = camera_look_direction_k.cross_product(camera_right_direction_i);
 
 
 
@@ -87,9 +87,9 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     coordinatesCameraToWorld[2][3] = camera_xyz_position.z;
     coordinatesCameraToWorld[3][3] = 1.0;
 
-    qDebug() <<"Camera to World Matrix\n";
+    //qDebug() <<"Camera to World Matrix\n";
     for(int j = 0; j < 4; j++){
-        qDebug() <<coordinatesCameraToWorld[j][0]<<" "<<coordinatesCameraToWorld[j][1]<<" "<<coordinatesCameraToWorld[j][2]<<" "<<coordinatesCameraToWorld[j][3];
+        //qDebug() <<coordinatesCameraToWorld[j][0]<<" "<<coordinatesCameraToWorld[j][1]<<" "<<coordinatesCameraToWorld[j][2]<<" "<<coordinatesCameraToWorld[j][3];
         qDebug() <<"\n";
     }
 

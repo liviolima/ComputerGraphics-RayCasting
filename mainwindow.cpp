@@ -88,9 +88,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //NumberVector camera_xyz_position = NumberVector(0, 0, 5);
-       NumberVector camera_xyz_position = NumberVector(1, 3, -5);
+       NumberVector camera_xyz_position = NumberVector(0, 0, 5);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
-       NumberVector up_xyz = NumberVector(0,1,0);
+       NumberVector up_xyz = NumberVector(0,-1,0);
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
@@ -149,7 +149,9 @@ MainWindow::MainWindow(QWidget *parent) :
                }
 
 
-               NumberVector origin = camera_xyz_position;
+               //NumberVector origin = camera_xyz_position;
+               NumberVector origin = NumberVector(0,0,0);
+
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
                NumberVector direction = camera.camera_look_direction_k.add(camera.camera_right_direction_i.multiply(xamnt - 0.5)
