@@ -8,17 +8,12 @@
 Camera::Camera()
 {
 
-    //deve possuir as posicoes do observador.
-    //Para onde ele esta olhando
-
-
 }
 
 Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     this->camera_xyz_position = pos;
     this->look_at_xyz_position = look_at;
     this->up_xyz = up;
-
 
     this->camera_look_direction_k = NumberVector(
                 this->camera_xyz_position.x - this->look_at_xyz_position.x,
@@ -30,8 +25,6 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
 
     this->camera_right_direction_i = up_xyz.cross_product(camera_look_direction_k).normalize();
     this->camera_down_direction_j = camera_look_direction_k.cross_product(camera_right_direction_i);
-    //this->camera_down_direction_j = camera_right_direction_i.cross_product(camera_look_direction_k);
-
 
 
 
@@ -40,8 +33,7 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
     double Oc_k1 = camera_xyz_position.dot_product(camera_look_direction_k);
 
 
-
-//-------- World To Camera Matrix ---------
+    //-------- World To Camera Matrix ---------
     coordinatesWorldToCamera[0][0] = camera_right_direction_i.x;
     coordinatesWorldToCamera[1][0] = camera_down_direction_j.x;
     coordinatesWorldToCamera[2][0] = camera_look_direction_k.x;
@@ -70,7 +62,7 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
 
 
 
-//-------- Camera To World Matrix ---------
+    //-------- Camera To World Matrix ---------
     coordinatesCameraToWorld[0][0] = camera_right_direction_i.x;
     coordinatesCameraToWorld[1][0] = camera_right_direction_i.y;
     coordinatesCameraToWorld[2][0] = camera_right_direction_i.z;
@@ -118,21 +110,21 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
     double temp_vertex_y_2;
     double temp_vertex_z_2;
 
-    camera_xyz_position.x =          coordinatesWorldToCamera[0][0] * temp_camera_x +
-                                     coordinatesWorldToCamera[0][1] * temp_camera_y +
-                                     coordinatesWorldToCamera[0][2] * temp_camera_z +
-                                     coordinatesWorldToCamera[0][3] * 1;
+    camera_xyz_position.x =  coordinatesWorldToCamera[0][0] * temp_camera_x +
+                             coordinatesWorldToCamera[0][1] * temp_camera_y +
+                             coordinatesWorldToCamera[0][2] * temp_camera_z +
+                             coordinatesWorldToCamera[0][3] * 1;
 
-    camera_xyz_position.y =           coordinatesWorldToCamera[1][0] * temp_camera_x +
-                                      coordinatesWorldToCamera[1][1] * temp_camera_y +
-                                      coordinatesWorldToCamera[1][2] * temp_camera_z +
-                                      coordinatesWorldToCamera[1][3] * 1;
+    camera_xyz_position.y =  coordinatesWorldToCamera[1][0] * temp_camera_x +
+                             coordinatesWorldToCamera[1][1] * temp_camera_y +
+                             coordinatesWorldToCamera[1][2] * temp_camera_z +
+                             coordinatesWorldToCamera[1][3] * 1;
 
 
-    camera_xyz_position.z =          coordinatesWorldToCamera[2][0] * temp_camera_x+
-                                     coordinatesWorldToCamera[2][1] * temp_camera_y +
-                                     coordinatesWorldToCamera[2][2] * temp_camera_z +
-                                     coordinatesWorldToCamera[2][3] * 1;
+    camera_xyz_position.z =  coordinatesWorldToCamera[2][0] * temp_camera_x+
+                             coordinatesWorldToCamera[2][1] * temp_camera_y +
+                             coordinatesWorldToCamera[2][2] * temp_camera_z +
+                             coordinatesWorldToCamera[2][3] * 1;
 
 
 
@@ -157,8 +149,6 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
                  temp_vertex_z_2 = triangles.at(i)->vertex[2].z;
 
 
-
-
                  //----------vertex[0] of this triangle------------
 
                   triangles.at(i)->vertex[0].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_0 +
@@ -179,8 +169,8 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
                                                    coordinatesWorldToCamera[2][3] * 1;
 
 
-
                   //----------vertex[1] of this triangle------------
+
                   triangles.at(i)->vertex[1].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_1 +
                                                    coordinatesWorldToCamera[0][1] * temp_vertex_y_1 +
                                                    coordinatesWorldToCamera[0][2] * temp_vertex_z_1 +
@@ -199,6 +189,7 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
                                                    coordinatesWorldToCamera[2][3] * 1;
 
                   //----------vertex[2] of this triangle------------
+
                   triangles.at(i)->vertex[2].x =   coordinatesWorldToCamera[0][0] * temp_vertex_x_2 +
                                                    coordinatesWorldToCamera[0][1] * temp_vertex_y_2 +
                                                    coordinatesWorldToCamera[0][2] * temp_vertex_z_2 +
@@ -255,6 +246,7 @@ void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> 
 
 
                  //----------vertex[1] of this triangle------------
+
                  triangles.at(i)->vertex[1].x =   coordinatesCameraToWorld[0][0] * triangles.at(i)->vertex[1].x +
                                                   coordinatesCameraToWorld[0][1] * triangles.at(i)->vertex[1].y +
                                                   coordinatesCameraToWorld[0][2] * triangles.at(i)->vertex[1].z +
@@ -273,6 +265,7 @@ void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> 
                                                   coordinatesCameraToWorld[2][3] * 1;
 
                  //----------vertex[2] of this triangle------------
+
                  triangles.at(i)->vertex[2].x =   coordinatesCameraToWorld[0][0] * triangles.at(i)->vertex[2].x +
                                                   coordinatesCameraToWorld[0][1] * triangles.at(i)->vertex[2].y +
                                                   coordinatesCameraToWorld[0][2] * triangles.at(i)->vertex[2].z +
@@ -297,79 +290,7 @@ void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> 
 }
 
 
-void printMatrixWorldToCamera(){
 
-
-}
-
-void printMatrixCameraToWorld(){
-
-}
-
-/*
-void Camera::transformVertexesFromCoordinatesWorldToCamera2(){
-    //this method is for a single triangule.
-    // Vertex 0 //
-
-    scene.triangle.vertex[0].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[0].x +
-                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[0].y +
-                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[0].z +
-                                 coordinatesWorldToCamera[0][3] * 1;
-
-
-    scene.triangle.vertex[0].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[0].x +
-                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[0].y +
-                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[0].z +
-                                 coordinatesWorldToCamera[1][3] * 1;
-
-
-    scene.triangle.vertex[0].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[0].x +
-                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[0].y +
-                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[0].z +
-                                 coordinatesWorldToCamera[2][3] * 1;
-
-    // Vertex 1 //
-
-    scene.triangle.vertex[1].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[1].x +
-                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[1].y +
-                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[1].z +
-                                 coordinatesWorldToCamera[0][3] * 1;
-
-
-    scene.triangle.vertex[1].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[1].x +
-                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[1].y +
-                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[1].z +
-                                 coordinatesWorldToCamera[1][3] * 1;
-
-
-    scene.triangle.vertex[1].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[1].x +
-                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[1].y +
-                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[1].z +
-                                 coordinatesWorldToCamera[2][3] * 1;
-
-
-
-    // Vertex 2 //
-
-    scene.triangle.vertex[2].x = coordinatesWorldToCamera[0][0] * scene.triangle.vertex[2].x +
-                                 coordinatesWorldToCamera[0][1] * scene.triangle.vertex[2].y +
-                                 coordinatesWorldToCamera[0][2] * scene.triangle.vertex[2].z +
-                                 coordinatesWorldToCamera[0][3] * 1;
-
-
-    scene.triangle.vertex[2].y = coordinatesWorldToCamera[1][0] * scene.triangle.vertex[2].x +
-                                 coordinatesWorldToCamera[1][1] * scene.triangle.vertex[2].y +
-                                 coordinatesWorldToCamera[1][2] * scene.triangle.vertex[2].z +
-                                 coordinatesWorldToCamera[1][3] * 1;
-
-
-    scene.triangle.vertex[2].z = coordinatesWorldToCamera[2][0] * scene.triangle.vertex[2].x +
-                                 coordinatesWorldToCamera[2][1] * scene.triangle.vertex[2].y +
-                                 coordinatesWorldToCamera[2][2] * scene.triangle.vertex[2].z +
-                                 coordinatesWorldToCamera[2][3] * 1;
-
-}
-*/
 
 
 

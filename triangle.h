@@ -40,7 +40,6 @@ public:
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
     double findIntersection(NumberVector origin, NumberVector direction);
-    double findIntersection2(NumberVector origin, NumberVector direction);
     void printVertexes();
     Color getColor();
 

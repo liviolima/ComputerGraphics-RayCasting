@@ -42,7 +42,6 @@ NumberVector NumberVector::sub(NumberVector other){
     return NumberVector(x - other.x, y - other.y, z - other.z);
 }
 
-
 NumberVector NumberVector::negative(){
     return NumberVector(-x, -y, -z);
 }

@@ -4,7 +4,7 @@
 
 Scene::Scene()
 {
-    //deve possuir objeto e a iluminacao
+    //This must contain ours objects and the lighting.
 
     ilumination_xyz_position[0] = 0;
     ilumination_xyz_position[1] = 0;

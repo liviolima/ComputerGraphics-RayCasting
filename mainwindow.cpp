@@ -7,9 +7,7 @@
 #include <vector>
 #include <QDebug>
 #include "object.h"
-#include "plane.h"
 #include "color.h"
-#include "sphere.h"
 #include "cube.h"
 
 struct intersections_of_scenary{
@@ -18,9 +16,6 @@ struct intersections_of_scenary{
 };
 
 
-void convertToCameraCoordinates(Scene scene){
-    //I did it on the class Camera.
-}
 
 int winningObjectIndex(std::vector<double> object_intersection){
     //return the index of the winning intersection
@@ -103,60 +98,34 @@ MainWindow::MainWindow(QWidget *parent) :
 
        ui->setupUi(this);
 
-       int thisone;
        int sizeX = 600;
        int sizeY = 600;
        double aspectratio = (double)sizeX / (double)sizeY;
        double xamnt, yamnt;
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
 
-       qDebug()  << "Console Mode.\n";
 
-
-
-
-       //NumberVector camera_xyz_position = NumberVector(0, 0, 5);
-       //Valores da prova
-       //NumberVector camera_xyz_position = NumberVector(52, 48, 36);
-       //NumberVector look_at_xyz_position = NumberVector(3,4,3);
-       //NumberVector up_xyz = NumberVector(8 - camera_xyz_position.x ,5 - camera_xyz_position.y, 1 - camera_xyz_position.z).normalize();
+       //Valores da AP1 de Computação Gráfica
+       /*
+       NumberVector camera_xyz_position = NumberVector(52, 48, 36);
+       NumberVector look_at_xyz_position = NumberVector(3,4,3);
+       NumberVector up_xyz = NumberVector(8 - camera_xyz_position.x ,5 - camera_xyz_position.y, 1 - camera_xyz_position.z).normalize();
+       */
 
 
        //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
        //NumberVector camera_xyz_position = NumberVector(-46, 34, 65);
-       NumberVector camera_xyz_position = NumberVector(-46, 22, 65);
 
+       NumberVector camera_xyz_position = NumberVector(-46, 22, 65);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
-
-
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
-       Scene scene = Scene();
-       convertToCameraCoordinates(scene);
+
+
+       //Scene scene = Scene();
        std::vector<Object*> scene_objects;
 
 
-       //Triangle
-       //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
-
-       //Plane
-/*
-       Color color = Color(233.0, 24.0, 25.0, 0);
-       NumberVector Y = NumberVector(0, 1, 0);
-       Plane plane = Plane(Y, -1, color);
-       scene_objects.push_back(dynamic_cast<Object*>(&plane));
-*/
-
-       //Sphere
-/*
-       Color color2 = Color(2.0, 20.0, 131.0, 0);
-       NumberVector center = NumberVector(0, 1.0, 0.0);
-       double radius = 1.2; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
-       Sphere sphere = Sphere(center, radius, color2);
-       scene_objects.push_back(dynamic_cast<Object*>(&sphere));
-*/
-
-       //Cube
        Color color3 = Color(255.0, 13.0, 0.0, 0);
        double size = 1.0;
 
@@ -197,21 +166,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
-
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
        //camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
        //camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
 
        NumberVector origin = camera.camera_xyz_position;
        std::cout<<"camera xyz:"<<camera.camera_xyz_position.x<<" "<<camera.camera_xyz_position.y<<" "<<camera.camera_xyz_position.z<<" \n";
-       //NumberVector origin = NumberVector(0,0,0);
 
 
 
        for(int i=0; i<sizeX; i++){
            for(int j=0; j<sizeY; j++){
-               //thisone = j*sizeX + i;
 
                if(sizeX > sizeY){
                     xamnt = ((i+0.5)/sizeX)*aspectratio - (((sizeX - sizeY)/(double)sizeY)/2);
@@ -222,16 +187,9 @@ MainWindow::MainWindow(QWidget *parent) :
                    yamnt = (((sizeY - j) + 0.5)/sizeY)/aspectratio - (((sizeY - sizeX)/(double)sizeX)/2);
                }
                else{
-                   //the image is a square
                    xamnt = (i + 0.5)/sizeX;
                    yamnt = ((sizeY - j) + 0.5)/sizeY;
                }
-
-
-
-              //std::cout<<xamnt<<" "<<yamnt<<" \n";
-
-
 
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
@@ -240,96 +198,35 @@ MainWindow::MainWindow(QWidget *parent) :
                                                                            .normalize();
 
 
-
-
-               //std::cout<<direction.x<<" "<<direction.y<<" "<<direction.z<<" \n";
-
-
-
-               //We used this before
-/*
-               for(int index = 0; index < scene_objects.size(); index++){
-                   intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
-               }
-*/
-
-
                std::vector<intersections_of_scenary> intersections_of_all_objects;
-
 
                for(int index = 0; index < scene_objects.size(); index++){
                    std::vector<double> intersections;
                    std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
                    for (int x = 0 ; x < triangles.size() ; x++){
-                            //std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
-                            //std::cout << triangles.size();
-                            //triangles.at(i2)->printVertexes();
-
-                              // is = { index, intersections_of_one_objects.push_back(triangles.at(x)->findIntersection(origin, direction));
-                             // };
-
-
-
-                       intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
-
-
+                        intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
                    }
 
                    intersections_of_scenary is;
                    is.index_of_one_object = index;
                    is.intersections_of_one_object.swap(intersections);
                    intersections_of_all_objects.push_back(is);
-//}
 
                    }
+
+
+               //background color
+               image.setPixel(i, j, qRgb(173, 216, 230));
+
+
                for(int index = 0; index < scene_objects.size(); index++){
-                   image.setPixel(i, j, qRgb(173, 216, 230));
-               }
-
-
-               for(int index = 0; index < scene_objects.size(); index++){
-
-
-                    int index_of_winning_object = winningObjectIndex(intersections_of_all_objects.at(index).intersections_of_one_object);
-
-    //std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
-
-                   if(index_of_winning_object == -1){
-                       //set the background to this color
-                       //image.setPixel(i, j, qRgb(173, 216, 230));
-                   }
-                   else{
-                        //index corresponds to an object in our scene.
-                        //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
-                        //Color this_color = Color(255.0, 0.0, 0.0, 0);
-    //                   for(int index = 0; i < scene_objects.size(); index++){
-                         Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
-                         image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-
-
+                   int index_of_winning_object = winningObjectIndex(intersections_of_all_objects.at(index).intersections_of_one_object);
+                   if(index_of_winning_object != -1){
+                       Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
+                       image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
                    }
                }
-
-//std::cout<<"test 5 \n";
-
-//std::cout<<"test 7 \n";
-               //------------This is just a test-------------
-               /*
-               if( (i > 200  && i < 440) && (j > 200) && (j < 280)){
-                   image.setPixel(i, j, qRgb(23, 222, 10));
-               }
-               else{
-                   image.setPixel(i, j, qRgb(0, 0, 0));
-               }
-               */
-               //------------This is a pseudo-code------------
-               /*
-               Ray ray = ConstructRayThroughPixel(camera, i, j);
-               Intersection hit = FindIntersection(ray, scene);
-               image.setPixel(i, j, qRgb(4, 4, 4));]
-               */
            }
-
        }
 
        QGraphicsScene *graphic = new QGraphicsScene(this);
