@@ -66,7 +66,30 @@ int winningObjectIndex(std::vector<double> object_intersection){
     }
 }
 
+/*
+int winningObjectIndex(std::vector<double>  intersections) {
+    // para se nao toca em nada
+    if (intersections.size() == 0)
+        return -1;
 
+    if (intersections.size() == 1) {
+        if (intersections.at(0) > 0)
+            return 0;
+       return -1;
+    }
+
+    double min = std::numeric_limits<qlonglong>::max();
+    double index = -1;
+    for (unsigned int j = 0; j < intersections.size(); j++) {
+      if (intersections.at(j) > 0 && intersections.at(j) < min) {
+          min = intersections.at(j);
+          index = j;
+      }
+    }
+
+    return index;
+}
+*/
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -88,9 +111,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //NumberVector camera_xyz_position = NumberVector(0, 0, 5);
-       NumberVector camera_xyz_position = NumberVector(1, -3, 5);
+       //Valores da prova
+       //NumberVector camera_xyz_position = NumberVector(52, 48, 36);
+       //NumberVector look_at_xyz_position = NumberVector(3,4,3);
+       //NumberVector up_xyz = NumberVector(8 - camera_xyz_position.x ,5 - camera_xyz_position.y, 1 - camera_xyz_position.z).normalize();
+
+
+       NumberVector camera_xyz_position = NumberVector(2, -2, -8);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
-       NumberVector up_xyz = NumberVector(0,1,0);
+       NumberVector up_xyz = NumberVector(0 , 1, 0);
+
+
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
        Scene scene = Scene();
        convertToCameraCoordinates(scene);
@@ -101,21 +132,21 @@ MainWindow::MainWindow(QWidget *parent) :
        //scene_objects.push_back(dynamic_cast<Object*>(&scene.triangle));
 
        //Plane
-       /*
-       Color color = Color(23.0, 124.0, 5.0, 0);
+/*
+       Color color = Color(233.0, 24.0, 25.0, 0);
        NumberVector Y = NumberVector(0, 1, 0);
        Plane plane = Plane(Y, -1, color);
        scene_objects.push_back(dynamic_cast<Object*>(&plane));
-       */
+*/
 
        //Sphere
-       /*
+/*
        Color color2 = Color(2.0, 20.0, 131.0, 0);
-       NumberVector center = NumberVector(0, 0.0, 0.0);
-       double radius = 1.0; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
+       NumberVector center = NumberVector(0, 1.0, 0.0);
+       double radius = 1.2; // ****TRY CHANGE THIS VALUE. JUST ADD 0.1 or SUB 0.1****
        Sphere sphere = Sphere(center, radius, color2);
        scene_objects.push_back(dynamic_cast<Object*>(&sphere));
-       */
+*/
 
        //Cube
        Color color3 = Color(255.0, 13.0, 0.0, 0);
@@ -136,7 +167,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
        for(int i=0; i<sizeX; i++){
            for(int j=0; j<sizeY; j++){
-               thisone = j*sizeX + i;
+               //thisone = j*sizeX + i;
 
                if(sizeX > sizeY){
                     xamnt = ((i+0.5)/sizeX)*aspectratio - (((sizeX - sizeY)/(double)sizeY)/2);
@@ -154,12 +185,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+              //std::cout<<xamnt<<" "<<yamnt<<" \n";
+
+
+
 
                //On direction vector we have to use xamnt and yamnt. Both values were calculated before.
                NumberVector direction = camera.camera_look_direction_k.add(camera.camera_right_direction_i.multiply(xamnt - 0.5)
                                                                            .add(camera.camera_down_direction_j.multiply(yamnt - 0.5)))
                                                                            .normalize();
-               //direction = direction.multiply(2);
+
+
+
+
+
+               //std::cout<<direction.x<<" "<<direction.y<<" "<<direction.z<<" \n";
 
                std::vector<double> intersections;
 
@@ -170,6 +210,7 @@ MainWindow::MainWindow(QWidget *parent) :
                    intersections.push_back(scene_objects.at(index)->findIntersection(origin,direction));
                }
 */
+
 
 
 
@@ -186,7 +227,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
                int index_of_winning_object = winningObjectIndex(intersections);
-               //std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
+
+//std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
 
 
                if(index_of_winning_object == -1){

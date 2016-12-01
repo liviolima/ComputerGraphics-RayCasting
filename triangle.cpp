@@ -268,9 +268,9 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     //normal = direction.cross_product(edge2).normalize();
     normal = edge1.cross_product(edge2).normalize();
 
-    NumberVector _a = vertex[0];
+    NumberVector _a = vertex[2];
     NumberVector _b = vertex[1];
-    NumberVector _c = vertex[2];
+    NumberVector _c = vertex[0];
 
        double distance = normal.dot_product(_a);
 
@@ -311,6 +311,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
        if(test1 >= 0  && test2 >= 0  && test3 >= 0  ) {
            //dentro do triangulo
+           std::cout<<"ola";
            return -1*b/a;
        } else {
            //fora do triangulo
