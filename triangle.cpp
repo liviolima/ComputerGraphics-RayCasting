@@ -312,7 +312,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
        if(test1 >= 0  && test2 >= 0  && test3 >= 0  ) {
            //dentro do triangulo
-           std::cout<<"ola";
+           //std::cout<<"ola";
            return -1*b/a;
        } else {
            //fora do triangulo

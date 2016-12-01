@@ -153,14 +153,14 @@ MainWindow::MainWindow(QWidget *parent) :
        Color color3 = Color(255.0, 13.0, 0.0, 0);
        double size = 1.0;
        Cube cube = Cube(size, color3);
-       cube.scale(1.0, 4.0, 1.0);
-       //cube.translate(1.3, 0.0, 0.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&cube));
+       cube.scale(2.0, 4.0, 1.0);
+       //cube.translate(10.2, 0.0, 0.0);
+       //scene_objects.push_back(dynamic_cast<Object*>(&cube));
 
-       //Cube cube2 = Cube(size, color3);
-       //cube2.scale(1.0, 3.0, 1.0);
+       Cube cube2 = Cube(size, color3);
+       cube2.scale(1.0, 1.0, 1.0);
 
-       // scene_objects.push_back(dynamic_cast<Object*>(&cube2));
+       scene_objects.push_back(dynamic_cast<Object*>(&cube2));
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
@@ -209,7 +209,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
                //std::cout<<direction.x<<" "<<direction.y<<" "<<direction.z<<" \n";
 
-               std::vector<double> intersections;
 
 
                //We used this before
@@ -221,38 +220,48 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
+      //          std::cout<<"test 1 \n";
                for(int index = 0; index < scene_objects.size(); index++){
+                   std::vector<double> intersections;
+
+    //               std::cout<<"test 2 \n";
                    std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
                    for (int x = 0 ; x < triangles.size() ; x++){
                             //std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
                             //std::cout << triangles.size();
                             //triangles.at(i2)->printVertexes();
-                            intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
-
+      //                     std::cout<<"test 3 \n";
+                           intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
+        //                   std::cout<<"test 4 \n";
                       }
+  //                 std::cout<<"test 5 \n";
+
+                   int index_of_winning_object = winningObjectIndex(intersections);
+
+    //std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
+
+
+                   if(index_of_winning_object == -1){
+                       //set the background to this color
+                        image.setPixel(i, j, qRgb(173, 216, 230));
+                   }
+                   else{
+                        //index corresponds to an object in our scene.
+                        //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
+                        //Color this_color = Color(255.0, 0.0, 0.0, 0);
+//    std::cout<<"test 6 \n";
+//                        for(int index = 0; i < scene_objects.size(); index++){
+                            Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
+                            image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+  //                      }
+
+                   }
+
                }
 
+//std::cout<<"test 5 \n";
 
-               int index_of_winning_object = winningObjectIndex(intersections);
-
-//std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
-
-
-               if(index_of_winning_object == -1){
-                   //set the background to this color
-                    image.setPixel(i, j, qRgb(173, 216, 230));
-               }
-               else{
-                    //index corresponds to an object in our scene.
-                    //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
-                    //Color this_color = Color(255.0, 0.0, 0.0, 0);
-
-                    Color this_color = scene_objects.at(0)->triangles.at(index_of_winning_object)->getColor();
-                    image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-               }
-
-
+//std::cout<<"test 7 \n";
                //------------This is just a test-------------
                /*
                if( (i > 200  && i < 440) && (j > 200) && (j < 280)){
