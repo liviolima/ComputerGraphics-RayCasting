@@ -13,8 +13,8 @@ public:
     Cube(double size, Color newColor);
 
     Triangle trianglesv[12];
-
     Color color;
+    double size_x, size_y, size_z;
 
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);

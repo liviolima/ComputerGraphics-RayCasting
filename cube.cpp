@@ -30,7 +30,7 @@ Cube::Cube()
     f 4 3 8
     f 5 1 8
 */
-    double x = 1;
+    double x = this->size_x = this->size_y = this->size_z = 1;
 
     NumberVector v1 = NumberVector( x  , -x,  -x);
     NumberVector v2 = NumberVector( x  , -x,   x);
@@ -90,6 +90,7 @@ Cube::Cube(double size, Color newColor)
     color.blue = newColor.blue;
 
     double x = size;
+    this->size_x = this->size_y = this->size_z = size;
 
     NumberVector v1 = NumberVector( x  , -x,  -x);
     NumberVector v2 = NumberVector( x  , -x,   x);
@@ -147,9 +148,61 @@ Color Cube::getColor(){
 
 void Cube::scale(double x, double y, double z){
 
+    size_x = size_x*x;
+    size_y = size_y*y;
+    size_z = size_z*z;
+
+    NumberVector v1 = NumberVector( size_x  , -size_y,  -size_z);
+    NumberVector v2 = NumberVector( size_x  , -size_y,   size_z);
+    NumberVector v3 = NumberVector(-size_x  , -size_y,   size_z);
+    NumberVector v4 = NumberVector(-size_x  , -size_y,  -size_z);
+    NumberVector v5 = NumberVector( size_x  ,  size_y,  -size_z);
+    NumberVector v6 = NumberVector( size_x  ,  size_y,   size_z);
+    NumberVector v7 = NumberVector(-size_x  ,  size_y,   size_z);
+    NumberVector v8 = NumberVector(-size_x  ,  size_y,  -size_z);
+
+    trianglesv[0] = Triangle(v2, v3, v4, redColor);
+    trianglesv[1] = Triangle(v8, v7, v6, darkRedColor);
+    trianglesv[2] = Triangle(v5, v6, v2, greenColor);
+    trianglesv[3] = Triangle(v6, v7, v3, darkGreenColor);
+    trianglesv[4] = Triangle(v3, v7, v8, blueColor);
+    trianglesv[5] = Triangle(v1, v4, v8, darkBlueColor);
+    trianglesv[6] = Triangle(v1, v2, v4, yellowColor);
+    trianglesv[7] = Triangle(v5, v8, v6, darkYellowColor);
+    trianglesv[8] = Triangle(v1, v5, v2, purpleColor);
+    trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
+    trianglesv[10] = Triangle(v4, v3, v8, cianColor);
+    trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
+
 }
 
 void Cube::translate(double x, double y, double z){
+
+    size_x = size_x+x;
+    size_y = size_y+y;
+    size_z = size_z+z;
+
+    NumberVector v1 = NumberVector( size_x  , -size_y,  -size_z);
+    NumberVector v2 = NumberVector( size_x  , -size_y,   size_z);
+    NumberVector v3 = NumberVector(-size_x  , -size_y,   size_z);
+    NumberVector v4 = NumberVector(-size_x  , -size_y,  -size_z);
+    NumberVector v5 = NumberVector( size_x  ,  size_y,  -size_z);
+    NumberVector v6 = NumberVector( size_x  ,  size_y,   size_z);
+    NumberVector v7 = NumberVector(-size_x  ,  size_y,   size_z);
+    NumberVector v8 = NumberVector(-size_x  ,  size_y,  -size_z);
+
+    trianglesv[0] = Triangle(v2, v3, v4, redColor);
+    trianglesv[1] = Triangle(v8, v7, v6, darkRedColor);
+    trianglesv[2] = Triangle(v5, v6, v2, greenColor);
+    trianglesv[3] = Triangle(v6, v7, v3, darkGreenColor);
+    trianglesv[4] = Triangle(v3, v7, v8, blueColor);
+    trianglesv[5] = Triangle(v1, v4, v8, darkBlueColor);
+    trianglesv[6] = Triangle(v1, v2, v4, yellowColor);
+    trianglesv[7] = Triangle(v5, v8, v6, darkYellowColor);
+    trianglesv[8] = Triangle(v1, v5, v2, purpleColor);
+    trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
+    trianglesv[10] = Triangle(v4, v3, v8, cianColor);
+    trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
 
 }
 

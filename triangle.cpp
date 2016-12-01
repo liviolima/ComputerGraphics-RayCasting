@@ -224,8 +224,8 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     NumberVector edge1, edge2, P, Q, T;
     double det, inv_det, u, v, t;
 
-    edge1 = vertex[1].sub(vertex[0]);
-    edge2 = vertex[2].sub(vertex[0]);
+    edge1 = vertex[2].sub(vertex[0]);
+    edge2 = vertex[1].sub(vertex[0]);
 
     P = direction.cross_product(edge2);
     //if determinant is near zero, ray lies in plane of triangle or ray is parallel to plane of triangle
@@ -259,6 +259,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     }
 }
 */
+
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 

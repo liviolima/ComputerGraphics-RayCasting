@@ -117,7 +117,8 @@ MainWindow::MainWindow(QWidget *parent) :
        //NumberVector up_xyz = NumberVector(8 - camera_xyz_position.x ,5 - camera_xyz_position.y, 1 - camera_xyz_position.z).normalize();
 
 
-       NumberVector camera_xyz_position = NumberVector(2, -2, -8);
+       //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
+       NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
 
@@ -152,7 +153,14 @@ MainWindow::MainWindow(QWidget *parent) :
        Color color3 = Color(255.0, 13.0, 0.0, 0);
        double size = 1.0;
        Cube cube = Cube(size, color3);
+       cube.scale(1.0, 4.0, 1.0);
+       //cube.translate(1.3, 0.0, 0.0);
        scene_objects.push_back(dynamic_cast<Object*>(&cube));
+
+       //Cube cube2 = Cube(size, color3);
+       //cube2.scale(1.0, 3.0, 1.0);
+
+       //scene_objects.push_back(dynamic_cast<Object*>(&cube2));
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
@@ -239,6 +247,7 @@ MainWindow::MainWindow(QWidget *parent) :
                     //index corresponds to an object in our scene.
                     //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
                     //Color this_color = Color(255.0, 0.0, 0.0, 0);
+
                     Color this_color = scene_objects.at(0)->triangles.at(index_of_winning_object)->getColor();
                     image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
                }
