@@ -160,7 +160,7 @@ MainWindow::MainWindow(QWidget *parent) :
        //Cube cube2 = Cube(size, color3);
        //cube2.scale(1.0, 3.0, 1.0);
 
-       //scene_objects.push_back(dynamic_cast<Object*>(&cube2));
+       // scene_objects.push_back(dynamic_cast<Object*>(&cube2));
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
