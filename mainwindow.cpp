@@ -123,7 +123,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
-       NumberVector camera_xyz_position = NumberVector(12, 15, 45);
+       //NumberVector camera_xyz_position = NumberVector(-46, 34, 65);
+       NumberVector camera_xyz_position = NumberVector(-46, 22, 65);
+
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
 
@@ -157,16 +159,44 @@ MainWindow::MainWindow(QWidget *parent) :
        //Cube
        Color color3 = Color(255.0, 13.0, 0.0, 0);
        double size = 1.0;
-       Cube cube = Cube(size, color3);
-       cube.scale(2.0, 4.0, 1.0);
-       cube.translate(-12.2, 9.0, 0.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&cube));
 
-       Cube cube2 = Cube(size, color3);
-       cube2.translate(12.0, 9.0, 0.0);
-       cube2.scale(1.0, 1.0, 1.0);
+       Cube leg1 = Cube(size, color3);
+       leg1.scale(1.0, 6.0, 1.0);
+       leg1.translate(-10.0, 9.0, 0.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&leg1));
 
-       scene_objects.push_back(dynamic_cast<Object*>(&cube2));
+       Cube leg2 = Cube(size, color3);
+       leg2.scale(1.0, 6.0, 1.0);
+       leg2.translate(10.0, 9.0, 0.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&leg2));
+
+       Cube leg3 = Cube(size, color3);
+       leg3.scale(1.0, 6.0, 1.0);
+       leg3.translate(10.0, 9.0, 8.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&leg3));
+
+       Cube leg4 = Cube(size, color3);
+       leg4.scale(1.0, 6.0, 1.0);
+       leg4.translate(-10.0, 9.0, 8.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&leg4));
+
+       Cube topTable = Cube(size, color3);
+       topTable.scale(14.0, 0.5, 8.0);
+       topTable.translate(-1.5, 14.5, 6.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&topTable));
+
+       Cube notebookScreen = Cube(size, color3);
+       notebookScreen.scale(4.5, 2.0, 0.5);
+       notebookScreen.translate(0.0, 17.5, 4.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&notebookScreen));
+
+       Cube notebookKeyboard = Cube(size, color3);
+       notebookKeyboard.scale(4.5, 0.5, 2.0);
+       notebookKeyboard.translate(-1.9, 14.5, -1.4);
+       scene_objects.push_back(dynamic_cast<Object*>(&notebookKeyboard));
+
+
+
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
@@ -252,6 +282,10 @@ MainWindow::MainWindow(QWidget *parent) :
 //}
 
                    }
+               for(int index = 0; index < scene_objects.size(); index++){
+                   image.setPixel(i, j, qRgb(173, 216, 230));
+               }
+
 
                for(int index = 0; index < scene_objects.size(); index++){
 
