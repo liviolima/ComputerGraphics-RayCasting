@@ -12,6 +12,11 @@
 #include "sphere.h"
 #include "cube.h"
 
+struct intersections_of_scenary{
+    int index_of_one_object;
+    std::vector<double> intersections_of_one_object;
+};
+
 
 void convertToCameraCoordinates(Scene scene){
     //I did it on the class Camera.
@@ -118,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
-       NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
+       NumberVector camera_xyz_position = NumberVector(12, 15, 45);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
 
@@ -154,17 +159,18 @@ MainWindow::MainWindow(QWidget *parent) :
        double size = 1.0;
        Cube cube = Cube(size, color3);
        cube.scale(2.0, 4.0, 1.0);
-       //cube.translate(10.2, 0.0, 0.0);
-       //scene_objects.push_back(dynamic_cast<Object*>(&cube));
+       cube.translate(-12.2, 9.0, 0.0);
+       scene_objects.push_back(dynamic_cast<Object*>(&cube));
 
        Cube cube2 = Cube(size, color3);
+       cube2.translate(12.0, 9.0, 0.0);
        cube2.scale(1.0, 1.0, 1.0);
 
        scene_objects.push_back(dynamic_cast<Object*>(&cube2));
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
-       camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
+       //camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
        //camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
 
        NumberVector origin = camera.camera_xyz_position;
@@ -206,7 +212,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
                //std::cout<<direction.x<<" "<<direction.y<<" "<<direction.z<<" \n";
 
 
@@ -219,44 +224,56 @@ MainWindow::MainWindow(QWidget *parent) :
 */
 
 
+               std::vector<intersections_of_scenary> intersections_of_all_objects;
 
-      //          std::cout<<"test 1 \n";
+
                for(int index = 0; index < scene_objects.size(); index++){
                    std::vector<double> intersections;
-
-    //               std::cout<<"test 2 \n";
                    std::vector<Triangle*> triangles = scene_objects.at(index)->triangles;
                    for (int x = 0 ; x < triangles.size() ; x++){
                             //std::cout <<"i: "<<i<<", j: "<<j<<", i2: "<<i2 <<" Hi-3\n";
                             //std::cout << triangles.size();
                             //triangles.at(i2)->printVertexes();
-      //                     std::cout<<"test 3 \n";
-                           intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
-        //                   std::cout<<"test 4 \n";
-                      }
-  //                 std::cout<<"test 5 \n";
 
-                   int index_of_winning_object = winningObjectIndex(intersections);
+                              // is = { index, intersections_of_one_objects.push_back(triangles.at(x)->findIntersection(origin, direction));
+                             // };
+
+
+
+                       intersections.push_back(triangles.at(x)->findIntersection(origin, direction));
+
+
+                   }
+
+                   intersections_of_scenary is;
+                   is.index_of_one_object = index;
+                   is.intersections_of_one_object.swap(intersections);
+                   intersections_of_all_objects.push_back(is);
+//}
+
+                   }
+
+               for(int index = 0; index < scene_objects.size(); index++){
+
+
+                    int index_of_winning_object = winningObjectIndex(intersections_of_all_objects.at(index).intersections_of_one_object);
 
     //std::cout << index_of_winning_object; //Test to see intersections (-1 or 1 or 0 values)
 
-
                    if(index_of_winning_object == -1){
                        //set the background to this color
-                        image.setPixel(i, j, qRgb(173, 216, 230));
+                       //image.setPixel(i, j, qRgb(173, 216, 230));
                    }
                    else{
                         //index corresponds to an object in our scene.
                         //Color this_color = scene_objects.at(index_of_winning_object)->getColor();
                         //Color this_color = Color(255.0, 0.0, 0.0, 0);
-//    std::cout<<"test 6 \n";
-//                        for(int index = 0; i < scene_objects.size(); index++){
-                            Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
-                            image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
-  //                      }
+    //                   for(int index = 0; i < scene_objects.size(); index++){
+                         Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
+                         image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+
 
                    }
-
                }
 
 //std::cout<<"test 5 \n";

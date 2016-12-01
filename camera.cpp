@@ -24,7 +24,7 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
                 this->camera_xyz_position.x - this->look_at_xyz_position.x,
                 this->camera_xyz_position.y - this->look_at_xyz_position.y,
                 this->camera_xyz_position.z - this->look_at_xyz_position.z)
-          .normalize();
+          .negative().normalize();
 
 
 

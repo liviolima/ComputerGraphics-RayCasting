@@ -39,6 +39,9 @@ public:
     Color cianColor = Color(0.0, 204.0, 204.0, 0);
     Color darkCianColor = Color(51.0, 255.0, 255.0, 0.0);
 
+    //Vertexes
+    NumberVector v1, v2, v3, v4, v5, v6, v7, v8;
+
 };
 
 #endif // CUBE_H
