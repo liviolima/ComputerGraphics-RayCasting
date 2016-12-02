@@ -15,6 +15,7 @@ struct intersections_of_scenary{
     std::vector<double> intersections_of_one_object;
 };
 
+std::vector<Object*> scene_objects;
 
 
 int winningObjectIndex(std::vector<double> object_intersection){
@@ -91,6 +92,47 @@ int winningObjectIndex(std::vector<double>  intersections) {
 }
 */
 
+void createTable(double x, double y, double z){
+    Color color3 = Color(255.0, 13.0, 0.0, 0);
+    double size = 1.0;
+
+    Cube * leg1 = new Cube(size, color3);
+    leg1->scale(1.0, 6.0, 1.0);
+    leg1->translate(-10.0+x, 9.0+y, 0.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(leg1));
+
+    Cube * leg2 = new Cube(size, color3);
+    leg2->scale(1.0, 6.0, 1.0);
+    leg2->translate(10.0+x, 9.0+y, 0.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(leg2));
+
+    Cube * leg3 = new Cube(size, color3);
+    leg3->scale(1.0, 6.0, 1.0);
+    leg3->translate(10.0+x, 9.0+y, 8.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(leg3));
+
+    Cube * leg4 = new Cube(size, color3);
+    leg4->scale(1.0, 6.0, 1.0);
+    leg4->translate(-10.0+x, 9.0+y, 8.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(leg4));
+
+    Cube * topTable = new Cube(size, color3);
+    topTable->scale(14.0, 0.5, 8.0);
+    topTable->translate(-1.5+x, 14.5+y, 6.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(topTable));
+
+    Cube * notebookScreen = new Cube(size, color3);
+    notebookScreen->scale(4.5, 2.0, 0.5);
+    notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
+
+    Cube * notebookKeyboard = new Cube(size, color3);
+    notebookKeyboard->scale(4.5, 0.5, 2.0);
+    notebookKeyboard->translate(-1.9+x, 14.5+y, -1.4+z);
+    scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
+}
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -123,47 +165,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
        //Scene scene = Scene();
-       std::vector<Object*> scene_objects;
 
-
-       Color color3 = Color(255.0, 13.0, 0.0, 0);
-       double size = 1.0;
-
-       Cube leg1 = Cube(size, color3);
-       leg1.scale(1.0, 6.0, 1.0);
-       leg1.translate(-10.0, 9.0, 0.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&leg1));
-
-       Cube leg2 = Cube(size, color3);
-       leg2.scale(1.0, 6.0, 1.0);
-       leg2.translate(10.0, 9.0, 0.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&leg2));
-
-       Cube leg3 = Cube(size, color3);
-       leg3.scale(1.0, 6.0, 1.0);
-       leg3.translate(10.0, 9.0, 8.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&leg3));
-
-       Cube leg4 = Cube(size, color3);
-       leg4.scale(1.0, 6.0, 1.0);
-       leg4.translate(-10.0, 9.0, 8.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&leg4));
-
-       Cube topTable = Cube(size, color3);
-       topTable.scale(14.0, 0.5, 8.0);
-       topTable.translate(-1.5, 14.5, 6.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&topTable));
-
-       Cube notebookScreen = Cube(size, color3);
-       notebookScreen.scale(4.5, 2.0, 0.5);
-       notebookScreen.translate(0.0, 17.5, 4.0);
-       scene_objects.push_back(dynamic_cast<Object*>(&notebookScreen));
-
-       Cube notebookKeyboard = Cube(size, color3);
-       notebookKeyboard.scale(4.5, 0.5, 2.0);
-       notebookKeyboard.translate(-1.9, 14.5, -1.4);
-       scene_objects.push_back(dynamic_cast<Object*>(&notebookKeyboard));
-
+       createTable(0,0,0);
+       //createTable(45,0,0);
+       //createTable(45,0,-60);
+       //createTable(0,0,-60);
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
