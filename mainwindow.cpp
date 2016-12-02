@@ -9,6 +9,7 @@
 #include "object.h"
 #include "color.h"
 #include "cube.h"
+#include "material.h"
 
 struct intersections_of_scenary{
     int index_of_one_object;
@@ -93,6 +94,13 @@ int winningObjectIndex(std::vector<double>  intersections) {
 */
 
 void createTable(double x, double y, double z){
+
+    double ka_wood[4] = {0.5, 0.5 ,0.5, 1.0}, kd_wood[4] = {0.5, 0.5 ,0.5, 1.0}, ks_wood[4] = {0.5, 0.5 ,0.5, 1.0};
+    double ka_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, kd_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, ks_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0};
+
+    //Material woodMaterial = Material(ka_wood, kd_wood, ks_wood);
+    //Material notebookMaterial = Material(ka_notebookMaterial, kd_notebookMaterial, ks_notebookMaterial);
+
     Color colorBrown = Color(92.0, 64.0, 51.0, 0);
     Color colorGrey = Color(168.0, 168.0, 168.0, 0);
     double size = 1.0;

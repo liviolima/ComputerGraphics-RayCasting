@@ -5,6 +5,7 @@
 #include "object.h"
 #include "triangle.h"
 #include "vector"
+#include "material.h"
 
 class Cube : public Object
 {
@@ -13,13 +14,17 @@ public:
     Cube(double size, Color newColor);
 
     Triangle trianglesv[12];
+
     Color color;
+    Material material;
+
     double size_x, size_y, size_z;
 
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
     virtual double findIntersection(NumberVector origin, NumberVector direction);
     virtual Color getColor();
+
 
     Color redColor = Color(255.0, 0.0, 0.0, 0);
     Color darkRedColor = Color(153.0, 0.0, 0.0, 0);

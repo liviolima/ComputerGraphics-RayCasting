@@ -127,6 +127,7 @@ Cube::Cube(double size, Color newColor)
 
 
 
+
 Color Cube::getColor(){
     return this->color;
 }
