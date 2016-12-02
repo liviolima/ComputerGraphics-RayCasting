@@ -93,40 +93,41 @@ int winningObjectIndex(std::vector<double>  intersections) {
 */
 
 void createTable(double x, double y, double z){
-    Color color3 = Color(255.0, 13.0, 0.0, 0);
+    Color colorBrown = Color(92.0, 64.0, 51.0, 0);
+    Color colorGrey = Color(168.0, 168.0, 168.0, 0);
     double size = 1.0;
 
-    Cube * leg1 = new Cube(size, color3);
+    Cube * leg1 = new Cube(size, colorBrown);
     leg1->scale(1.0, 6.0, 1.0);
     leg1->translate(-10.0+x, 9.0+y, 0.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg1));
 
-    Cube * leg2 = new Cube(size, color3);
+    Cube * leg2 = new Cube(size, colorBrown);
     leg2->scale(1.0, 6.0, 1.0);
     leg2->translate(10.0+x, 9.0+y, 0.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg2));
 
-    Cube * leg3 = new Cube(size, color3);
+    Cube * leg3 = new Cube(size, colorBrown);
     leg3->scale(1.0, 6.0, 1.0);
     leg3->translate(10.0+x, 9.0+y, 8.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg3));
 
-    Cube * leg4 = new Cube(size, color3);
+    Cube * leg4 = new Cube(size, colorBrown);
     leg4->scale(1.0, 6.0, 1.0);
     leg4->translate(-10.0+x, 9.0+y, 8.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg4));
 
-    Cube * topTable = new Cube(size, color3);
+    Cube * topTable = new Cube(size, colorBrown);
     topTable->scale(14.0, 0.5, 8.0);
     topTable->translate(-1.5+x, 14.5+y, 6.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(topTable));
 
-    Cube * notebookScreen = new Cube(size, color3);
+    Cube * notebookScreen = new Cube(size, colorGrey);
     notebookScreen->scale(4.5, 2.0, 0.5);
     notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
 
-    Cube * notebookKeyboard = new Cube(size, color3);
+    Cube * notebookKeyboard = new Cube(size, colorGrey);
     notebookKeyboard->scale(4.5, 0.5, 2.0);
     notebookKeyboard->translate(-1.9+x, 14.5+y, -1.4+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));

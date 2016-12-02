@@ -15,6 +15,8 @@ Triangle::Triangle()
     vertex[1] = NumberVector( 2, 0, 0);
     vertex[2] = NumberVector( 1, 2, 0);
 
+    normal_vector = NumberVector(0, 0, 0);
+
     edge * all_edges = new edge[2];
 
     face * all_faces = new face[1];
@@ -36,6 +38,8 @@ Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3)
     vertex[0] = v1;
     vertex[1] = v2;
     vertex[2] = v3;
+
+    normal_vector = NumberVector(0, 0, 0);
 
     edge * all_edges = new edge[2];
 
@@ -83,19 +87,18 @@ void Triangle::translate(double x, double y, double z){
 }
 
 
-NumberVector Triangle::getNormalAt(NumberVector point){
-
-    NumberVector normal_vector; //It is necessary to implement.
+NumberVector Triangle::getNormal(){
     return normal_vector;
 }
 
 
 double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
-    NumberVector edge1, edge2, normal ;
+    NumberVector edge1, edge2, normal;
     edge1 = vertex[1].sub(vertex[0]);
     edge2 = vertex[2].sub(vertex[0]);
     normal = edge1.cross_product(edge2).normalize();
+    normal_vector = normal;
 
     NumberVector _a = vertex[2];
     NumberVector _b = vertex[1];

@@ -13,6 +13,7 @@ public:
 
 
     NumberVector vertex[3];
+    NumberVector normal_vector;
 
     Color color;
 
@@ -43,7 +44,7 @@ public:
     void printVertexes();
     Color getColor();
 
-    NumberVector getNormalAt(NumberVector point);
+    NumberVector getNormal();
 
     void setVertexes(NumberVector new_value_for_vertex[3]);
 
