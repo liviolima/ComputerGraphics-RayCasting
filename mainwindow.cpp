@@ -98,44 +98,51 @@ void createTable(double x, double y, double z){
     double ka_wood[4] = {0.5, 0.5 ,0.5, 1.0}, kd_wood[4] = {0.5, 0.5 ,0.5, 1.0}, ks_wood[4] = {0.5, 0.5 ,0.5, 1.0};
     double ka_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, kd_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, ks_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0};
 
-    //Material woodMaterial = Material(ka_wood, kd_wood, ks_wood);
-    //Material notebookMaterial = Material(ka_notebookMaterial, kd_notebookMaterial, ks_notebookMaterial);
+    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood);
+    Material notebookMaterial = Material(ka_notebookMaterial, kd_notebookMaterial, ks_notebookMaterial);
 
-    Color colorBrown = Color(92.0, 64.0, 51.0, 0);
-    Color colorGrey = Color(168.0, 168.0, 168.0, 0);
+    //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
+    //Color colorGrey = Color(168.0, 168.0, 168.0, 0);
     double size = 1.0;
 
-    Cube * leg1 = new Cube(size, colorBrown);
+    //Cube * leg1 = new Cube(size, colorBrown);
+    Cube * leg1 = new Cube(size, woodMaterial);
     leg1->scale(1.0, 6.0, 1.0);
     leg1->translate(-10.0+x, 9.0+y, 0.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg1));
 
-    Cube * leg2 = new Cube(size, colorBrown);
+    //Cube * leg2 = new Cube(size, colorBrown);
+    Cube * leg2 = new Cube(size, woodMaterial);
     leg2->scale(1.0, 6.0, 1.0);
     leg2->translate(10.0+x, 9.0+y, 0.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg2));
 
-    Cube * leg3 = new Cube(size, colorBrown);
+    //Cube * leg3 = new Cube(size, colorBrown);
+    Cube * leg3 = new Cube(size, woodMaterial);
     leg3->scale(1.0, 6.0, 1.0);
     leg3->translate(10.0+x, 9.0+y, 8.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg3));
 
-    Cube * leg4 = new Cube(size, colorBrown);
+    //Cube * leg4 = new Cube(size, colorBrown);
+    Cube * leg4 = new Cube(size, woodMaterial);
     leg4->scale(1.0, 6.0, 1.0);
     leg4->translate(-10.0+x, 9.0+y, 8.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(leg4));
 
-    Cube * topTable = new Cube(size, colorBrown);
+    //Cube * topTable = new Cube(size, colorBrown);
+    Cube * topTable = new Cube(size, woodMaterial);
     topTable->scale(14.0, 0.5, 8.0);
     topTable->translate(-1.5+x, 14.5+y, 6.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(topTable));
 
-    Cube * notebookScreen = new Cube(size, colorGrey);
+    //Cube * notebookScreen = new Cube(size, colorGrey);
+    Cube * notebookScreen = new Cube(size, notebookMaterial);
     notebookScreen->scale(4.5, 2.0, 0.5);
     notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
 
-    Cube * notebookKeyboard = new Cube(size, colorGrey);
+    //Cube * notebookKeyboard = new Cube(size, colorGrey);
+    Cube * notebookKeyboard = new Cube(size, notebookMaterial);
     notebookKeyboard->scale(4.5, 0.5, 2.0);
     notebookKeyboard->translate(-1.9+x, 14.5+y, -1.4+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
