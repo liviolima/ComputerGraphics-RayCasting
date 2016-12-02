@@ -1,5 +1,6 @@
 #include "cube.h"
 #include "numbervector.h"
+#include "material.h"
 
 Cube::Cube()
 {
@@ -125,6 +126,70 @@ Cube::Cube(double size, Color newColor)
 
 }
 
+Cube::Cube(double size, Material material)
+{
+    color.red = 255.0;
+    color.green = 0.0;
+    color.blue = 0.0;
+
+    this->material = material;
+
+    double x = size;
+    this->size_x = this->size_y = this->size_z = size;
+
+    v1 = NumberVector( x  , -x,  -x);
+    v2 = NumberVector( x  , -x,   x);
+    v3 = NumberVector(-x  , -x,   x);
+    v4 = NumberVector(-x  , -x,  -x);
+    v5 = NumberVector( x  ,  x,  -x);
+    v6 = NumberVector( x  ,  x,   x);
+    v7 = NumberVector(-x  ,  x,   x);
+    v8 = NumberVector(-x  ,  x,  -x);
+/*
+    trianglesv[0] = Triangle(v2, v3, v4, color);
+    trianglesv[1] = Triangle(v8, v7, v6, color);
+    trianglesv[2] = Triangle(v5, v6, v2, color);
+    trianglesv[3] = Triangle(v6, v7, v3, color);
+    trianglesv[4] = Triangle(v3, v7, v8, color);
+    trianglesv[5] = Triangle(v1, v4, v8, color);
+    trianglesv[6] = Triangle(v1, v2, v4, color);
+    trianglesv[7] = Triangle(v5, v8, v6, color);
+    trianglesv[8] = Triangle(v1, v5, v2, color);
+    trianglesv[9] = Triangle(v2, v6, v3, color);
+    trianglesv[10] = Triangle(v4, v3, v8, color);
+    trianglesv[11] = Triangle(v5, v1, v8, color);
+*/
+    for(int i = 0; i < 12; i++)
+        triangles.push_back(dynamic_cast<Triangle*>(&trianglesv[i]));
+/*
+    trianglesv[0] = Triangle(v2, v3, v4, redColor);
+    trianglesv[1] = Triangle(v8, v7, v6, darkRedColor);
+    trianglesv[2] = Triangle(v5, v6, v2, greenColor);
+    trianglesv[3] = Triangle(v6, v7, v3, darkGreenColor);
+    trianglesv[4] = Triangle(v3, v7, v8, blueColor);
+    trianglesv[5] = Triangle(v1, v4, v8, darkBlueColor);
+    trianglesv[6] = Triangle(v1, v2, v4, yellowColor);
+    trianglesv[7] = Triangle(v5, v8, v6, darkYellowColor);
+    trianglesv[8] = Triangle(v1, v5, v2, purpleColor);
+    trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
+    trianglesv[10] = Triangle(v4, v3, v8, cianColor);
+    trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
+*/
+
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
+
+}
 
 
 
@@ -160,6 +225,8 @@ void Cube::scale(double x, double y, double z){
     trianglesv[10] = Triangle(v4, v3, v8, color);
     trianglesv[11] = Triangle(v5, v1, v8, color);
 */
+
+    /*
     trianglesv[0] = Triangle(v2, v3, v4, redColor);
     trianglesv[1] = Triangle(v8, v7, v6, darkRedColor);
     trianglesv[2] = Triangle(v5, v6, v2, greenColor);
@@ -172,8 +239,20 @@ void Cube::scale(double x, double y, double z){
     trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
     trianglesv[10] = Triangle(v4, v3, v8, cianColor);
     trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
+    */
 
-
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
 
 
 }
@@ -203,6 +282,7 @@ void Cube::translate(double x, double y, double z){
     trianglesv[11] = Triangle(v5, v1, v8, color);
 */
 
+    /*
     trianglesv[0] = Triangle(v2, v3, v4, redColor);
     trianglesv[1] = Triangle(v8, v7, v6, darkRedColor);
     trianglesv[2] = Triangle(v5, v6, v2, greenColor);
@@ -215,7 +295,20 @@ void Cube::translate(double x, double y, double z){
     trianglesv[9] = Triangle(v2, v6, v3, darkPurpleColor);
     trianglesv[10] = Triangle(v4, v3, v8, cianColor);
     trianglesv[11] = Triangle(v5, v1, v8, darkCianColor);
+    */
 
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
 
 
 }

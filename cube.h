@@ -12,6 +12,7 @@ class Cube : public Object
 public:
     Cube();
     Cube(double size, Color newColor);
+    Cube(double size, Material material);
 
     Triangle trianglesv[12];
 

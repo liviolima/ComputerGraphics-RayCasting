@@ -3,6 +3,7 @@
 #import "numbervector.h"
 #import "ray.h"
 #include "color.h"
+#include "material.h"
 
 class Triangle
 {
@@ -10,12 +11,15 @@ public:
     Triangle();
     Triangle(NumberVector v1, NumberVector v2, NumberVector v3);
     Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Color newColor);
+    Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Material material);
+
 
 
     NumberVector vertex[3];
     NumberVector normal_vector;
 
     Color color;
+    Material material;
 
     struct edge{
         int edge_identifier;

@@ -5,6 +5,7 @@
 #include "iostream"
 
 
+
 Triangle::Triangle()
 {
     color.red = 255.0;
@@ -59,6 +60,31 @@ Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Color newC
     color.red = newColor.red;
     color.green = newColor.green;
     color.blue = newColor.blue;
+
+    vertex[0] = v1;
+    vertex[1] = v2;
+    vertex[2] = v3;
+
+    edge * all_edges = new edge[2];
+
+    face * all_faces = new face[1];
+
+
+    all_edges[0] = {1, 1, 2};
+    all_edges[1] = {2, 1, 3};
+
+    all_faces[0] = {1,1, 2,3};
+
+}
+
+Triangle::Triangle(NumberVector v1, NumberVector v2, NumberVector v3, Material material)
+{
+
+    color.red = 255.0;
+    color.green = 0.0;
+    color.blue = 0.0;
+
+    this->material = material;
 
     vertex[0] = v1;
     vertex[1] = v2;
