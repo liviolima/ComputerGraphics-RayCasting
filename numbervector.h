@@ -15,6 +15,9 @@ public:
     NumberVector add(NumberVector other);
     NumberVector sub(NumberVector other);
     NumberVector negative();
+    NumberVector k_multiply_by_I_lighting(NumberVector other);
+
 };
+
 
 #endif // NUMBERVECTOR_H

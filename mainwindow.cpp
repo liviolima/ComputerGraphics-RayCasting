@@ -94,12 +94,16 @@ int winningObjectIndex(std::vector<double>  intersections) {
 */
 
 void createTable(double x, double y, double z){
+    NumberVector ka_wood = NumberVector(0.5, 0.5, 0.5);
+    NumberVector kd_wood = NumberVector(0.5, 0.5, 0.5);
+    NumberVector ks_wood = NumberVector(0.5, 0.5, 0.5);
 
-    double ka_wood[4] = {0.5, 0.5 ,0.5, 1.0}, kd_wood[4] = {0.5, 0.5 ,0.5, 1.0}, ks_wood[4] = {0.5, 0.5 ,0.5, 1.0};
-    double ka_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, kd_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0}, ks_notebookMaterial[4] = {1.0, 1.0 ,1.0, 1.0};
+    NumberVector ka_laptop = NumberVector(1.0, 1.0, 1.0);
+    NumberVector kd_laptop = NumberVector(1.0, 1.0, 1.0);
+    NumberVector ks_laptop = NumberVector(1.0, 1.0, 1.0);
 
-    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood);
-    Material notebookMaterial = Material(ka_notebookMaterial, kd_notebookMaterial, ks_notebookMaterial);
+    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 1.0);
+    Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 2.0);
 
     //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
     //Color colorGrey = Color(168.0, 168.0, 168.0, 0);
@@ -136,13 +140,13 @@ void createTable(double x, double y, double z){
     scene_objects.push_back(dynamic_cast<Object*>(topTable));
 
     //Cube * notebookScreen = new Cube(size, colorGrey);
-    Cube * notebookScreen = new Cube(size, notebookMaterial);
+    Cube * notebookScreen = new Cube(size, laptopMaterial);
     notebookScreen->scale(4.5, 2.0, 0.5);
     notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
 
     //Cube * notebookKeyboard = new Cube(size, colorGrey);
-    Cube * notebookKeyboard = new Cube(size, notebookMaterial);
+    Cube * notebookKeyboard = new Cube(size, laptopMaterial);
     notebookKeyboard->scale(4.5, 0.5, 2.0);
     notebookKeyboard->translate(-1.9+x, 14.5+y, -1.4+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
@@ -180,7 +184,7 @@ MainWindow::MainWindow(QWidget *parent) :
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
 
 
-       //Scene scene = Scene();
+       Scene scene = Scene();
 
        createTable(0,0,0);
        //createTable(45,0,0);
@@ -244,8 +248,41 @@ MainWindow::MainWindow(QWidget *parent) :
                for(int index = 0; index < scene_objects.size(); index++){
                    int index_of_winning_object = winningObjectIndex(intersections_of_all_objects.at(index).intersections_of_one_object);
                    if(index_of_winning_object != -1){
-                       Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
-                       image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+                       /*
+                        Calculate Lighting
+                        Color Ipix = Ka*Ia + Kd*Id(l.n) + Ks*Is(r.v)^a
+                       */
+
+                       NumberVector Ia = scene.ambient;
+                       NumberVector Id = scene.diffuse;
+                       NumberVector Is = scene.specular;
+                       NumberVector Ka;
+                       NumberVector Ks;
+                       NumberVector Kd;
+                       double alpha_material;
+                       NumberVector n;
+                       NumberVector v;
+                       NumberVector l;
+                       NumberVector r;
+
+                       double l_dot_n = l.dot_product(n);
+                       double r_dot_v = r.dot_product(v);
+                       double r_dot_v_pow_alpha = pow(r_dot_v, alpha_material);
+
+
+                       NumberVector ambient_lighting  = Ka.k_multiply_by_I_lighting(Ia);
+                       NumberVector diffuse_lighting  = Kd.k_multiply_by_I_lighting(Id).multiply(l_dot_n);
+                       NumberVector specular_lighting = Ks.k_multiply_by_I_lighting(Is).multiply(r_dot_v_pow_alpha);
+
+                       NumberVector Ipix = ambient_lighting.add(diffuse_lighting).add(specular_lighting);
+                       Color Ipix_color = Color(Ipix.x, Ipix.y, Ipix.z, 1);
+                       image.setPixel(i, j, qRgb(Ipix_color.red, Ipix_color.green, Ipix_color.blue));
+
+
+                       //Before using lighting
+                       //Color this_color = scene_objects.at(index)->triangles.at(index_of_winning_object)->getColor();
+                       //image.setPixel(i, j, qRgb(this_color.red, this_color.green, this_color.blue));
+                       //Before using lighting
                    }
                }
            }

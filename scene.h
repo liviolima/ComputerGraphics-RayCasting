@@ -11,7 +11,7 @@ public:
     Triangle triangle;
     NumberVector ilumination_xyz_position;
 
-    double ambient[4], diffuse[4], specular[4];
+    NumberVector ambient, diffuse, specular;
 };
 
 #endif // SCENE_H

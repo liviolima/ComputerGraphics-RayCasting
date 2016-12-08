@@ -46,4 +46,6 @@ NumberVector NumberVector::negative(){
     return NumberVector(-x, -y, -z);
 }
 
-
+NumberVector NumberVector::k_multiply_by_I_lighting(NumberVector other){
+    return NumberVector(x * other.x, y * other.y, z * other.z);
+}
