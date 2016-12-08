@@ -197,6 +197,10 @@ Color Cube::getColor(){
     return this->color;
 }
 
+Material Cube::getMaterial(){
+    return this->material;
+}
+
 void Cube::scale(double x, double y, double z){
 
     size_x = size_x*x;

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "triangle.h"
+#include "material.h"
 
 class Object
 {
@@ -17,6 +18,7 @@ public:
     virtual void translate(double x, double y, double z) = 0;
     virtual double findIntersection(NumberVector origin, NumberVector direction) = 0;
     virtual Color getColor();
+    virtual Material getMaterial();
 };
 
 #endif // OBJECT_H

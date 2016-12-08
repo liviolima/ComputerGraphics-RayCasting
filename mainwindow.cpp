@@ -256,14 +256,29 @@ MainWindow::MainWindow(QWidget *parent) :
                        NumberVector Ia = scene.ambient;
                        NumberVector Id = scene.diffuse;
                        NumberVector Is = scene.specular;
-                       NumberVector Ka;
-                       NumberVector Ks;
-                       NumberVector Kd;
-                       double alpha_material;
-                       NumberVector n;
-                       NumberVector v;
-                       NumberVector l;
-                       NumberVector r;
+
+                       Material material = scene_objects.at(index)->getMaterial();
+                       NumberVector Ka = material.ka;
+                       NumberVector Ks = material.ks;
+                       NumberVector Kd = material.kd;
+                       double alpha_material = material.alpha;
+
+                       NumberVector n = scene_objects.at(index)->triangles.at(index_of_winning_object)->getNormal();
+
+                       double T;
+                       NumberVector t = NumberVector(direction.x*T, direction.y*T, direction.z*T); //Quem é o ponto de interseção?
+                       NumberVector v; //Ponto de interseção até a camera.
+                       v = NumberVector(camera.camera_xyz_position.x - t.x, camera.camera_xyz_position.y - t.y , camera.camera_xyz_position.z - t.z );
+
+                       //Quem é o ponto de interseção?
+                       NumberVector l; //Ponto de interseção até a fonte luminosa.
+                       l = NumberVector(scene.ilumination_xyz_position.x - t.x, scene.ilumination_xyz_position.y - t.y , scene.ilumination_xyz_position.z - t.z );
+
+
+
+                       NumberVector first_part_r = n.multiply(n.dot_product(l)*2);
+                       NumberVector r = first_part_r.sub(l);   //r = 2(n.l)n - l
+
 
                        double l_dot_n = l.dot_product(n);
                        double r_dot_v = r.dot_product(v);

@@ -25,6 +25,7 @@ public:
     void translate(double x, double y, double z);
     virtual double findIntersection(NumberVector origin, NumberVector direction);
     virtual Color getColor();
+    virtual Material getMaterial();
 
 
     Color redColor = Color(255.0, 0.0, 0.0, 0);

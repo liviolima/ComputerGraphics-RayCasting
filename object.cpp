@@ -10,3 +10,6 @@ Color Object::getColor(){
     return Color(0.0, 0.0, 0.0, 0);
 }
 
+Material Object::getMaterial(){
+    return Material();
+}
