@@ -124,7 +124,7 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
     edge1 = vertex[1].sub(vertex[0]);
     edge2 = vertex[2].sub(vertex[0]);
     normal = edge1.cross_product(edge2).normalize();
-    normal_vector = normal;
+
 
     NumberVector _a = vertex[2];
     NumberVector _b = vertex[1];
@@ -169,8 +169,12 @@ double Triangle::findIntersection(NumberVector origin, NumberVector direction){
 
        if(test1 >= 0  && test2 >= 0  && test3 >= 0  ) {
            //dentro do triangulo
+           T_intersection = -1*b/a;
+           normal_vector = normal;
            return -1*b/a;
        } else {
+           T_intersection = -1;
+           normal_vector = NumberVector(0, 0, 0);
            //fora do triangulo
            return -1;
        }
@@ -193,5 +197,8 @@ void Triangle::printVertexes(){
     std::cout<< "v2: " <<"x= "<<vertex[2].x<<", y= "<<vertex[2].y<<", z= "<<vertex[2].z<<"\n";
 }
 
+double Triangle::get_T_intersection(){
+    return T_intersection;
+}
 
 

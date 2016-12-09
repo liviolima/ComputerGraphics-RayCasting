@@ -20,6 +20,7 @@ public:
 
     Color color;
     Material material;
+    double T_intersection;
 
     struct edge{
         int edge_identifier;
@@ -45,6 +46,7 @@ public:
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
     double findIntersection(NumberVector origin, NumberVector direction);
+    double get_T_intersection();
     void printVertexes();
     Color getColor();
 

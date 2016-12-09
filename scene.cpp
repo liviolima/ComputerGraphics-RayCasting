@@ -8,9 +8,9 @@ Scene::Scene()
 
       ilumination_xyz_position = NumberVector(20, 30, 40);
 
-      ambient  = NumberVector(0.7, 0.7, 0.7);
-      diffuse  = NumberVector(0.8, 0.3, 0.3);
-      specular = NumberVector(0.8, 0.3, 0.3);
+      ambient  = NumberVector(0.8, 0.5, 0.1);
+      diffuse  = NumberVector(0.8, 0.6, 0.4);
+      specular = NumberVector(0.8, 0.6, 0.4);
 
 
 

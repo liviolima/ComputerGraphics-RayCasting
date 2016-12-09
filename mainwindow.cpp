@@ -163,7 +163,7 @@ MainWindow::MainWindow(QWidget *parent) :
        int sizeX = 600;
        int sizeY = 600;
        double aspectratio = (double)sizeX / (double)sizeY;
-       double xamnt, yamnt;
+       double xamnt, yamnt, zamnt = 20;
        QImage image = QImage(sizeX, sizeY, QImage::Format_RGB32);
 
 
@@ -198,6 +198,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
        NumberVector origin = camera.camera_xyz_position;
        std::cout<<"camera xyz:"<<camera.camera_xyz_position.x<<" "<<camera.camera_xyz_position.y<<" "<<camera.camera_xyz_position.z<<" \n";
+
 
 
 
@@ -262,21 +263,43 @@ MainWindow::MainWindow(QWidget *parent) :
                        NumberVector Ks = material.ks;
                        NumberVector Kd = material.kd;
                        double alpha_material = material.alpha;
+                       //std::cout<<alpha_material;
 
+                       //***Será que a normal no vértice e a normal no ponto de interseção é a mesma coisa? Eu estou considerando que sim.
                        NumberVector n = scene_objects.at(index)->triangles.at(index_of_winning_object)->getNormal();
 
-                       double T;
-                       NumberVector t = NumberVector(direction.x*T, direction.y*T, direction.z*T); //Quem é o ponto de interseção?
+                       //std::cout<<"n: "<<n.x<<" "<<n.y<<" "<<n.z<<"\n"; //***ESSA NORMAL TÁ ESTRANHA. Tem -0
+
+                       double T = scene_objects.at(index)->triangles.at(index_of_winning_object)->get_T_intersection();
+
+                       /*
+                       double Pint_x = camera_xyz_position.x + T*(xamnt-camera_xyz_position.x);
+                       double Pint_y = camera_xyz_position.y + T*(yamnt-camera_xyz_position.y);
+                       double Pint_z = camera_xyz_position.z + T*(zamnt-camera_xyz_position.z);//***Quem é zamnt?
+
+                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z).normalize(); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
+                       */
+
+
+                       NumberVector dir = direction;
+                       double Pint_x = camera_xyz_position.x + T*(dir.x);
+                       double Pint_y = camera_xyz_position.y + T*(dir.y);
+                       double Pint_z = camera_xyz_position.z + T*(dir.z);//***Quem é zamnt?
+
+                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z).normalize(); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
+
+
+                       //std::cout<<"t: "<<t.x<<" "<<t.y<<" "<<t.z<<"\n";
+
                        NumberVector v; //Ponto de interseção até a camera.
-                       v = NumberVector(camera.camera_xyz_position.x - t.x, camera.camera_xyz_position.y - t.y , camera.camera_xyz_position.z - t.z );
+                       v = NumberVector(camera.camera_xyz_position.x - t.x, camera.camera_xyz_position.y - t.y , camera.camera_xyz_position.z - t.z ).normalize();
 
                        //Quem é o ponto de interseção?
                        NumberVector l; //Ponto de interseção até a fonte luminosa.
-                       l = NumberVector(scene.ilumination_xyz_position.x - t.x, scene.ilumination_xyz_position.y - t.y , scene.ilumination_xyz_position.z - t.z );
+                       l = NumberVector(scene.ilumination_xyz_position.x - t.x, scene.ilumination_xyz_position.y - t.y , scene.ilumination_xyz_position.z - t.z ).normalize();
 
 
-
-                       NumberVector first_part_r = n.multiply(n.dot_product(l)*2);
+                       NumberVector first_part_r = n.multiply((n.dot_product(l))*2);
                        NumberVector r = first_part_r.sub(l);   //r = 2(n.l)n - l
 
 
@@ -286,12 +309,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
                        NumberVector ambient_lighting  = Ka.k_multiply_by_I_lighting(Ia);
-                       NumberVector diffuse_lighting  = Kd.k_multiply_by_I_lighting(Id).multiply(l_dot_n);
-                       NumberVector specular_lighting = Ks.k_multiply_by_I_lighting(Is).multiply(r_dot_v_pow_alpha);
+                       //std::cout<<"Amb: "<< ambient_lighting.x <<" "<< ambient_lighting.y <<" "<< ambient_lighting.z <<"\n";
 
+                       NumberVector diffuse_lighting  = Kd.k_multiply_by_I_lighting(Id).multiply(l_dot_n);
+                       //std::cout<<"Dif: "<< diffuse_lighting.x <<" "<< diffuse_lighting.y <<" "<< diffuse_lighting.z <<"\n";
+
+                       NumberVector specular_lighting = Ks.k_multiply_by_I_lighting(Is).multiply(r_dot_v_pow_alpha);
+                       //std::cout<<"Esp: "<< specular_lighting.x <<" "<< specular_lighting.y <<" "<< specular_lighting.z <<"\n";
+
+
+                       //NumberVector Ipix = ambient_lighting.add(diffuse_lighting).add(specular_lighting);
                        NumberVector Ipix = ambient_lighting.add(diffuse_lighting).add(specular_lighting);
+                       //Ipix = Ipix.normalize(); //Linha importante
                        Color Ipix_color = Color(Ipix.x, Ipix.y, Ipix.z, 1);
-                       image.setPixel(i, j, qRgb(Ipix_color.red, Ipix_color.green, Ipix_color.blue));
+
+                       std::cout<<Ipix.x<<" "<<Ipix.y<<" "<<Ipix.z<<"\n";
+                       image.setPixel(i, j, qRgb(Ipix_color.red*255, Ipix_color.green*255, Ipix_color.blue*255));
 
 
                        //Before using lighting
