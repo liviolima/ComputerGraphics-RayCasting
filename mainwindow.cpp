@@ -113,6 +113,7 @@ void createTable(double x, double y, double z){
     NumberVector kd_laptop = NumberVector(1.0, 1.0, 1.0);
     NumberVector ks_laptop = NumberVector(1.0, 1.0, 1.0);
     */
+    /* Brown and Metal
     NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
     NumberVector kd_wood = NumberVector(0.4, 0.2, 0.25);
     NumberVector ks_wood = NumberVector(0.1, 0.1, 0.1);
@@ -120,10 +121,18 @@ void createTable(double x, double y, double z){
     NumberVector ka_laptop = NumberVector(0.2, 0.2, 0.2);
     NumberVector kd_laptop = NumberVector(0.3, 0.4, 0.8);
     NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
+    */
+    NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_wood = NumberVector(0.5, 1.0, 0.5);
+    NumberVector ks_wood = NumberVector(0.5, 1.0, 0.5);
+
+    NumberVector ka_laptop = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_laptop = NumberVector(1, 0.1, 0.1);
+    NumberVector ks_laptop = NumberVector(1, 1, 1);
 
 
-    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 0.0);
-    Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 2.0);
+    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 2.0);
+    Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 20.0);
 
     //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
     //Color colorGrey = Color(168.0, 168.0, 168.0, 0);
@@ -278,6 +287,7 @@ MainWindow::MainWindow(QWidget *parent) :
                        NumberVector Id = scene.diffuse;
                        NumberVector Is = scene.specular;
 
+
                        Material material = scene_objects.at(index)->getMaterial();
                        NumberVector Ka = material.ka;
                        NumberVector Ks = material.ks;
@@ -285,12 +295,14 @@ MainWindow::MainWindow(QWidget *parent) :
                        double alpha_material = material.alpha;
                        //std::cout<<alpha_material;
 
+
                        //***Será que a normal no vértice e a normal no ponto de interseção é a mesma coisa? Eu estou considerando que sim.
                        NumberVector n = scene_objects.at(index)->triangles.at(index_of_winning_object)->getNormal();
-
                        //std::cout<<"n: "<<n.x<<" "<<n.y<<" "<<n.z<<"\n"; //***ESSA NORMAL TÁ ESTRANHA. Tem -0
 
+
                        double T = scene_objects.at(index)->triangles.at(index_of_winning_object)->get_T_intersection();
+
 
                        /*
                        double Pint_x = camera_xyz_position.x + T*(xamnt-camera_xyz_position.x);
@@ -306,13 +318,13 @@ MainWindow::MainWindow(QWidget *parent) :
                        double Pint_y = camera_xyz_position.y + T*(dir.y);
                        double Pint_z = camera_xyz_position.z + T*(dir.z);//***Quem é zamnt?
 
-                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z).normalize(); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
-
-
+                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
                        //std::cout<<"t: "<<t.x<<" "<<t.y<<" "<<t.z<<"\n";
+
 
                        NumberVector v; //Ponto de interseção até a camera.
                        v = NumberVector(camera.camera_xyz_position.x - t.x, camera.camera_xyz_position.y - t.y , camera.camera_xyz_position.z - t.z ).normalize();
+
 
                        //Quem é o ponto de interseção?
                        NumberVector l; //Ponto de interseção até a fonte luminosa.
@@ -331,8 +343,10 @@ MainWindow::MainWindow(QWidget *parent) :
                        NumberVector ambient_lighting  = Ka.k_multiply_by_I_lighting(Ia);
                        //std::cout<<"Amb: "<< ambient_lighting.x <<" "<< ambient_lighting.y <<" "<< ambient_lighting.z <<"\n";
 
+
                        NumberVector diffuse_lighting  = Kd.k_multiply_by_I_lighting(Id).multiply(l_dot_n);
                        //std::cout<<"Dif: "<< diffuse_lighting.x <<" "<< diffuse_lighting.y <<" "<< diffuse_lighting.z <<"\n";
+
 
                        NumberVector specular_lighting = Ks.k_multiply_by_I_lighting(Is).multiply(r_dot_v_pow_alpha);
                        //std::cout<<"Esp: "<< specular_lighting.x <<" "<< specular_lighting.y <<" "<< specular_lighting.z <<"\n";
@@ -343,7 +357,8 @@ MainWindow::MainWindow(QWidget *parent) :
                        //Ipix = Ipix.normalize(); //Linha importante
                        Color Ipix_color = Color(Ipix.x, Ipix.y, Ipix.z, 1);
 
-                       std::cout<<Ipix.x<<" "<<Ipix.y<<" "<<Ipix.z<<"\n";
+
+                       //std::cout<<Ipix.x<<" "<<Ipix.y<<" "<<Ipix.z<<"\n";
                        image.setPixel(i, j, qRgb(Ipix_color.red*255, Ipix_color.green*255, Ipix_color.blue*255));
 
 
