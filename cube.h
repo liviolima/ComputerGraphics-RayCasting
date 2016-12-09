@@ -23,6 +23,12 @@ public:
 
     void scale(double x, double y, double z);
     void translate(double x, double y, double z);
+    void rotate_x(double angle);
+    void rotate_y(double angle);
+    void rotate_z(double angle);
+    void shearing_planeZY_push_Z(double angle);
+
+
     virtual double findIntersection(NumberVector origin, NumberVector direction);
     virtual Color getColor();
     virtual Material getMaterial();

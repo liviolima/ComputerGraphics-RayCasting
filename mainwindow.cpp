@@ -123,16 +123,16 @@ void createTable(double x, double y, double z){
     NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
     */
     NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
-    NumberVector kd_wood = NumberVector(0.5, 1.0, 0.5);
-    NumberVector ks_wood = NumberVector(0.5, 1.0, 0.5);
+    NumberVector kd_wood = NumberVector(0.4, 0.2, 0.25);
+    NumberVector ks_wood = NumberVector(0.4, 0.2, 0.25);
 
     NumberVector ka_laptop = NumberVector(0.2, 0.2, 0.2);
-    NumberVector kd_laptop = NumberVector(1, 0.1, 0.1);
-    NumberVector ks_laptop = NumberVector(1, 1, 1);
+    NumberVector kd_laptop = NumberVector(0.3, 0.4, 0.8);
+    NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
 
 
     Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 2.0);
-    Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 20.0);
+    Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 2.0);
 
     //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
     //Color colorGrey = Color(168.0, 168.0, 168.0, 0);
@@ -142,42 +142,56 @@ void createTable(double x, double y, double z){
     Cube * leg1 = new Cube(size, woodMaterial);
     leg1->scale(1.0, 6.0, 1.0);
     leg1->translate(-10.0+x, 9.0+y, 0.0+z);
+    //leg1->rotate_z(50);
+    leg1->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg1));
 
     //Cube * leg2 = new Cube(size, colorBrown);
     Cube * leg2 = new Cube(size, woodMaterial);
     leg2->scale(1.0, 6.0, 1.0);
     leg2->translate(10.0+x, 9.0+y, 0.0+z);
+    //leg2->rotate_z(50);
+    leg2->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg2));
 
     //Cube * leg3 = new Cube(size, colorBrown);
     Cube * leg3 = new Cube(size, woodMaterial);
     leg3->scale(1.0, 6.0, 1.0);
     leg3->translate(10.0+x, 9.0+y, 8.0+z);
+    //leg3->rotate_z(50);
+    leg3->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg3));
 
     //Cube * leg4 = new Cube(size, colorBrown);
     Cube * leg4 = new Cube(size, woodMaterial);
     leg4->scale(1.0, 6.0, 1.0);
     leg4->translate(-10.0+x, 9.0+y, 8.0+z);
+    //leg4->rotate_z(50);
+    leg4->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg4));
 
     //Cube * topTable = new Cube(size, colorBrown);
     Cube * topTable = new Cube(size, woodMaterial);
     topTable->scale(14.0, 0.5, 8.0);
     topTable->translate(-1.5+x, 14.5+y, 6.0+z);
+    //topTable->rotate_z(50);
+    topTable->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(topTable));
 
     //Cube * notebookScreen = new Cube(size, colorGrey);
     Cube * notebookScreen = new Cube(size, laptopMaterial);
     notebookScreen->scale(4.5, 2.0, 0.5);
     notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
+    //notebookScreen->rotate_z(50);
+    notebookScreen->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
 
     //Cube * notebookKeyboard = new Cube(size, colorGrey);
     Cube * notebookKeyboard = new Cube(size, laptopMaterial);
     notebookKeyboard->scale(4.5, 0.5, 2.0);
     notebookKeyboard->translate(5.5+x, 14.5+y, -1.4+z);
+    //notebookKeyboard->rotate_z(50);
+    notebookKeyboard->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
 }
 
@@ -217,8 +231,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
        createTable(0,0,0);
        //createTable(45,0,0);
-       //createTable(45,0,-60);
+       //createTable(90,0,0);
+       //createTable(-20,0,60);
+       //createTable(0,0,60);
+       //createTable(45,0, 60);
+       //createTable(90,0, 60);
        //createTable(0,0,-60);
+       //createTable(45,0, -60);
+
 
 
        //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
@@ -318,7 +338,7 @@ MainWindow::MainWindow(QWidget *parent) :
                        double Pint_y = camera_xyz_position.y + T*(dir.y);
                        double Pint_z = camera_xyz_position.z + T*(dir.z);//***Quem é zamnt?
 
-                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
+                       NumberVector t = NumberVector(Pint_x, Pint_y, Pint_z).normalize(); //Precisa Normalizar? Acho que não, mas fica estranho se não normalizar.
                        //std::cout<<"t: "<<t.x<<" "<<t.y<<" "<<t.z<<"\n";
 
 

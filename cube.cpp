@@ -1,6 +1,9 @@
 #include "cube.h"
 #include "numbervector.h"
 #include "material.h"
+#include <math.h>
+
+#define PI 3.14159265
 
 Cube::Cube()
 {
@@ -316,6 +319,131 @@ void Cube::translate(double x, double y, double z){
 
 
 }
+
+void Cube::rotate_x(double angle){
+
+    double sin_angle = sin(angle*PI/180);
+    double cos_angle = cos(angle*PI/180);
+
+
+    v1 = NumberVector( v1.x  ,  v1.y*cos_angle-v1.z*sin_angle,   v1.y*sin_angle+v1.z*cos_angle);
+    v2 = NumberVector( v2.x  ,  v2.y*cos_angle-v2.z*sin_angle,   v2.y*sin_angle+v2.z*cos_angle);
+    v3 = NumberVector( v3.x  ,  v3.y*cos_angle-v3.z*sin_angle,   v3.y*sin_angle+v3.z*cos_angle);
+    v4 = NumberVector( v4.x  ,  v4.y*cos_angle-v4.z*sin_angle,   v4.y*sin_angle+v4.z*cos_angle);
+    v5 = NumberVector( v5.x  ,  v5.y*cos_angle-v5.z*sin_angle,   v5.y*sin_angle+v5.z*cos_angle);
+    v6 = NumberVector( v6.x  ,  v6.y*cos_angle-v6.z*sin_angle,   v6.y*sin_angle+v6.z*cos_angle);
+    v7 = NumberVector( v7.x  ,  v7.y*cos_angle-v7.z*sin_angle,   v7.y*sin_angle+v7.z*cos_angle);
+    v8 = NumberVector( v8.x  ,  v8.y*cos_angle-v8.z*sin_angle,   v8.y*sin_angle+v8.z*cos_angle);
+
+
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
+
+
+}
+
+void Cube::rotate_y(double angle){
+
+    double sin_angle = sin(angle*PI/180);
+    double cos_angle = cos(angle*PI/180);
+
+
+    v1 = NumberVector( v1.x*cos_angle+v1.z*sin_angle  ,  v1.y,   v1.x*(-sin_angle)+v1.z*cos_angle);
+    v2 = NumberVector( v2.x*cos_angle+v2.z*sin_angle  ,  v2.y,   v2.x*(-sin_angle)+v2.z*cos_angle);
+    v3 = NumberVector( v3.x*cos_angle+v3.z*sin_angle  ,  v3.y,   v3.x*(-sin_angle)+v3.z*cos_angle);
+    v4 = NumberVector( v4.x*cos_angle+v4.z*sin_angle  ,  v4.y,   v4.x*(-sin_angle)+v4.z*cos_angle);
+    v5 = NumberVector( v5.x*cos_angle+v5.z*sin_angle  ,  v5.y,   v5.x*(-sin_angle)+v5.z*cos_angle);
+    v6 = NumberVector( v6.x*cos_angle+v6.z*sin_angle  ,  v6.y,   v6.x*(-sin_angle)+v6.z*cos_angle);
+    v7 = NumberVector( v7.x*cos_angle+v7.z*sin_angle  ,  v7.y,   v7.x*(-sin_angle)+v7.z*cos_angle);
+    v8 = NumberVector( v8.x*cos_angle+v8.z*sin_angle  ,  v8.y,   v8.x*(-sin_angle)+v8.z*cos_angle);
+
+
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
+
+}
+
+void Cube::rotate_z(double angle){
+    double sin_angle = sin(angle*PI/180);
+    double cos_angle = cos(angle*PI/180);
+
+
+    v1 = NumberVector( v1.x*cos_angle-v1.y*sin_angle  ,  v1.x*sin_angle+v1.y*cos_angle,   v1.z);
+    v2 = NumberVector( v2.x*cos_angle-v2.y*sin_angle  ,  v2.x*sin_angle+v2.y*cos_angle,   v2.z);
+    v3 = NumberVector( v3.x*cos_angle-v3.y*sin_angle  ,  v3.x*sin_angle+v3.y*cos_angle,   v3.z);
+    v4 = NumberVector( v4.x*cos_angle-v4.y*sin_angle  ,  v4.x*sin_angle+v4.y*cos_angle,   v4.z);
+    v5 = NumberVector( v5.x*cos_angle-v5.y*sin_angle  ,  v5.x*sin_angle+v5.y*cos_angle,   v5.z);
+    v6 = NumberVector( v6.x*cos_angle-v6.y*sin_angle  ,  v6.x*sin_angle+v6.y*cos_angle,   v6.z);
+    v7 = NumberVector( v7.x*cos_angle-v7.y*sin_angle  ,  v7.x*sin_angle+v7.y*cos_angle,   v7.z);
+    v8 = NumberVector( v8.x*cos_angle-v8.y*sin_angle  ,  v8.x*sin_angle+v8.y*cos_angle,   v8.z);
+
+
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
+
+}
+
+void Cube::shearing_planeZY_push_Z(double angle){
+
+    double tan_angle = tan(angle*PI/180);
+
+    v1 = NumberVector( v1.x  ,  v1.y,   tan_angle*v1.y+v1.z);
+    v2 = NumberVector( v2.x  ,  v2.y,   tan_angle*v2.y+v2.z);
+    v3 = NumberVector( v3.x  ,  v3.y,   tan_angle*v3.y+v3.z);
+    v4 = NumberVector( v4.x  ,  v4.y,   tan_angle*v4.y+v4.z);
+    v5 = NumberVector( v5.x  ,  v5.y,   tan_angle*v5.y+v5.z);
+    v6 = NumberVector( v6.x  ,  v6.y,   tan_angle*v6.y+v6.z);
+    v7 = NumberVector( v7.x  ,  v7.y,   tan_angle*v7.y+v7.z);
+    v8 = NumberVector( v8.x  ,  v8.y,   tan_angle*v8.y+v8.z);
+
+
+    trianglesv[0] = Triangle(v2, v3, v4, material);
+    trianglesv[1] = Triangle(v8, v7, v6, material);
+    trianglesv[2] = Triangle(v5, v6, v2, material);
+    trianglesv[3] = Triangle(v6, v7, v3, material);
+    trianglesv[4] = Triangle(v3, v7, v8, material);
+    trianglesv[5] = Triangle(v1, v4, v8, material);
+    trianglesv[6] = Triangle(v1, v2, v4, material);
+    trianglesv[7] = Triangle(v5, v8, v6, material);
+    trianglesv[8] = Triangle(v1, v5, v2, material);
+    trianglesv[9] = Triangle(v2, v6, v3, material);
+    trianglesv[10] = Triangle(v4, v3, v8, material);
+    trianglesv[11] = Triangle(v5, v1, v8, material);
+
+
+}
+
+
 
 double Cube::findIntersection(NumberVector origin, NumberVector direction){
     return -1;
