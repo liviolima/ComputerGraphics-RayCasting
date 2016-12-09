@@ -94,6 +94,17 @@ int winningObjectIndex(std::vector<double>  intersections) {
 */
 
 void createTable(double x, double y, double z){
+   /*
+    Material green(Color(0.2, 0.2, 0.2), Color(0.5, 1.0, 0.5), Color(0.5, 1.0, 0.5), 2);
+    Material brown(Color(0.2, 0.2, 0.2), Color(0.4, 0.2, 0.25), Color(0.1, 0.1, 0.1), 0);
+    Material metal(Color(0.2, 0.2, 0.2), Color(0.1, 0.1, 0.1), Color(1, 1, 1), 5);
+    Material red(Color(0.2, 0.2, 0.2), Color(1,0.1,0.1), Color(1, 1, 1), 20);
+    Material orange(Color(0.1, 0.1, 0.1), Color(0.0752, 0.6, 0.0248), Color(0.7, 0.5585, 0.2308), 2);
+    Material blue(Color(0.2, 0.2, 0.2), Color(0.3, 0.4, 0.8), Color(0.3, 0.4, 0.8), 2);
+    Material brass(Color(0.33, 0.22, 0.03), Color(0.78, 0.57, 0.11), Color(0.99, 0.91, 0.81), 27.8);
+    */
+
+    /*
     NumberVector ka_wood = NumberVector(0.5, 0.5, 0.5);
     NumberVector kd_wood = NumberVector(0.5, 0.5, 0.5);
     NumberVector ks_wood = NumberVector(0.5, 0.5, 0.5);
@@ -101,8 +112,17 @@ void createTable(double x, double y, double z){
     NumberVector ka_laptop = NumberVector(1.0, 1.0, 1.0);
     NumberVector kd_laptop = NumberVector(1.0, 1.0, 1.0);
     NumberVector ks_laptop = NumberVector(1.0, 1.0, 1.0);
+    */
+    NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_wood = NumberVector(0.4, 0.2, 0.25);
+    NumberVector ks_wood = NumberVector(0.1, 0.1, 0.1);
 
-    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 1.0);
+    NumberVector ka_laptop = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_laptop = NumberVector(0.3, 0.4, 0.8);
+    NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
+
+
+    Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 0.0);
     Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 2.0);
 
     //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
@@ -148,7 +168,7 @@ void createTable(double x, double y, double z){
     //Cube * notebookKeyboard = new Cube(size, colorGrey);
     Cube * notebookKeyboard = new Cube(size, laptopMaterial);
     notebookKeyboard->scale(4.5, 0.5, 2.0);
-    notebookKeyboard->translate(-1.9+x, 14.5+y, -1.4+z);
+    notebookKeyboard->translate(5.5+x, 14.5+y, -1.4+z);
     scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
 }
 
@@ -178,7 +198,7 @@ MainWindow::MainWindow(QWidget *parent) :
        //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
        //NumberVector camera_xyz_position = NumberVector(-46, 34, 65);
 
-       NumberVector camera_xyz_position = NumberVector(-46, 22, 65);
+       NumberVector camera_xyz_position = NumberVector(-46, 27, 65);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
