@@ -8,8 +8,15 @@
 #include <QDebug>
 #include "object.h"
 #include "color.h"
+
 #include "cube.h"
 #include "material.h"
+
+double x_camera = -20;
+double y_camera = 85;
+double z_camera = 290;
+
+
 
 struct intersections_of_scenary{
     int index_of_one_object;
@@ -68,60 +75,10 @@ int winningObjectIndex(std::vector<double> object_intersection){
     }
 }
 
-/*
-int winningObjectIndex(std::vector<double>  intersections) {
-    // para se nao toca em nada
-    if (intersections.size() == 0)
-        return -1;
 
-    if (intersections.size() == 1) {
-        if (intersections.at(0) > 0)
-            return 0;
-       return -1;
-    }
-
-    double min = std::numeric_limits<qlonglong>::max();
-    double index = -1;
-    for (unsigned int j = 0; j < intersections.size(); j++) {
-      if (intersections.at(j) > 0 && intersections.at(j) < min) {
-          min = intersections.at(j);
-          index = j;
-      }
-    }
-
-    return index;
-}
-*/
 
 void createTable(double x, double y, double z){
-   /*
-    Material green(Color(0.2, 0.2, 0.2), Color(0.5, 1.0, 0.5), Color(0.5, 1.0, 0.5), 2);
-    Material brown(Color(0.2, 0.2, 0.2), Color(0.4, 0.2, 0.25), Color(0.1, 0.1, 0.1), 0);
-    Material metal(Color(0.2, 0.2, 0.2), Color(0.1, 0.1, 0.1), Color(1, 1, 1), 5);
-    Material red(Color(0.2, 0.2, 0.2), Color(1,0.1,0.1), Color(1, 1, 1), 20);
-    Material orange(Color(0.1, 0.1, 0.1), Color(0.0752, 0.6, 0.0248), Color(0.7, 0.5585, 0.2308), 2);
-    Material blue(Color(0.2, 0.2, 0.2), Color(0.3, 0.4, 0.8), Color(0.3, 0.4, 0.8), 2);
-    Material brass(Color(0.33, 0.22, 0.03), Color(0.78, 0.57, 0.11), Color(0.99, 0.91, 0.81), 27.8);
-    */
 
-    /*
-    NumberVector ka_wood = NumberVector(0.5, 0.5, 0.5);
-    NumberVector kd_wood = NumberVector(0.5, 0.5, 0.5);
-    NumberVector ks_wood = NumberVector(0.5, 0.5, 0.5);
-
-    NumberVector ka_laptop = NumberVector(1.0, 1.0, 1.0);
-    NumberVector kd_laptop = NumberVector(1.0, 1.0, 1.0);
-    NumberVector ks_laptop = NumberVector(1.0, 1.0, 1.0);
-    */
-    /* Brown and Metal
-    NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
-    NumberVector kd_wood = NumberVector(0.4, 0.2, 0.25);
-    NumberVector ks_wood = NumberVector(0.1, 0.1, 0.1);
-
-    NumberVector ka_laptop = NumberVector(0.2, 0.2, 0.2);
-    NumberVector kd_laptop = NumberVector(0.3, 0.4, 0.8);
-    NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
-    */
     NumberVector ka_wood = NumberVector(0.2, 0.2, 0.2);
     NumberVector kd_wood = NumberVector(0.4, 0.2, 0.25);
     NumberVector ks_wood = NumberVector(0.4, 0.2, 0.25);
@@ -130,70 +87,321 @@ void createTable(double x, double y, double z){
     NumberVector kd_laptop = NumberVector(0.3, 0.4, 0.8);
     NumberVector ks_laptop = NumberVector(0.3, 0.4, 0.8);
 
+    NumberVector ka_screen = NumberVector(0.8, 0.0, 0.0);
+    NumberVector kd_screen = NumberVector(0.8, 0.0, 0.0);
+    NumberVector ks_screen = NumberVector(0.8, 0.0, 0.0);
+
 
     Material woodMaterial = Material(ka_wood, kd_wood, ks_wood, 2.0);
     Material laptopMaterial = Material(ka_laptop, kd_laptop, ks_laptop, 2.0);
+    Material redMaterial = Material(ka_screen, kd_screen, ks_screen, 2.0);
 
-    //Color colorBrown = Color(92.0, 64.0, 51.0, 0);
-    //Color colorGrey = Color(168.0, 168.0, 168.0, 0);
     double size = 1.0;
 
-    //Cube * leg1 = new Cube(size, colorBrown);
+
     Cube * leg1 = new Cube(size, woodMaterial);
     leg1->scale(1.0, 6.0, 1.0);
-    leg1->translate(-10.0+x, 9.0+y, 0.0+z);
-    //leg1->rotate_z(50);
-    leg1->shearing_planeZY_push_Z(-40);
+    leg1->translate(-14.5+x, 9.0+y, -1.0+z);
+
+    //leg1->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg1));
 
-    //Cube * leg2 = new Cube(size, colorBrown);
     Cube * leg2 = new Cube(size, woodMaterial);
     leg2->scale(1.0, 6.0, 1.0);
-    leg2->translate(10.0+x, 9.0+y, 0.0+z);
+    leg2->translate(10.5+x, 9.0+y, -1.0+z);
     //leg2->rotate_z(50);
-    leg2->shearing_planeZY_push_Z(-40);
+    //leg2->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg2));
 
-    //Cube * leg3 = new Cube(size, colorBrown);
     Cube * leg3 = new Cube(size, woodMaterial);
     leg3->scale(1.0, 6.0, 1.0);
-    leg3->translate(10.0+x, 9.0+y, 8.0+z);
+    leg3->translate(-14.5+x, 9.0+y, 12.0+z);
     //leg3->rotate_z(50);
-    leg3->shearing_planeZY_push_Z(-40);
+    //leg3->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg3));
 
-    //Cube * leg4 = new Cube(size, colorBrown);
+
     Cube * leg4 = new Cube(size, woodMaterial);
     leg4->scale(1.0, 6.0, 1.0);
-    leg4->translate(-10.0+x, 9.0+y, 8.0+z);
+    leg4->translate(10.5+x, 9.0+y, 12.0+z);
     //leg4->rotate_z(50);
-    leg4->shearing_planeZY_push_Z(-40);
+    //leg4->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(leg4));
 
-    //Cube * topTable = new Cube(size, colorBrown);
+
     Cube * topTable = new Cube(size, woodMaterial);
     topTable->scale(14.0, 0.5, 8.0);
-    topTable->translate(-1.5+x, 14.5+y, 6.0+z);
-    //topTable->rotate_z(50);
-    topTable->shearing_planeZY_push_Z(-40);
+
+    topTable->translate(-1.5+x, 14.5+y, 5.0+z);
+
+    //topTable->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(topTable));
 
-    //Cube * notebookScreen = new Cube(size, colorGrey);
-    Cube * notebookScreen = new Cube(size, laptopMaterial);
-    notebookScreen->scale(4.5, 2.0, 0.5);
-    notebookScreen->translate(0.0+x, 17.5+y, 4.0+z);
+
+
+    Cube * supporter2 = new Cube(size, laptopMaterial);
+    supporter2->scale(3.0, 0.1, 1.2);
+    supporter2->translate(-4.5+x, 14.5+y, 4.5+z);
+    //supporter2->rotate_z(50);
+    //supporter2->shearing_planeZY_push_Z(-40);
+    scene_objects.push_back(dynamic_cast<Object*>(supporter2));
+
+    Cube * supporter = new Cube(size, laptopMaterial);
+    supporter->scale(1.5, 3.5, 0.5);
+    supporter->translate(-5.0+x, 17.5+y, 2.5+z);
+    //supporter->rotate_z(50);
+    //supporter->shearing_planeZY_push_Z(-40);
+    scene_objects.push_back(dynamic_cast<Object*>(supporter));
+
+
+    Cube * pc = new Cube(size, laptopMaterial);
+    pc->scale(1.0, 3.5, 4.5);
+    pc->translate(10.5+x, 19.5+y, 8.5+z);
+    //pc->rotate_z(50);
+    //pc->shearing_planeZY_push_Z(-40);
+    scene_objects.push_back(dynamic_cast<Object*>(pc));
+
+
+    Cube * notebookScreen = new Cube(size, redMaterial);
+    notebookScreen->scale(4.5, 2.5, 0.5);
+    notebookScreen->translate(-4.0+x, 20.0+y, 3.5+z);
     //notebookScreen->rotate_z(50);
-    notebookScreen->shearing_planeZY_push_Z(-40);
+    //notebookScreen->shearing_planeZY_push_Z(-40);
     scene_objects.push_back(dynamic_cast<Object*>(notebookScreen));
 
-    //Cube * notebookKeyboard = new Cube(size, colorGrey);
-    Cube * notebookKeyboard = new Cube(size, laptopMaterial);
-    notebookKeyboard->scale(4.5, 0.5, 2.0);
-    notebookKeyboard->translate(5.5+x, 14.5+y, -1.4+z);
-    //notebookKeyboard->rotate_z(50);
-    notebookKeyboard->shearing_planeZY_push_Z(-40);
-    scene_objects.push_back(dynamic_cast<Object*>(notebookKeyboard));
+    Cube * keyboard = new Cube(size, laptopMaterial);
+    keyboard->scale(7.5, 0.3, 1.5);
+    keyboard->translate(-3.5+x, 14.5+y, 9.0+z);
+    //keyboard->rotate_z(50);
+    //keyboard->shearing_planeZY_push_Z(-40);
+    scene_objects.push_back(dynamic_cast<Object*>(keyboard));
+
+
 }
+
+void createBlackBoard(double x, double y, double z){
+    double size = 1.0;    
+
+    NumberVector ka_blackboard = NumberVector(0.0, 0.2, 0.0);
+    NumberVector kd_blackboard = NumberVector(0.0, 0.2, 0.0);
+    NumberVector ks_blackboard = NumberVector(0.0, 0.2, 0.0);
+
+    Material blackBoardMaterial = Material(ka_blackboard, kd_blackboard, ks_blackboard, 2.0);
+    Cube * blackBoard = new Cube(size, blackBoardMaterial);
+    blackBoard->scale(30.0, 12.0, 1.0);
+    blackBoard->translate(-10+x ,10+y, 10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(blackBoard));
+}
+
+void createWindow(){
+
+}
+
+void createBookShelf(double x, double y, double z){
+    double size = 1.0;
+    NumberVector ka_wood = NumberVector(0.1, 0.2, 0.2);
+    NumberVector kd_wood = NumberVector(0.3, 0.2, 0.25);
+    NumberVector ks_wood = NumberVector(0.3, 0.2, 0.25);
+
+    NumberVector ka_book1 = NumberVector(0.35, 0.0, 0.0);
+    NumberVector kd_book1 = NumberVector(0.35, 0.0, 0.0);
+    NumberVector ks_book1 = NumberVector(0.35, 0.0, 0.0);
+
+    NumberVector ka_book2 = NumberVector(0.0, 0.35, 0.0);
+    NumberVector kd_book2 = NumberVector(0.0, 0.35, 0.0);
+    NumberVector ks_book2 = NumberVector(0.0, 0.35, 0.0);
+
+    NumberVector ka_book3 = NumberVector(0.0, 0.0, 0.35);
+    NumberVector kd_book3 = NumberVector(0.0, 0.0, 0.35);
+    NumberVector ks_book3 = NumberVector(0.0, 0.0, 0.35);
+
+
+
+    Material book1Material = Material(ka_book1, kd_book1, ks_book1, 2.0);
+    Material book2Material = Material(ka_book2, kd_book2, ks_book2, 2.0);
+    Material book3Material = Material(ka_book3, kd_book3, ks_book3, 2.0);
+    Material shelfMaterial = Material(ka_wood, kd_wood, ks_wood, 2.0);
+
+
+    Cube * shelfBack = new Cube(size, shelfMaterial);
+    shelfBack->scale(12.0, 20.0, 1.0);
+    shelfBack->translate(-21+x ,10+y, -10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfBack));
+
+    Cube * shelfTop = new Cube(size, shelfMaterial);
+    shelfTop->scale(12.0, 0.5, 10.0);
+    shelfTop->translate(-22+x ,30+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfTop));
+
+    Cube * shelfBottom = new Cube(size, shelfMaterial);
+    shelfBottom->scale(12.0, 0.5, 10.0);
+    shelfBottom->translate(-22+x ,-10+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfBottom));
+
+    Cube * shelfRight = new Cube(size, shelfMaterial);
+    shelfRight->scale(0.5, 20.0, 10.0);
+    shelfRight->translate(-10+x ,10+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfRight));
+
+    Cube * shelfLeft = new Cube(size, shelfMaterial);
+    shelfLeft->scale(0.5, 20.0, 10.0);
+    shelfLeft->translate(-33.6+x ,10+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfLeft));
+
+
+
+    Cube * shelfMiddle1 = new Cube(size, shelfMaterial);
+    shelfMiddle1->scale(12.0, 0.7, 10.0);
+    shelfMiddle1->translate(-22+x ,14.5+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfMiddle1));
+
+    Cube * shelfMiddle2 = new Cube(size, shelfMaterial);
+    shelfMiddle2->scale(12.0, 0.7, 10.0);
+    shelfMiddle2->translate(-22+x ,3.5+y, 0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(shelfMiddle2));
+
+
+
+    Cube * book1 = new Cube(size, book1Material);
+    book1->scale(2.0, 4.0, 6.0);
+    book1->translate(-14+x ,18.5+y, -5.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(book1));
+
+    Cube * book2 = new Cube(size, book2Material);
+    book2->scale(1.5, 4.0, 6.0);
+    book2->translate(-22+x ,18.5+y, -5.0+z);
+    //book2->shearing_planeZY_push_Z(40);
+    scene_objects.push_back(dynamic_cast<Object*>(book2));
+
+    Cube * book3 = new Cube(size, book3Material);
+    book3->scale(1.5, 4.0, 6.0);
+    book3->translate(-28+x , 18.5+y, -5.0+z);
+    //book3->shearing_planeZY_push_Z(40);
+    scene_objects.push_back(dynamic_cast<Object*>(book3));
+
+
+    Cube * book4 = new Cube(size, book1Material);
+    book4->scale(2.0, 4.0, 6.0);
+    book4->translate(-16+x ,6.5+y, -5.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(book4));
+
+    Cube * book5 = new Cube(size, book1Material);
+    book5->scale(2.0, 4.0, 6.0);
+    book5->translate(-23+x ,6.5+y, -5.0+z);
+    scene_objects.push_back(dynamic_cast<Object*>(book5));
+
+
+
+}
+
+void createSmallBookShelf(double x, double y, double z){
+
+}
+
+void createBin(double x, double y, double z){
+    double size = 1.0;
+    NumberVector ka_bin = NumberVector(0.1, 0.1, 0.1);
+    NumberVector kd_bin = NumberVector(0.1, 0.1, 0.1);
+    NumberVector ks_bin = NumberVector(0.1, 0.1, 0.1);
+    Material binMaterial = Material(ka_bin, kd_bin, ks_bin, 2.0);
+
+    Cube * bin = new Cube(size, binMaterial);
+    bin->scale(4.0, 9.0, 4.0);
+    bin->translate(x ,y, z);
+    scene_objects.push_back(dynamic_cast<Object*>(bin));
+
+    NumberVector ka_binTop = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_binTop = NumberVector(0.3, 0.4, 0.8);
+    NumberVector ks_binTop = NumberVector(0.3, 0.4, 0.8);
+    Material binTopMaterial = Material(ka_binTop, kd_binTop, ks_binTop, 2.0);
+
+    Cube * binTop = new Cube(size, binTopMaterial);
+    binTop->scale(2.5, 0.5, 2.5);
+    binTop->translate(x ,y, z);
+    scene_objects.push_back(dynamic_cast<Object*>(binTop));
+
+}
+
+
+
+void createGround(double x, double y, double z){
+    double size = 1.0;
+    NumberVector ka_ground = NumberVector(0.6, 0.6, 0.6);
+    NumberVector kd_ground = NumberVector(0.6, 0.6, 0.6);
+    NumberVector ks_ground = NumberVector(0.6, 0.6, 0.6);
+    Material groundMaterial = Material(ka_ground, kd_ground, ks_ground, 2.0);
+
+    Cube * ground = new Cube(size, groundMaterial);
+    ground->scale(160.0, 1.0, 300.0);
+    ground->translate(-90+x ,-20+y, -10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(ground));
+
+
+}
+
+void createWall(double x, double y, double z){
+
+    double size = 1.0;
+
+    NumberVector ka_wall = NumberVector(0.3, 0.3, 0.3);
+    NumberVector kd_wall = NumberVector(0.4, 0.5, 0.9);
+    NumberVector ks_wall = NumberVector(0.4, 0.5, 0.9);
+    Material wallMaterial = Material(ka_wall, kd_wall, ks_wall, 2.0);
+
+    NumberVector ka_windows = NumberVector(0.4, 0.4, 0.4);
+    NumberVector kd_windows = NumberVector(0.4, 0.4, 0.4);
+    NumberVector ks_windows = NumberVector(0.4, 0.4, 0.4);
+    Material windowsMaterial = Material(ka_windows, kd_windows, ks_windows, 2.0);
+
+    NumberVector ka_cross_windows = NumberVector(0.2, 0.2, 0.2);
+    NumberVector kd_cross_windows = NumberVector(0.2, 0.2, 0.2);
+    NumberVector ks_cross_windows = NumberVector(0.2, 0.2, 0.2);
+    Material crossWindowsMaterial = Material(ka_cross_windows, kd_cross_windows, ks_cross_windows, 2.0);
+
+
+    Cube * wall2 = new Cube(size, wallMaterial);
+    wall2->scale(1.0, 37.0, 280.0);
+    wall2->translate(-19+x ,27+y, 80+z);
+    scene_objects.push_back(dynamic_cast<Object*>(wall2));
+
+
+    Cube * wall1 = new Cube(size, wallMaterial);
+    wall1->scale(120.0, 40.0, 1.0);
+    wall1->translate(-140+x ,30+y, -10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(wall1));
+
+
+
+
+
+}
+
+void createDoor(double x, double y, double z){
+
+    double size = 1.0;
+    NumberVector ka_door = NumberVector(0.05, 0.1, 0.2);
+    NumberVector kd_door = NumberVector(0.15, 0.1, 0.25);
+    NumberVector ks_door = NumberVector(0.15, 0.1, 0.25);
+    Material doorMaterial = Material(ka_door, kd_door, ks_door, 2.0);
+
+    NumberVector ka_knob = NumberVector(1.00, 0.93, 0.0);
+    NumberVector kd_knob = NumberVector(1.00, 0.93, 0.0);
+    NumberVector ks_knob = NumberVector(1.00, 0.93, 0.0);
+    Material knobMaterial = Material(ka_knob, kd_knob, ks_knob, 2.0);
+
+    Cube * door = new Cube(size, doorMaterial);
+    door->scale(12.0, 20.0, 1.0);
+    door->translate(-21+x ,10+y, -10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(door));
+
+    Cube * doorKnob = new Cube(size, knobMaterial);
+    doorKnob->scale(4.5, 0.5, 1.0);
+    doorKnob->translate(-28+x ,12+y, -10+z);
+    scene_objects.push_back(dynamic_cast<Object*>(doorKnob));
+
+}
+
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -221,7 +429,7 @@ MainWindow::MainWindow(QWidget *parent) :
        //NumberVector camera_xyz_position = NumberVector(-4.25, -2.8, -15);
        //NumberVector camera_xyz_position = NumberVector(-46, 34, 65);
 
-       NumberVector camera_xyz_position = NumberVector(-46, 27, 65);
+       NumberVector camera_xyz_position = NumberVector(x_camera, y_camera, z_camera);
        NumberVector look_at_xyz_position = NumberVector(0,0,0);
        NumberVector up_xyz = NumberVector(0 , 1, 0);
        Camera camera = Camera(camera_xyz_position, look_at_xyz_position, up_xyz);
@@ -229,21 +437,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
        Scene scene = Scene();
 
-       createTable(0,0,0);
-       //createTable(45,0,0);
-       //createTable(90,0,0);
-       //createTable(-20,0,60);
-       //createTable(0,0,60);
-       //createTable(45,0, 60);
-       //createTable(90,0, 60);
-       //createTable(0,0,-60);
-       //createTable(45,0, -60);
+
+
+       createGround(150,0,-60);
+       createWall(150,0,-60);
+       createBlackBoard(30, 20, -30);
+       createBookShelf(-30,0,-40);
+       createDoor(135, 0, -60);
+
+       //createBin(0,0,0);
+       createTable(0,0,40);
+       createTable(50,0,40);
+       createTable(0,0,90);
+       createTable(50,0,90);
+       createTable(0,0,140);
+       createTable(50,0,140);
 
 
 
-       //###This line is important. Here we are changing the coordinates of all vertex of all objects.###
-       //camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
-       //camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
+
+
 
        NumberVector origin = camera.camera_xyz_position;
        std::cout<<"camera xyz:"<<camera.camera_xyz_position.x<<" "<<camera.camera_xyz_position.y<<" "<<camera.camera_xyz_position.z<<" \n";
@@ -342,7 +555,7 @@ MainWindow::MainWindow(QWidget *parent) :
                        //std::cout<<"t: "<<t.x<<" "<<t.y<<" "<<t.z<<"\n";
 
 
-                       NumberVector v; //Ponto de interseção até a camera.
+                       NumberVector v;//Ponto de interseção até a camera.
                        v = NumberVector(camera.camera_xyz_position.x - t.x, camera.camera_xyz_position.y - t.y , camera.camera_xyz_position.z - t.z ).normalize();
 
 

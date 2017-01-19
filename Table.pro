@@ -20,9 +20,9 @@ SOURCES += main.cpp\
     object.cpp \
     triangle.cpp \
     numbervector.cpp \
-    color.cpp \
     cube.cpp \
-    material.cpp
+    material.cpp \
+    color.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -31,9 +31,9 @@ HEADERS  += mainwindow.h \
     object.h \
     triangle.h \
     numbervector.h \
-    color.h \
     cube.h \
-    material.h
+    material.h \
+    color.h
 
 FORMS    += mainwindow.ui
 

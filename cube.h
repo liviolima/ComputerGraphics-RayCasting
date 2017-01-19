@@ -1,7 +1,6 @@
 #ifndef CUBE_H
 #define CUBE_H
 #include "numbervector.h"
-#include "color.h"
 #include "object.h"
 #include "triangle.h"
 #include "vector"
@@ -11,13 +10,16 @@ class Cube : public Object
 {
 public:
     Cube();
-    Cube(double size, Color newColor);
     Cube(double size, Material material);
 
     Triangle trianglesv[12];
 
-    Color color;
     Material material;
+
+    NumberVector ka_default = NumberVector(0.6, 0.6, 0.6);
+    NumberVector kd_default = NumberVector(0.4, 0.4, 0.4);
+    NumberVector ks_default = NumberVector(0.4, 0.4, 0.4);
+    Material defaultMaterial = Material(ka_default, kd_default, ks_default, 2.0);
 
     double size_x, size_y, size_z;
 
@@ -30,27 +32,7 @@ public:
 
 
     virtual double findIntersection(NumberVector origin, NumberVector direction);
-    virtual Color getColor();
     virtual Material getMaterial();
-
-
-    Color redColor = Color(255.0, 0.0, 0.0, 0);
-    Color darkRedColor = Color(153.0, 0.0, 0.0, 0);
-
-    Color greenColor = Color(0.0, 255.0, 0.0, 0);
-    Color darkGreenColor = Color(0.0, 51.0, 0.0, 0);
-
-    Color blueColor = Color(0.0, 0.0, 255.0, 0);
-    Color darkBlueColor = Color(0.0, 0.0, 102.0, 0);
-
-    Color yellowColor = Color(255.0, 255.0, 0.0, 0);
-    Color darkYellowColor = Color(204.0, 204.0, 0.0, 0);
-
-    Color purpleColor = Color(204.0, 0.0, 204.0, 0);
-    Color darkPurpleColor = Color(102.0, 0.0, 102.0, 0);
-
-    Color cianColor = Color(0.0, 204.0, 204.0, 0);
-    Color darkCianColor = Color(51.0, 255.0, 255.0, 0.0);
 
     //Vertexes
     NumberVector v1, v2, v3, v4, v5, v6, v7, v8;

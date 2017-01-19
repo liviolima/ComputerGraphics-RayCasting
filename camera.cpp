@@ -93,6 +93,7 @@ Camera::Camera(NumberVector pos, NumberVector look_at, NumberVector up){
 }
 
 
+//Method: World -> Camera
 void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> scene_objects){
     double temp_camera_x = camera_xyz_position.x;
     double temp_camera_y = camera_xyz_position.y;
@@ -214,6 +215,8 @@ void Camera::transformVertexesFromCoordinatesWorldToCamera(std::vector<Object*> 
 
 }
 
+
+//Method: Camera -> World
 void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> scene_objects){
 
     for(int index = 0; index < scene_objects.size(); index++){
@@ -223,6 +226,7 @@ void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> 
                 std::cout<<"\nTriangle["<<i<<"]\n";
                 std::cout<<"before transformation\n";
                 triangles.at(i)->printVertexes();
+
 
                 //----------vertex[0] of this triangle------------
 
@@ -288,6 +292,10 @@ void Camera::transformVertexesFromCoordinatesCameraToWorld(std::vector<Object*> 
            }
     }
 }
+
+//###This line is important. Here we are changing the coordinates of all vertex of all objects.###
+//camera.transformVertexesFromCoordinatesWorldToCamera(scene_objects);
+//camera.transformVertexesFromCoordinatesCameraToWorld(scene_objects);
 
 
 
